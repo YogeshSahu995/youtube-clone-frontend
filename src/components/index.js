@@ -4,7 +4,7 @@ import { Register } from "./Auth/Register.jsx";
 import { Login } from "./Auth/Login.jsx";
 import { OpenPlaylist, Playlist } from "./Playlist/index.js";
 import { Video } from "./Video/index.js";
-import { VideoForm, PostForm, PlaylistForm, DeleteForm } from "./Forms/index.js";
+import { VideoForm, PostForm, PlaylistForm, DeleteForm, ChangePasswordForm } from "./Forms/index.js";
 import { 
     CoverImage,
     Sidebar, 
@@ -76,6 +76,7 @@ export {
     PostForm,
     PlaylistForm,
     DeleteForm,
+    ChangePasswordForm,
     Post,
     RTE,
     Playlist,

@@ -8,8 +8,8 @@ import { registerUser, loginUser, updateAccountdetails, updateAvatar, updateCove
 import { Link } from "react-router-dom"
 import { errorHandler } from "../../utils/errorHandler"
 
-export function Register({userData}) {
-    const[loading, setLoading] = useState(false)
+export function Register({ userData }) {
+    const [loading, setLoading] = useState(false)
     const [tempCoverImage, setTempCoverImage] = useState("")
     const [temAvatar, setTempAvatar] = useState("")
     const dispatch = useDispatch()
@@ -56,7 +56,7 @@ export function Register({userData}) {
             } catch (error) {
                 console.error(error.message)
             }
-            finally{
+            finally {
                 setLoading(false)
             }
         }
@@ -65,29 +65,29 @@ export function Register({userData}) {
             setLoading(true)
             console.log(data)
             try {
-                if(data.fullname && data.email){
-                    await updateAccountdetails({ 
-                        fullname: data.fullname, 
-                        email: data.email, 
+                if (data.fullname && data.email) {
+                    await updateAccountdetails({
+                        fullname: data.fullname,
+                        email: data.email,
                     })
                 }
                 if (data?.avatar?.[0]) {
                     const formData = new FormData()
                     formData.append("avatar", data.avatar[0]);
-                    if([...formData]?.[0][1].name){
+                    if ([...formData]?.[0][1].name) {
                         await updateAvatar(formData)
                     }
                 }
                 if (data?.coverImage?.[0]) {
                     const formData = new FormData()
                     formData.append('coverImage', data.coverImage[0])
-                    if([...formData]?.[0][1].name){
+                    if ([...formData]?.[0][1].name) {
                         await updateCoverImage(formData)
                     }
                 }
             } catch (error) {
                 console.error(error.message)
-            } finally{
+            } finally {
                 setLoading(false)
                 navigate(`/channel/${userData.username}`)
             }
@@ -95,7 +95,7 @@ export function Register({userData}) {
     }
 
     useEffect(() => {
-        if(userData){
+        if (userData) {
             setTempAvatar(userData.avatar)
             setTempCoverImage(userData.coverImage)
         }
@@ -103,7 +103,7 @@ export function Register({userData}) {
 
     const handelPreview = (event, setTemp) => {
         const file = event.target.files[0]
-        if(file){
+        if (file) {
             const reader = new FileReader()
             reader.onload = () => {
                 setTemp(reader.result)
@@ -113,16 +113,24 @@ export function Register({userData}) {
         }
     }
 
-    if(loading) return <Loading />
+    if (loading) return <Loading />
 
     return (
-        <FormStyle className="md:w-[700px]" heading={userData ? "Customise" : "Sign up"}>
+        <FormStyle className="md:w-[700px] relative" heading={userData ? "Customise" : "Sign up"}>
             {error && <Error message={error} />}
             {errors.avatar && (
                 <Error message={errors.avatar.message} />
             )}
+            {userData && (
+                <Link
+                    className="text-[#ffffff81] hover:text-white absolute right-4 top-8"
+                    to="/edit/Change-Password"
+                >
+                    Change Password
+                </Link>
+            )}
             <form onSubmit={handleSubmit(dataSubmit)}>
-                <div className={`w-full ${userData? "inline" : "grid"} sm:grid-cols-2`}>
+                <div className={`w-full ${userData ? "inline" : "grid"} sm:grid-cols-2`}>
                     <div>
                         <Input
                             label="Email"
@@ -130,7 +138,7 @@ export function Register({userData}) {
                             placeholder="Enter Email.."
                             outline="outline-white outline-1"
                             {...register("email", {
-                                required: (userData? false : true),
+                                required: (userData ? false : true),
                                 pattern: {
                                     value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
                                     message: "Invailed Email Address"
@@ -152,7 +160,7 @@ export function Register({userData}) {
                             placeholder="Enter fullname.."
                             outline="outline-white outline-1"
                             {...register("fullname", {
-                                required: (userData? false : true)
+                                required: (userData ? false : true)
                             })}
                         />
                         {!userData && (
@@ -177,9 +185,9 @@ export function Register({userData}) {
                             type="file"
                             label="Upload Avatar"
                             accept="image/*"
-                            onInput= {(e) => handelPreview(e, setTempAvatar)}
+                            onInput={(e) => handelPreview(e, setTempAvatar)}
                             {...register("avatar", {
-                                required: (userData? false: "avatar is required" ),
+                                required: (userData ? false : "avatar is required"),
                             })}
                         />
                         <Avatar avatar={temAvatar} />
@@ -187,7 +195,7 @@ export function Register({userData}) {
                             type="file"
                             label="Upload Cover-image"
                             accept="image/*"
-                            onInput = {(e) => handelPreview(e, setTempCoverImage)}
+                            onInput={(e) => handelPreview(e, setTempCoverImage)}
                             {...register("coverImage", {
                                 required: false
                             })}
@@ -200,7 +208,7 @@ export function Register({userData}) {
                     value={userData ? "Save Changes" : "Sign up"}
                     type="submit"
                     bgColor="bg-cyan-700"
-                    className="mr-2 mt-2 hover:bg-opacity-70"
+                    className="mr-2 mt-4 hover:bg-opacity-70"
                 />
                 {!userData && (
                     <p className="font-semibold text-blue-100 mt-2">

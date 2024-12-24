@@ -9,6 +9,7 @@ import { ViewFullPlaylist } from "./ViewFullPlaylist";
 import { EditPlaylist } from "./EditPlaylist";
 import { AnotherChannel } from "./AnotherChannel";
 import { SubscriptionPage } from "./SubscriptionsPage";
+import {ChangePasswordPage} from "./ChangePasswordPage"
 
 export {
     Channel, 
@@ -22,4 +23,5 @@ export {
     EditPlaylist, 
     AnotherChannel,
     SubscriptionPage,
+    ChangePasswordPage
 }

@@ -3,7 +3,7 @@ import { LogoutBtn } from "./Header/logoutBtn.jsx";
 import { Register } from "./Auth/Register.jsx";
 import { Login } from "./Auth/Login.jsx";
 import { OpenPlaylist, Playlist } from "./Playlist/index.js";
-import { Video } from "./Video/index.js";
+import { Video, OpenVideo } from "./Video/index.js";
 import { VideoForm, PostForm, PlaylistForm, DeleteForm, ChangePasswordForm } from "./Forms/index.js";
 import { 
     CoverImage,
@@ -70,6 +70,7 @@ export {
     SubscriptionButton,
     SubscribedChannelInfo,
     Video,
+    OpenVideo,
     TimeAgo,
     Select,
     VideoForm,

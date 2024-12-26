@@ -12,7 +12,7 @@ export function Button(
         <input 
             type={type} 
             value={value}
-            className={`${className} px-2 py-1 cursor-pointer rounded-xl border-none shadow-lg shadow-[#0000002b] ${bgColor} ${textColor} text-lg`}
+            className={`${className} h-fit px-4 py-2 cursor-pointer rounded-xl border-none shadow-lg shadow-[#0000002b] ${bgColor} ${textColor} text-lg`}
             {...props}
         /> 
     )

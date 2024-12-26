@@ -23,7 +23,7 @@ export function Video({
 
     const { username, email, avatar, fullname } = owner
     return (
-        <Link>
+        <Link to={`/video/${_id}`}>
             <div className="w-fit grid grid-row sm:grid-cols-custom mx-auto mb-4 sm:mx-2 sm:w-full rounded-lg hover:bg-[#ffffff1e]">
                 <div
                     className={` ${thumbnailSize} relative bg-cover bg-no-repeat bg-center bg-black rounded-lg`}
@@ -39,7 +39,7 @@ export function Video({
                     <p> {description}</p>
                     <div className="flex flex-col gap-2 text-[#fff9] text-sm font-light">
                         {
-                            comments && likes && views ?
+                            (comments && likes && views) ?
                                 (
                                 <>
                                     <div>
@@ -61,7 +61,7 @@ export function Video({
                         }
                         <div className="flex items-center mt-2">
                             <Avatar avatar={avatar} heightWidth="h-[30px] w-[30px] mr-2" />
-                            <h4>{username}</h4>
+                            <h4>{fullname}</h4>
                         </div>
                     </div>
                 </div>

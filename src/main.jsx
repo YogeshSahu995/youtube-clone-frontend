@@ -16,6 +16,7 @@ import {
   EditPlaylist,
   SubscriptionPage,
   ChangePasswordPage,
+  PlayVideoPage,
 } from './pages/index.js'
 import { 
   ChannelVideos, 
@@ -104,6 +105,10 @@ const router = createBrowserRouter([
           {
             path: '/add-video',
             element: <AuthLayout children={<AddVideo />} authentication />
+          },
+          {
+            path: '/video/:videoId',
+            element: <AuthLayout children={<PlayVideoPage />} authentication />
           },
           {
             path: '/create-post',

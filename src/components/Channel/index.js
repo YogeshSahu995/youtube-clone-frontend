@@ -10,6 +10,7 @@ import { SubscribedChannels } from "./SubscribedChannels";
 import {SubscriptionButton} from "./SubscriptionButton";
 import { EmptyPageResponse } from "./EmptyPageResponse";
 import { SubscribedChannelInfo } from "./SubscribedChannelsInfo";
+import { GetChannelVideos } from "./GetChannelVideos";
 
 export {
     Channel, 
@@ -24,4 +25,5 @@ export {
     SubscriptionButton,
     EmptyPageResponse,
     SubscribedChannelInfo,
+    GetChannelVideos
 }

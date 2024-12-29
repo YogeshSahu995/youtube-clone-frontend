@@ -17,6 +17,7 @@ import { Avatar } from "./Avatar";
 import { ChannelList } from "./ChannelList";
 import { NavbarOfChannel } from "./NavbarOfChannel";
 import { CoverImage } from "./CoverImage";
+import { DropDown } from "./DropDown";
 
 export {
     CoverImage,
@@ -38,5 +39,6 @@ export {
     ScrollDiv,
     Avatar,
     ChannelList,
-    NavbarOfChannel
+    NavbarOfChannel,
+    DropDown
 }

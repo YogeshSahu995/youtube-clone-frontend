@@ -1,9 +1,10 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Video, Loading2, TimeAgo, Avatar, SubscriptionButton, Button } from "../index" 
 import { Link, useOutletContext } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { toggleVideoLike } from "../../services/likeService"
 import { GetChannelVideos } from "../Channel"
+import { GetVideoComment } from "./GetVideoComments"
 
 export function OpenVideo({video, userId}){
     const {_id, videoFile, thumbnail, title, description, views, likes, comments, isPublished, owner, isLiked, createdAt} = video
@@ -19,6 +20,7 @@ export function OpenVideo({video, userId}){
     const [likeCount, setLikeCount] = useState(likes)
     const {mainRef} = useOutletContext()
     const userData = useSelector(state => state.data)
+    const videoId = _id
 
     GetChannelVideos({
         setAllVideos, 
@@ -36,15 +38,15 @@ export function OpenVideo({video, userId}){
     })
 
     const toggleLike = async() => {
-        const response = await toggleVideoLike(_id)
+        const response = await toggleVideoLike(videoId)
         if(response.data?.data){
             console.log(response.data.data)
-            setLike(response.data.data)
-            setLikeCount(prev => prev += 1)
+            setLike(true)
+            setLikeCount(prev => likes + 1)
         }
         else{
             setLike(false)
-            setLikeCount(prev => prev -= prev)
+            setLikeCount(prev => prev -= 1)
         }
     }
 
@@ -55,9 +57,9 @@ export function OpenVideo({video, userId}){
         return(
             <div className="p-1 relative">
                 <div className="grid grid-rows-custom lg:grid-cols-custom text-white gap-2">
-                    <section className="h-fit">
+                    <section className="h-fit p-2">
                         <video 
-                            className="h-[290px] w-full sm:h-[350px] lg:min-w-[40vw] object-contain object-center"
+                            className="h-fit w-full sm:max-w-[80vw] md:max-w-[70vw] lg:min-w-[40vw] object-contain object-center mx-auto"
                             controls
                             poster={thumbnail}
                         >
@@ -65,8 +67,8 @@ export function OpenVideo({video, userId}){
                         </video>
                         <div className="flex flex-col gap-2 mt-4 border p-2 rounded-xl ">
                             <div className="flex justify-between">
-                                <h3 className="text-3xl font-semibold">{title}</h3>
-                                <div className="text-2xl">
+                                <h3 className="text-3xl font-bold">{title}</h3>
+                                <div className="text-xl">
                                     <i className={`${like?"ri-thumb-up-fill":"ri-thumb-up-line"} mr-1 cursor-pointer`} onClick={toggleLike}></i>
                                     {likeCount}
                                 </div>
@@ -79,7 +81,7 @@ export function OpenVideo({video, userId}){
                                 <Link to={`/channel/${username}`} className="flex gap-4">
                                     <Avatar avatar={avatar} heightWidth="h-[60px] w-[60px]" />
                                     <div>
-                                        <h3  className="text-xl font-semibold">{fullname}</h3>
+                                        <h3  className="text-xl font-medium">{fullname}</h3>
                                         <p className="text-lg font-light text-[#ffffff91]"> {subscribersCount} Subscribers </p>
                                     </div>
                                 </Link>
@@ -93,7 +95,11 @@ export function OpenVideo({video, userId}){
                             </div>
                         </div>
                         <div>
-
+                            <GetVideoComment 
+                                mainRef={mainRef} 
+                                videoId={videoId} 
+                                commentCount={comments} 
+                            />
                         </div>
                     </section>
                     <section className="w-full overflow-x-hidden">

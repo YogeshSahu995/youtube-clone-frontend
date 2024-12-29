@@ -5,11 +5,11 @@ const getVideoComments = ({videoId, page, limit}) => {
 }
 
 const addComment = ({videoId, data}) => {
-    return apiCall(`comments/${videoId}`, 'POST', data, )
+    return apiCall(`comments/${videoId}`, 'POST', data)
 }
 
 const updateComment = ({commentId, data}) => {
-    return apiCall(`comments/c/${commentId}`, 'PATCH', data, )
+    return apiCall(`comments/c/${commentId}`, 'PATCH', data)
 }
 
 const deleteComment = ({commentId}) => {

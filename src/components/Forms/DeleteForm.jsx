@@ -5,6 +5,7 @@ export function DeleteForm ({
     message = "Are you sure you want to delete? Once it's deleted You will not be able to recover it.",
     isHidden,
     setIsHidden,
+    setIsDelete,
     deleteFunction,
 }) {
     return (
@@ -20,14 +21,14 @@ export function DeleteForm ({
                         value="Cancel" 
                         bgColor="bg-[#ffffff9d]"
                         textColor="text-[#222]"
-                        className="px-4 py-2 font-semibold"
-                        onClick = {() => setIsHidden(true)}
+                        className="px-4 py-2 font-semibold hover:text-black hover:bg-white"
+                        onClick = {() => {setIsHidden(true)}}
                     />
                     <Button
                         value="Delete" 
                         bgColor="bg-red-400"
                         textColor="text-[#ffffff9d]"
-                        className="px-4 py-2 font-semibold"
+                        className="px-4 py-2 font-semibold hover:text-red-600 hover:bg-red-200"
                         onClick = {deleteFunction}
                     />
                 </div>

@@ -1,7 +1,6 @@
 import { Header } from "./Header/Header.jsx";
 import { LogoutBtn } from "./Header/logoutBtn.jsx";
-import { Register } from "./Auth/Register.jsx";
-import { Login } from "./Auth/Login.jsx";
+import { Login, Register, HandelPreview } from "./Auth/index.js";
 import { OpenPlaylist, Playlist } from "./Playlist/index.js";
 import { Video, OpenVideo } from "./Video/index.js";
 import { VideoForm, PostForm, PlaylistForm, DeleteForm, ChangePasswordForm } from "./Forms/index.js";
@@ -57,6 +56,7 @@ export {
     Loading2,
     Login,
     Register,
+    HandelPreview,
     Avatar,
     Channel,
     ChannelHeader,

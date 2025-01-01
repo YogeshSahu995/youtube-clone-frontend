@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { paginationHandler } from "../../utils";
 import { Comment } from "./Comment";
 import { Button, Input } from "../LayoutComponents";
+import { comma } from "postcss/lib/list";
 
 export function GetVideoComment({
     videoId,
@@ -15,6 +16,7 @@ export function GetVideoComment({
     const [error, setError] = useState("")
     const [page, setPage] = useState(1)
     const [comment, setComment] = useState("")
+    const [noOfComment, setNoOfComment] = useState(commentCount)
     const mainRef = useRef(null)
 
     useEffect(() => {
@@ -37,7 +39,7 @@ export function GetVideoComment({
                 setLoading(false);
             }
         })();
-    }, [page]);
+    }, [page, noOfComment]);
     
     useEffect(() => {
         const container = mainRef.current;
@@ -51,8 +53,9 @@ export function GetVideoComment({
         try {
             const response = await addComment({videoId, data: {"content":comment}})
             if(response.data.data){
-                console.log(response.data.data)
                 setComment("")
+                setAllComments([])
+                setNoOfComment(prev => prev += 1)
             }
         } catch (error) {
             console.error("Error submitting comment:", error.message)
@@ -61,8 +64,8 @@ export function GetVideoComment({
 
     return(
         <div className="">
-            <h1 className="py-2">Comments <span className="text-[#ffffff73]">{commentCount}</span></h1>
-            <div className="w-full flex justify-between">
+            <h1 className="py-2">Comments <span className="text-[#ffffff73]">{noOfComment}</span></h1>
+            <div className="w-full flex justify-between items-center">
                 <Input 
                     placeholder="add a comment"
                     className = "w-[60vw] md:w-[70vw] lg:w-[40vw]"
@@ -71,7 +74,8 @@ export function GetVideoComment({
                 />
                 <Button 
                     value="comment" 
-                    bgColor={comment.trim()? "bg-cyan-700": "bg-[#222]"} 
+                    bgColor={comment.trim()? "bg-cyan-700 text-[#fff]": "bg-[#111] text-[#ffffff70]"} 
+                    cursor={comment.trim()? "cursor-pointer": "cursor-wait"}
                     onClick = {SubmitComment}
                     disabled={!comment.trim()}
                 />

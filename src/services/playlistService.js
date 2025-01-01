@@ -16,6 +16,10 @@ const deletePlaylist = ({playlistId}) => {
     return apiCall(`playlist/${playlistId}`, 'DELETE')
 }
 
+const checkAlreadyVideoExist = ({playlistId, videoId}) => {
+    return apiCall(`playlist/check-exist/${playlistId}/${videoId}`)
+}
+
 const addVideoInPlaylist = ({videoId, playlistId}) => {
     return apiCall(`playlist/add/${videoId}/${playlistId}`, 'PATCH')
 }
@@ -35,5 +39,6 @@ export {
     getPlaylistById,
     getUserPlaylists,
     updatePlaylist,
-    deletePlaylist
+    deletePlaylist,
+    checkAlreadyVideoExist
 }

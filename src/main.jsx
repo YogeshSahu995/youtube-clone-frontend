@@ -17,6 +17,8 @@ import {
   SubscriptionPage,
   ChangePasswordPage,
   PlayVideoPage,
+  EditVideoPage,
+  EditPostPage
 } from './pages/index.js'
 import { 
   ChannelVideos, 
@@ -93,6 +95,14 @@ const router = createBrowserRouter([
                 element: <SubscribedChannels />
               }
             ]
+          },
+          {
+            path: '/edit/post/:postId',
+            element: <AuthLayout children={<EditPostPage />} />
+          },
+          {
+            path: '/edit/video/:videoId',
+            element: <AuthLayout children={<EditVideoPage />} />
           },
           {
             path: '/edit/channel/:channelId',

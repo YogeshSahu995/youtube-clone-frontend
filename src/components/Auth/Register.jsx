@@ -1,4 +1,4 @@
-import { Input, FormStyle, Button, Error, Loading, Avatar, CoverImage } from "../index"
+import { Input, FormStyle, Button, Error, Loading, Avatar, CoverImage, HandelPreview } from "../index"
 import { useNavigate } from "react-router-dom"
 import { useForm } from "react-hook-form"
 import { useEffect, useState } from "react"
@@ -101,17 +101,6 @@ export function Register({ userData }) {
         }
     }, [userData])
 
-    const handelPreview = (event, setTemp) => {
-        const file = event.target.files[0]
-        if (file) {
-            const reader = new FileReader()
-            reader.onload = () => {
-                setTemp(reader.result)
-                // setValue(fieldName, file)
-            }
-            reader.readAsDataURL(file) // File ko Data URL mein convert karein
-        }
-    }
 
     if (loading) return <Loading />
 
@@ -185,7 +174,7 @@ export function Register({ userData }) {
                             type="file"
                             label="Upload Avatar"
                             accept="image/*"
-                            onInput={(e) => handelPreview(e, setTempAvatar)}
+                            onInput={(e) => HandelPreview(e, setTempAvatar)}
                             {...register("avatar", {
                                 required: (userData ? false : "avatar is required"),
                             })}
@@ -195,7 +184,7 @@ export function Register({ userData }) {
                             type="file"
                             label="Upload Cover-image"
                             accept="image/*"
-                            onInput={(e) => handelPreview(e, setTempCoverImage)}
+                            onInput={(e) => HandelPreview(e, setTempCoverImage)}
                             {...register("coverImage", {
                                 required: false
                             })}

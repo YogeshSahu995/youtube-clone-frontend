@@ -30,7 +30,7 @@ const getVideoById = ({videoId}) => {
     return apiCall(`videos/${videoId}`, 'GET')
 }
 
-const updateThumbnail = ({videoId, formData}) => {
+const updateVideo = ({videoId, formData}) => {
     return apiCall(`videos/${videoId}`, 'PATCH', formData, multipartFormatte)
 }
 
@@ -52,7 +52,7 @@ export {
     publishVideo, 
     getVideosByTitle, 
     getVideoById, 
-    updateThumbnail, 
+    updateVideo, 
     deleteVideo, 
     togglePublishBtn, 
     addVideoInHistory 

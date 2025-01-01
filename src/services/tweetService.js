@@ -9,7 +9,7 @@ const getUserTweets = (userId) => {
     return apiCall(`tweets/user/${userId}`, 'GET')
 }
 
-const updateATweet = (tweetId, formData) => {
+const updateATweet = ({tweetId, formData}) => {
     return apiCall(`tweets/${tweetId}`, 'PATCH', formData, multipartFormatte)
 }
 
@@ -17,4 +17,8 @@ const deleteATweet = (tweetId) => {
     return apiCall(`tweets/${tweetId}`, 'DELETE')
 }
 
-export {createATweet, getUserTweets, updateATweet, deleteATweet}
+const getTweetById = (tweetId) => {
+    return apiCall(`tweets/${tweetId}`, "GET")
+}
+
+export {createATweet, getUserTweets, updateATweet, deleteATweet, getTweetById}

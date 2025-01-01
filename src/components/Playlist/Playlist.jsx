@@ -14,8 +14,11 @@ export function Playlist({playlistInfo}){
                 if (videos.length > 0) {
                     setVideoCount(`${videos.length} videos`)
                     const response = await getVideoById({ videoId: videos[0] });
-                    if (response.data.data) {
+                    if (response.data.data?.thumbnail) {
                         setImage(response.data.data.thumbnail);
+                    }
+                    else{
+                        setImage("/images/no-video.jpg")
                     }
                 } else {
                     setVideoCount("No Videos")

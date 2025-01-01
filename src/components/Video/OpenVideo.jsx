@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { Video, Loading2, TimeAgo, Avatar, SubscriptionButton, Button } from "../index" 
-import { Link, useOutletContext } from "react-router-dom"
+import { Link, useOutletContext, useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { toggleVideoLike } from "../../services/likeService"
 import { GetChannelVideos } from "../Channel"
@@ -20,6 +20,7 @@ export function OpenVideo({video, userId}){
     const [likeCount, setLikeCount] = useState(likes)
     const {mainRef} = useOutletContext()
     const userData = useSelector(state => state.data)
+    const navigate = useNavigate()
     const videoId = _id
 
     GetChannelVideos({
@@ -56,10 +57,10 @@ export function OpenVideo({video, userId}){
         
         return(
             <div className="p-1 relative">
-                <div className="grid grid-rows-custom lg:grid-cols-custom text-white gap-2">
+                <div className="grid grid-rows-custom xl:grid-cols-custom text-white gap-2">
                     <section className="h-fit p-2">
                         <video 
-                            className="h-fit w-full sm:max-w-[80vw] md:max-w-[70vw] lg:min-w-[40vw] object-contain object-center mx-auto"
+                            className="h-[400px] w-full sm:max-w-[80vw] md:max-w-[70vw] lg:min-w-[40vw] object-contain object-center mx-auto"
                             controls
                             poster={thumbnail}
                         >
@@ -86,7 +87,7 @@ export function OpenVideo({video, userId}){
                                     </div>
                                 </Link>
                                 {isCurrentUser ? 
-                                    (<Button value="Edit" />):
+                                    (<Button value="Edit" onClick={() => navigate(`/edit/video/${videoId}`)} />):
                                     (<SubscriptionButton channelId={_id} isSubscribed={isSubscribed} />)
                                 }
                             </div>

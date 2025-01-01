@@ -11,6 +11,8 @@ import { AnotherChannel } from "./AnotherChannel";
 import { SubscriptionPage } from "./SubscriptionsPage";
 import {ChangePasswordPage} from "./ChangePasswordPage"
 import { PlayVideoPage } from "./PlayVideoPage";
+import {EditVideoPage} from "./EditVideoPage"
+import { EditPostPage } from "./EditPostPage";
 
 export {
     Channel, 
@@ -25,5 +27,7 @@ export {
     AnotherChannel,
     SubscriptionPage,
     ChangePasswordPage,
-    PlayVideoPage
+    PlayVideoPage,
+    EditVideoPage,
+    EditPostPage
 }

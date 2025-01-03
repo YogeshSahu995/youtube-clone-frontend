@@ -13,6 +13,7 @@ import {ChangePasswordPage} from "./ChangePasswordPage"
 import { PlayVideoPage } from "./PlayVideoPage";
 import {EditVideoPage} from "./EditVideoPage"
 import { EditPostPage } from "./EditPostPage";
+import { YouFeedPage } from "./YouFeedPage";
 
 export {
     Channel, 
@@ -29,5 +30,6 @@ export {
     ChangePasswordPage,
     PlayVideoPage,
     EditVideoPage,
-    EditPostPage
+    EditPostPage,
+    YouFeedPage
 }

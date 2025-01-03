@@ -39,7 +39,7 @@ export function ChannelList({ channelInfo }) {
             <div
                 className="px-4 py-2 flex flex-col min-[420px]:flex-row border border-[#ffffff5d] rounded-lg justify-between items-center mb-2 hover:bg-[#0e7490ba]">
                 <div
-                    onClick={() => navigate(`/profile/${username}`)}
+                    onClick={() => navigate(`/${username}`)}
                     className="flex my-2 min-[420px]:mb-0 hover:cursor-pointer"
                 >
                     <Avatar

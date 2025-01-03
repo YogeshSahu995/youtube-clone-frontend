@@ -18,7 +18,8 @@ import {
   ChangePasswordPage,
   PlayVideoPage,
   EditVideoPage,
-  EditPostPage
+  EditPostPage,
+  YouFeedPage
 } from './pages/index.js'
 import { 
   ChannelVideos, 
@@ -45,27 +46,27 @@ const router = createBrowserRouter([
             element: <AuthLayout children={<Home />} authentication />
           },
           {
-            path:'/profile/:username',
+            path:'/:username',
             element: <AuthLayout children={<AnotherChannel  />} authentication />,
             children: [
               {
-                path: "/profile/:username/videos",
+                path: "/:username/videos",
                 element: <ChannelVideos />
               },
               {
-                path: "/profile/:username/posts",
+                path: "/:username/posts",
                 element: <ChannelPost />
               },
               {
-                path: "/profile/:username/search",
+                path: "/:username/search",
                 element: <ChannelSearchVideos />
               },
               {
-                path: "/profile/:username/playlists",
+                path: "/:username/playlists",
                 element: <ChannelPlaylists />
               },
               {
-                path: "/profile/:username/subscribed",
+                path: "/:username/subscribed",
                 element: <SubscribedChannels />
               }
             ]
@@ -97,6 +98,10 @@ const router = createBrowserRouter([
             ]
           },
           {
+            path: "/feed/you",
+            element: <AuthLayout children={<YouFeedPage />} />
+          },
+          {
             path: '/edit/post/:postId',
             element: <AuthLayout children={<EditPostPage />} />
           },
@@ -117,7 +122,7 @@ const router = createBrowserRouter([
             element: <AuthLayout children={<AddVideo />} authentication />
           },
           {
-            path: '/video/:videoId',
+            path: '/video/:videoId/:userId',
             element: <AuthLayout children={<PlayVideoPage />} authentication />
           },
           {

@@ -1,7 +1,9 @@
 import { useState } from "react"
 
 
-export function DropDown({children}){
+export function DropDown({
+    children
+}){
     const [isHidden, setIsHidden] = useState(true)
     return(
         <div className="relative flex flex-col p-1 z-auto mr-2 text-white ">

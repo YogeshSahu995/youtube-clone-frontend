@@ -40,6 +40,8 @@ import {
     SubscribedChannelInfo,
 } from "./Channel";
 
+import { YouMainPage } from "./You/YouMainPage.jsx";
+
 export {
     CoverImage,
     Header,
@@ -85,5 +87,6 @@ export {
     Popup,
     ScrollDiv,
     ChannelList,
-    NavbarOfChannel
+    NavbarOfChannel,
+    YouMainPage
 }

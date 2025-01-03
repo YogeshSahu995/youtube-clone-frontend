@@ -4,7 +4,7 @@ import { getcurrentUser } from './services/userService';
 import { useDispatch } from 'react-redux';
 import { login, logout } from './store/authSlice';
 import { useNavigate } from 'react-router-dom';
-import { CoverImage, Loading } from './components';
+import { Loading } from './components';
 
 function App() {
   const [loading, setLoading] = useState(true)

@@ -46,6 +46,14 @@ const addVideoInHistory = ({videoId}) => {
     return apiCall(`videos/add/history/${videoId}`, 'PATCH')
 }
 
+const handleVideoViews = ({videoId, userId}) => {
+    return apiCall(`videos/view/${videoId}/${userId}`, 'POST')
+}
+
+const getUserHistory = () => {
+    return apiCall("videos/get/history", "GET")
+}
+
 export { 
     getAllVideos, 
     getChannelVideos, 
@@ -55,5 +63,7 @@ export {
     updateVideo, 
     deleteVideo, 
     togglePublishBtn, 
-    addVideoInHistory 
+    addVideoInHistory,
+    handleVideoViews,
+    getUserHistory
 }

@@ -5,8 +5,9 @@ import { useSelector } from "react-redux"
 import { toggleVideoLike } from "../../services/likeService"
 import { GetChannelVideos } from "../Channel"
 import { GetVideoComment } from "./GetVideoComments"
+import { addVideoInHistory, handleVideoViews } from "../../services/videoService"
 
-export function OpenVideo({video, userId}){
+export function OpenVideo({video, userId, watcherId}){
     const {_id, videoFile, thumbnail, title, description, views, likes, comments, isPublished, owner, isLiked, createdAt} = video
     const [loading, setLoading] = useState(false)
     const [data, setData] = useState({});
@@ -17,6 +18,7 @@ export function OpenVideo({video, userId}){
     const [sortBy, setSortBy] = useState("createdAt");
     const [sortType, setSortType] = useState("des");
     const [like, setLike] = useState(isLiked)
+    const [viewCount, setViewCount] = useState(views)
     const [likeCount, setLikeCount] = useState(likes)
     const {mainRef} = useOutletContext()
     const userData = useSelector(state => state.data)
@@ -51,6 +53,22 @@ export function OpenVideo({video, userId}){
         }
     }
 
+    useEffect(() => {
+        ;(async() => {
+            try {
+                const addHistory = await addVideoInHistory({videoId})
+                const response = await handleVideoViews({videoId : videoId, userId: watcherId})
+                if(response.data.data){
+                    setTimeout(() => {
+                        setViewCount(prev => prev+1)
+                    }, 4000)
+                }
+            } catch (error) {
+                console.error(error.message)
+            }
+        })()
+    },[])
+
     if(Object.keys(video).length > 0){
         const {avatar, fullname, isSubscribed, subscribersCount, _id, username} = owner
         const isCurrentUser = _id == userData._id
@@ -60,7 +78,7 @@ export function OpenVideo({video, userId}){
                 <div className="grid grid-rows-custom xl:grid-cols-custom text-white gap-2">
                     <section className="h-fit p-2">
                         <video 
-                            className="h-[400px] w-full sm:max-w-[80vw] md:max-w-[70vw] lg:min-w-[40vw] object-contain object-center mx-auto"
+                            className="h-fit max-h-[400px] w-full sm:max-w-[80vw] md:max-w-[70vw] lg:min-w-[40vw] object-contain object-center mx-auto"
                             controls
                             poster={thumbnail}
                         >
@@ -75,7 +93,7 @@ export function OpenVideo({video, userId}){
                                 </div>
                             </div>
                             <div className="flex gap-4 font-normal text-[#ffffff91]">
-                                <span>{views} Views </span> 
+                                <span>{viewCount} Views </span> 
                                 <TimeAgo timeStamp={createdAt} />
                             </div>
                             <div className="flex gap-4 justify-between items-center mt-2 border-b pb-2">
@@ -111,6 +129,7 @@ export function OpenVideo({video, userId}){
                                         {video.createdAt &&
                                             <Video
                                                 videoInfo={video}
+                                                isPlaying={video._id === videoId ? true : false}
                                                 thumbnailSize="h-[160px] w-[90vw] sm:h-[190px] sm:w-[50vw] md:h-[190px] md:w-[300px] lg:h-[160px] lg:w-[18vw] xl:h-[190px] xl:w-[20vw]"
                                             />
                                         }

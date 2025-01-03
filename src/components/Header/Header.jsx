@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom"
 
 export function Header () {
     const authstatus = useSelector(state => state.status)
+    const userData = useSelector(state => state.data)
     const navigate = useNavigate()
 
     const buttons = [
@@ -47,7 +48,7 @@ export function Header () {
                     </div>
                 ): 
                 (<div className="w-max">
-                    <LogoutBtn />
+                    <LogoutBtn userData={userData} />
                 </div>)
                 }
             </div>

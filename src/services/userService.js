@@ -47,6 +47,14 @@ const getUserHistory = () => {
     return apiCall('users/watch-history', 'GET')
 }
 
+const removeVideoFromHistory = (videoId) => {
+    return apiCall(`users/watch-history/remove/${videoId}`, "POST")
+}
+
+const clearAllHistory = () => {
+    return apiCall(`users/watch-history/clear-all`, "POST")
+}
+
 
 export { 
         registerUser, 
@@ -59,5 +67,7 @@ export {
         updateAvatar, 
         updateCoverImage, 
         getUserChannelProfile, 
-        getUserHistory
+        getUserHistory,
+        removeVideoFromHistory,
+        clearAllHistory
     }

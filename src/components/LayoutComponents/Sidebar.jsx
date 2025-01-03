@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux'
 
 export function Sidebar () {
     const authStatus = useSelector(state => state.status)
-    const { username } = useSelector(state => state.data)
 
     const listOfIcons = [
         { 
@@ -33,8 +32,8 @@ export function Sidebar () {
         },
         { 
             element: <i className="ri-user-fill"></i>, 
-            slug: `/channel/${username}`, 
-            name: "Channel" 
+            slug: `/feed/you`, 
+            name: "You" 
         },
     ];
     return (

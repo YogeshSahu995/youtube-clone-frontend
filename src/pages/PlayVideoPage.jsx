@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { getVideoById } from "../services/videoService"
 
 export function PlayVideoPage(){
-    const {videoId} = useParams()
+    const {videoId, userId} = useParams()
     const [videoInfo, setVideoInfo] = useState({})
     const [Loading, setLoading] = useState(false)
     
@@ -28,6 +28,6 @@ export function PlayVideoPage(){
     if(Loading) return <Loading2 />
 
     if(Object.keys(videoInfo).length > 0){
-        return <OpenVideo video={videoInfo} userId = {videoInfo.owner._id} />
+        return <OpenVideo video={videoInfo} userId = {videoInfo.owner._id} watcherId = {userId} />
     }
 }

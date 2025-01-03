@@ -25,7 +25,7 @@ export function ChannelNav({ username, handleSearchChange }) {
     ]
 
     useEffect(() => {
-        navigate(`/profile/${username}/videos`)
+        navigate(`/channel/${username}/videos`)
     }, [username, navigate])
 
     return (

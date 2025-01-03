@@ -8,32 +8,32 @@ export function AnotherChannelNav({ username, handleSearchChange }) {
     const channelNav = [
         {
             name: "Videos",
-            slug: `/profile/:username/videos`
+            slug: `/:username/videos`
         },
         {
             name: "Playlists",
-            slug: "/profile/:username/playlists"
+            slug: "/:username/playlists"
         },
         {
             name: "Posts",
-            slug: "/profile/:username/posts"
+            slug: "/:username/posts"
         },
         {
             name: "Subscribed",
-            slug: "/profile/:username/subscribed"
+            slug: "/:username/subscribed"
         }
     ]
 
-    // useEffect(() => {
-    //     navigate(`/profile/${username}/videos`)
-    // }, [username, navigate])
+    useEffect(() => {
+        navigate(`/${username}/videos`)
+    }, [username, navigate])
 
     return (
         <NavbarOfChannel 
             channelNav={channelNav} 
             handleSearchChange={handleSearchChange} 
             username={username} 
-            searchPath={`/profile/${username}/search`}
+            searchPath={`/${username}/search`}
         />
 
     )

@@ -28,7 +28,7 @@ export function HistoryDropDown ({setAddVideoForm, isCurrentUser, videoId, setFe
                         className="hover:bg-[#00000038] px-1 rounded-md mb-1 cursor-pointer" 
                         onClick={() => handleRemoveVideo()}
                     >
-                        Remove from history
+                        Remove
                     </div>
                 )}
                 <div 

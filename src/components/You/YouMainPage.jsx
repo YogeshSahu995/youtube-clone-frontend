@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Avatar, Button } from "..";
-import { YourHistory } from "./YourHistory";
+import { YourHistory, YourLikedVideos, YourPlaylists } from "./index";
 
 export function YouMainPage({userData}){
     const navigate = useNavigate()
@@ -20,6 +20,8 @@ export function YouMainPage({userData}){
                 </div>
             </div>
             <YourHistory userData = {userData} />
+            <YourPlaylists userId = {userData._id} />
+            <YourLikedVideos />
         </div>
     )
 }

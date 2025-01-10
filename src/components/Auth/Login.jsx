@@ -66,13 +66,12 @@ export function Login(){
                 <Button 
                     value="Sign In"
                     type="submit"
-                    bgColor="bg-cyan-700"
-                    className="mr-2 mt-2 hover:bg-opacity-70"
+                    className="mr-2 mt-2"
                 />
             </form>
             <p className="font-semibold text-blue-100 mt-2">
                 Don't have an account ?  
-                <Link to='/register' className="text-cyan-700 ">
+                <Link to='/register' className="text-[#10e3ff] ">
                     _Create Account_
                 </Link>
             </p>

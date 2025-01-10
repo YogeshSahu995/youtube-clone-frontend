@@ -85,8 +85,7 @@ export function PlaylistForm({playlist, playlistId}){
                 <Button
                     type="submit"
                     value={playlist?"Update":"Create"}
-                    bgColor="bg-cyan-700"
-                    className="mr-2 mt-2 hover:bg-opacity-70"
+                    className="mr-2 mt-2"
                 />
             </form>
         </FormStyle>

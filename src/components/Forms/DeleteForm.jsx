@@ -10,7 +10,7 @@ export function DeleteForm ({
 }) {
     return (
         <Popup isHidden={isHidden}>
-            <div className="h-fit w-fit p-4 border grid gap-4 rounded-xl bg-[#222]">
+            <div className="h-fit w-fit p-4 grid gap-4 rounded-xl bg-[#00000083]">
                 <span className="text-2xl font-semibold">
                     <i className="ri-delete-bin-6-line text-red-500 px-2 py-2 bg-red-300 rounded-full mr-2 font-light"></i>
                     {title}

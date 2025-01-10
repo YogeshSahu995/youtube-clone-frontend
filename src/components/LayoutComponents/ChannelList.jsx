@@ -37,7 +37,7 @@ export function ChannelList({ channelInfo }) {
 
         return (
             <div
-                className="px-4 py-2 flex flex-col min-[420px]:flex-row border border-[#ffffff5d] rounded-lg justify-between items-center mb-2 hover:bg-[#0e7490ba]">
+                className="px-4 py-2 flex flex-col flex-wrap gap-2 min-[420px]:flex-row border border-[#ffffff5d] rounded-lg justify-between items-center mb-2 hover:bg-[#0e7490ba]">
                 <div
                     onClick={() => navigate(`/${username}`)}
                     className="flex my-2 min-[420px]:mb-0 hover:cursor-pointer"
@@ -48,7 +48,7 @@ export function ChannelList({ channelInfo }) {
                     />
 
                     <div
-                        className="text-white text-base flex flex-col justify-center">
+                        className="text-white text-base flex flex-col justify-center text-nowrap">
                         <h3 className="capitalize text-lg">{fullname}</h3>
                         <h3>{subscribersCount} Subscribers</h3>
                     </div>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Loading2, Error, Video, Button, Loading } from "../index";
+import { Loading2, Error, Video, Button } from "../index";
 import { useOutletContext } from "react-router-dom";
 import { EmptyPageResponse } from "./EmptyPageResponse";
 import { GetChannelVideos } from "./GetChannelVideos";
@@ -34,10 +34,6 @@ export function ChannelVideos() {
         return <Error message={error} />;
     }
 
-    if(loading){
-        return <Loading />
-    }
-
     if (allVideos.length === 0) {
         return(
             <EmptyPageResponse 
@@ -52,14 +48,15 @@ export function ChannelVideos() {
             />
         )
     }
+    else{console.log(allVideos)}
 
     return (
-        <>
+        <div className="px-4">
             <div>
                 <Button 
                  value="Latest"
-                 className="mr-3 mt-2 hover:bg-[#ffffff92] hover:text-[#222]"
-                 bgColor="bg-[#88888844]"
+                 bgColor="bg-[#0000009c]"
+                 className="mr-3 mt-2"
                  onClick={() => {
                     if((sortBy !== "createdAt") || (sortType !== "des")) {
                         setSortBy("createdAt")
@@ -70,8 +67,8 @@ export function ChannelVideos() {
                 />
                 <Button 
                  value="Popular"
-                 className="mr-3 mt-2 hover:bg-[#ffffff92] hover:text-[#222]"
-                 bgColor="bg-[#88888844]"
+                 bgColor="bg-[#0000009c]"
+                 className="mr-3 mt-2"
                  onClick={() => {
                     if((sortBy !== "likes") || (sortType !== "des")){
                         setSortBy("likes")
@@ -82,8 +79,8 @@ export function ChannelVideos() {
                 />
                 <Button 
                  value="Oldest"
-                 className="mr-3 mt-2 hover:bg-[#ffffff92] hover:text-[#222]"
-                 bgColor="bg-[#88888844]"
+                 bgColor="bg-[#0000009c]"
+                 className="mr-3 mt-2 "
                  onClick = {() => {
                     if((sortBy !== "createdAt") || (sortType !== "asc")){
                         setSortBy("createdAt")
@@ -102,6 +99,6 @@ export function ChannelVideos() {
             </ul>
             {loading && <Loading2 />}
             {end && <p className="text-white text-center italic underline-offset-1">No More Videos</p>}
-        </>
+        </div>
     );
 }

@@ -8,7 +8,6 @@ import { Logo } from "./Logo";
 import { Protectedpage } from "./Protectedpage";
 import { Sidebar } from "./Sidebar";
 import { TimeAgo } from "./TimeAgo";
-import Select from "./Select";
 import RTE from "./RTE";
 import { Post } from "./Post";
 import { Popup } from "./Popup";
@@ -18,6 +17,7 @@ import { ChannelList } from "./ChannelList";
 import { NavbarOfChannel } from "./NavbarOfChannel";
 import { CoverImage } from "./CoverImage";
 import { DropDown } from "./DropDown";
+import ToggleButton from "./ToggleButton";
 
 export {
     CoverImage,
@@ -32,7 +32,6 @@ export {
     Protectedpage, 
     Sidebar, 
     TimeAgo, 
-    Select, 
     RTE,
     Post,
     Popup,
@@ -40,5 +39,6 @@ export {
     Avatar,
     ChannelList,
     NavbarOfChannel,
-    DropDown
+    DropDown,
+    ToggleButton
 }

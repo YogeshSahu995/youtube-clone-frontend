@@ -17,7 +17,6 @@ import {
     Loading, 
     Loading2, 
     TimeAgo, 
-    Select, 
     Post,
     RTE,
     Popup,
@@ -41,8 +40,10 @@ import {
 } from "./Channel";
 
 import { YouMainPage } from "./You/YouMainPage.jsx";
+import { Home } from "./Home/Home.jsx";
 
 export {
+    Home,
     CoverImage,
     Header,
     Sidebar,
@@ -74,7 +75,6 @@ export {
     Video,
     OpenVideo,
     TimeAgo,
-    Select,
     VideoForm,
     PostForm,
     PlaylistForm,

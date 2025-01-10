@@ -15,5 +15,4 @@ export function paginationHandler ({container, data, setPage, setEnd}) {
     }
 
     return handleScroll
-
 }

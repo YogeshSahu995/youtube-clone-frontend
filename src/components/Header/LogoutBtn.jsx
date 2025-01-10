@@ -25,7 +25,7 @@ export function LogoutBtn ({userData}) {
         return(
             <div className="relative flex flex-col p-1 z-auto mr-2 text-white">
                 <div onClick={() => setIsHidden(prev => !prev)} className="text-right text-lg cursor-pointer">
-                    <Avatar avatar={avatar} heightWidth="h-[50px] w-[50px]" />
+                    <Avatar avatar={avatar} heightWidth={`h-[50px] w-[50px] ${isHidden? "" : "border-2 border-cyan-300"}`} />
                 </div>
                 <div 
                 className={`absolute right-[60px] top-7 flex flex-col gap-3 ${isHidden? "hidden" : "block"} text-center p-2 w-[200px] rounded-lg bg-[#484848] text-white`}>
@@ -36,7 +36,7 @@ export function LogoutBtn ({userData}) {
                             <h4>{username}</h4>
                         </div>
                     </div>
-                    <Link to={`/channel/${username}`} className="text-cyan-600  font-medium"> View your channel</Link>
+                    <Link to={`/channel/${username}`} className="text-[#10e3ff]  font-medium"> View your channel</Link>
                     <hr></hr>
                     <Button 
                         value="Sign Out"

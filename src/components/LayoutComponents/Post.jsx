@@ -5,11 +5,15 @@ import { Avatar, DropDown } from "./index"
 import { deleteATweet } from "../../services/tweetService"
 import { useState } from "react"
 import { DeleteForm } from "../Forms"
+import { LikeToggle } from "../Video"
+import { toggleTweetLike } from "../../services/likeService"
 
 export function Post({ postInfo, isCurrentUser }) {
-    const { content, createdAt, owner, _id, image } = postInfo
+    const { content, createdAt, owner, _id, image, likes, isLiked } = postInfo
     const { avatar, username } = owner
     const [isHidden, setIsHidden] = useState(true)
+    const [likeCount, setLikeCount] = useState(likes)
+    const [like, setLike] = useState(isLiked)
     const navigate = useNavigate()
 
     const handleRoute = () => {
@@ -46,7 +50,7 @@ export function Post({ postInfo, isCurrentUser }) {
                 title="Permanently delete"
             />
             <div
-                className="border border-[#ffffff4b] p-4 my-4 rounded-xl text-white w-full sm:w-fit mx-auto flex gap-3 flex-col ">
+                className="relative border border-[#ffffff4b] p-4 my-4 rounded-xl text-white w-full sm:w-fit mx-auto flex gap-3 flex-col ">
                 <div className="flex justify-between">
                     <div className="flex gap-3">
                         <Avatar avatar={avatar} heightWidth="h-[50px] w-[50px]" />
@@ -92,6 +96,14 @@ export function Post({ postInfo, isCurrentUser }) {
                     >
                     </div>
                 }
+                <LikeToggle 
+                    setLike = {setLike}
+                    Like={like}
+                    setLikeCount={setLikeCount}
+                    likeCount={likeCount}
+                    fn={toggleTweetLike}
+                    _id={_id}
+                />
             </div>
         </>
     )

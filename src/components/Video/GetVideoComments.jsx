@@ -4,6 +4,7 @@ import { paginationHandler } from "../../utils";
 import { Comment } from "./Comment";
 import { Button, Input } from "../LayoutComponents";
 import { comma } from "postcss/lib/list";
+import { EmptyPageResponse } from "../Channel";
 
 export function GetVideoComment({
     videoId,
@@ -82,17 +83,27 @@ export function GetVideoComment({
             </div>
             <div 
                 ref={mainRef} 
-                className="h-[300px] overflow-x-hidden scrollbar-thin scrollbar-thumb-[#444] scrollbar-track-transparent border"
+                className="h-[300px] bg-[#0000006d] rounded-xl overflow-x-hidden scrollbar-thin scrollbar-thumb-[#444] scrollbar-track-transparent p-2"
             >
-                <ul>
-                    {allComments?.map((comment) => {
-                        return(
-                            <li key={comment._id}>
-                                <Comment comment={comment} />
-                            </li>
-                        )
-                    })}
-                </ul>
+                {
+                    allComments.length == 0?(
+                        <div className="h-full w-full flex justify-center items-center text-xl">
+                            <i className="ri-chat-1-line text-2xl mr-2"></i>
+                            <h1>No Any Comment</h1>
+                        </div>
+                    ):(
+
+                        <ul>
+                            {allComments?.map((comment) => {
+                                return(
+                                    <li key={comment._id}>
+                                        <Comment comment={comment} />
+                                    </li>
+                                )
+                            })}
+                        </ul>
+                    )
+                }
             </div>
         </div>
     )

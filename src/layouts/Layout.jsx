@@ -1,14 +1,20 @@
 import { Header, Sidebar, Container, ScrollDiv } from "../components";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+
 
 export default function Layout (){
     const mainRef = useRef(null) // create ref for scrollbar div
     const authStatus = useSelector(state => state.status)
+    const navigate = useNavigate()
+    const [searchInput, setSearchInput] = useState("")
+
+    // if(searchInput) navigate('/')
+
     return (
         <Container>
-            <Header />
+            <Header setSearchInput = {setSearchInput} />
             <div className={`${authStatus && "grid grid-rows-custom  md:grid-cols-custom"} relative top-[80px]`}>
 
                 {authStatus && (
@@ -18,7 +24,7 @@ export default function Layout (){
                 )}
                 <main className="overflow-x-hidden"> {/* its imp overflow-hidden */}
                     <ScrollDiv ref={mainRef}>
-                        <Outlet context={{mainRef}} /> {/* pass ref to the outlet */}
+                        <Outlet context={{mainRef, searchInput}} /> {/* pass ref to the outlet */}
                     </ScrollDiv>
                 </main>
             </div>

@@ -1,10 +1,10 @@
 import { useEffect } from "react";
-import { Container } from "../components";
+import { Container, Home } from "../components";
 import { useDispatch } from "react-redux";
 import { login } from "../store/authSlice";
 import { getcurrentUser } from "../services/userService";
 
-export function Home () {
+export function HomePage () {
     const dispatch = useDispatch()
     useEffect(() => {
         getcurrentUser()
@@ -25,8 +25,8 @@ export function Home () {
         })
     },[])
     return (
-        <Container>
-            <h1 className="text-white text-3xl">Home</h1>
-        </Container>
+        <div>
+            <Home />
+        </div>
     )
 }

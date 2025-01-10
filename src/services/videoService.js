@@ -19,7 +19,7 @@ const getChannelVideos = ({page = '1', limit = '10', query, sortBy = 'createdAt'
     )
 }
 
-const getVideosByTitle = ({page = '1', limit = '20', query, sortBy = 'views', sortType = 'des'}) => {
+const getVideosByTitle = ({page = '1', limit = '20', query, sortBy = 'createdAt', sortType = 'des'}) => {
     return apiCall(
         `videos/t?page=${page}&limit=${limit}&query=${query}&sortBy=${sortBy}&sortType = ${sortType}`,
         'GET'

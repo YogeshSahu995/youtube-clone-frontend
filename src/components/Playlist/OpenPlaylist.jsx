@@ -134,29 +134,25 @@ export function OpenPlaylist({ playlistId }) {
                                     (<div className="w-fit mx-auto mt-2">
                                         <Button
                                             value="Play"
-                                            textColor="text-[#222]"
-                                            bgColor="bg-[#ffffff9d]"
-                                            className="px-8 font-bold hover:bg-[#fff]"
-                                            onClick={() => navigate('/')} //todo
+                                            className="px-8 font-bold"
+                                            onClick={() => navigate('/')}
                                         />
                                     </div>) :
-                                    (<div className="w-full flex justify-between mt-2">
+                                    (<div className="w-full flex justify-between items-center mt-2">
                                         <Button
                                             value="Play"
-                                            textColor="text-[#222]"
-                                            bgColor="bg-[#ffffff9d]"
-                                            className="px-8 font-bold hover:bg-[#fff]"
+                                            className="px-8 font-bold"
                                             onClick={() => navigate('/')} //todo
                                         />
                                         <div className="flex">
-                                            <Link to={`/playlist/edit/${data._id}`} className="px-2 py-1 rounded-full border text-lg mr-2 hover:bg-[#ffffff1e]">
+                                            <Link to={`/playlist/edit/${data._id}`} className="text-2xl mr-4 textEffect ">
                                                 <i className="ri-pencil-fill"></i>
                                             </Link>
                                             <button
                                                 onClick={() => {
                                                     setIsHidden(false)
                                                 }}
-                                                className="px-2 py-1 rounded-full border text-lg hover:bg-[#ffffff1e]"
+                                                className="text-2xl mr-2 textEffect"
                                             >
                                                 <i className="ri-delete-bin-6-line"></i>
                                             </button>

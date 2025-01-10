@@ -1,7 +1,7 @@
 import { Channel } from "./Channel";
 import { Login } from "./Login";
 import { Register } from "./Register";
-import { Home } from "./Home";
+import { HomePage } from "./HomePage";
 import { AddVideo } from "./AddVideo";
 import { CreatePost } from "./CreatePost";
 import { CreatePlaylist } from "./CreatePlaylist";
@@ -19,7 +19,7 @@ export {
     Channel, 
     Login, 
     Register,
-    Home, 
+    HomePage, 
     AddVideo, 
     CreatePost, 
     CreatePlaylist, 

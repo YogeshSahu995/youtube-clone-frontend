@@ -34,7 +34,7 @@ export function YourLikedVideos(){
                 <h1 className="text-3xl font-medium ml-1">Liked Videos</h1>
             </div>
             {allLikedVideos.length > 0 ? 
-                (<div className="overflow-y-hidden mt-8 pb-2 scrollbar-thin scrollbar-thumb-[#444] scrollbar-track-transparent ">
+                (<div className="overflow-y-hidden mt-8 pb-2 scrollbar-thin scrollbar-thumb-[#444] scrollbar-track-transparent scroll-smooth ">
                     <ul className="flex gap-4">
                         {allLikedVideos?.map((videoInfo) => {
                             return (

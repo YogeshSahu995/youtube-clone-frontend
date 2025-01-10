@@ -6,7 +6,6 @@ const registerUser = (formData) => {
 }
 
 const loginUser = (data) => {
-    console.log('login function chala..')
     return apiCall('users/login', 'POST', data)
 }
 
@@ -23,7 +22,6 @@ const refreshToken = () => {
 }
 
 const getcurrentUser = () => {
-    console.log('getCurrentUser chala')
     return apiCall('users/current-user', 'GET')
 }
 
@@ -55,6 +53,11 @@ const clearAllHistory = () => {
     return apiCall(`users/watch-history/clear-all`, "POST")
 }
 
+const getUserChannelByName = (username) => {
+    return apiCall(`users/get/users/${username}`, "get")
+}
+
+
 
 export { 
         registerUser, 
@@ -69,5 +72,6 @@ export {
         getUserChannelProfile, 
         getUserHistory,
         removeVideoFromHistory,
-        clearAllHistory
+        clearAllHistory,
+        getUserChannelByName
     }

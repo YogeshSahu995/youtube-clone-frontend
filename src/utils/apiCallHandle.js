@@ -10,7 +10,15 @@ export const apiCall = async(endpoint, method='GET', data = null, headers) => {
             headers
         })
     } catch (error) {
-        console.log('API CALL Error: ', error)
-        return error.response? error.response.data : error
+        if(error.response){
+            console.log(error.response)
+            return error.response? error.response.data : error
+        }
+        else if(error.request){
+            console.error(endpoint, ":", "No Response Received", error.request)
+        }
+        else{
+            console.error('Error setting up request :', error.message)
+        }
     }
 }

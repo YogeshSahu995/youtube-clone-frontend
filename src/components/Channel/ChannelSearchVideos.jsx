@@ -1,4 +1,4 @@
-import { NavLink, useOutletContext } from "react-router-dom";
+import { useOutletContext } from "react-router-dom";
 import { useDebounce } from "../../utils";
 import { useEffect, useState } from "react";
 import { getAllVideos } from "../../services/videoService";
@@ -15,7 +15,7 @@ export function ChannelSearchVideos() {
     const [end, setEnd] = useState(false)
     const [error, setError] = useState("")
     const {searchQuery, mainRef, userId} = useOutletContext()
-    const query = useDebounce({value: searchQuery, delay : 1000}) //custom hook 
+    const query = useDebounce({value: searchQuery, delay : 500}) //custom hook 
 
     useEffect(() => {
         setAllVideos([])
@@ -26,7 +26,7 @@ export function ChannelSearchVideos() {
                 const response = await getAllVideos({page, limit: "5", query, sortBy, sortType, userId })
                 const data = response.data.data;
                 if (data) {
-                    setAllVideos((prev) => [...prev, ...data.docs]);
+                    setAllVideos((prev) => [...prev, ...data.docs].filter((video) => video.isPublished ));
                 } 
                 else{
                     setError(errorHandler(response));

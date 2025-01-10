@@ -77,7 +77,7 @@ export function YourHistory(){
                     </ul>
                 </div>):
                 (<div className="mt-5 text-[#ffffff85]">
-                    Videos that you watch will be shown here. <Link to="/" className="text-cyan-700">Browse videos</Link>
+                    Videos that you watch will be shown here. <Link to="/" className="text-[#10e3ff]">Browse videos</Link>
                 </div>)
             }
         </div>

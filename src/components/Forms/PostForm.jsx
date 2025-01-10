@@ -95,8 +95,7 @@ export function PostForm ({post}) {
                 <Button
                     type="submit"
                     value={post? "Update Post" : "Upload Post"}
-                    bgColor="bg-cyan-700"
-                    className="mr-2 mt-2 hover:bg-opacity-70"
+                    className="mr-2 mt-2"
                 />
             </form>
         </FormStyle>

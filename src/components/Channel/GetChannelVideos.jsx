@@ -3,31 +3,33 @@ import { getChannelVideos } from "../../services/videoService";
 import { errorHandler, paginationHandler } from "../../utils";
 
 export function GetChannelVideos({
-    setLoading, 
-    setError, 
-    setAllVideos, 
-    setData, 
+    setLoading,
+    setError,
+    setAllVideos,
+    setData,
     mainRef,
     sortBy,
-    sortType, 
+    sortType,
     setPage,
     page,
     userId,
     data,
     setEnd
-}){
+}) 
+{
     useEffect(() => {
-        ;(async() => {
+        const controller = new AbortController()
+        ; (async () => {
             try {
                 setLoading(true);
                 setError("");
-                const response = await getChannelVideos({ page, query: userId, limit: "5", sortBy, sortType });
+                const response = await getChannelVideos({ page, query: userId, limit: "10", sortBy, sortType });
                 const data = response.data.data;
                 if (data) {
-                    setAllVideos((prev) => [...prev, ...data.docs]);
+                    setAllVideos((prev) => [...prev, ...data.docs].filter((video) => video.isPublished));
                     setData(data);
-                } 
-                else{
+                }
+                else {
                     setError(errorHandler(response));
                 }
             } catch (error) {
@@ -36,17 +38,19 @@ export function GetChannelVideos({
                 setLoading(false);
             }
         })();
-    }, [page, sortBy, sortType]);
-    
+
+        return () => controller.abort()
+    }, [page, sortBy, sortType, userId]);
+
     useEffect(() => {
         const container = mainRef.current;
-        const handleScroll = paginationHandler({container, data, setPage, setEnd})
+        const handleScroll = paginationHandler({ container, data, setPage, setEnd })
         return () => {
             if (container) container.removeEventListener("scroll", handleScroll);
         };
     }, [data, mainRef]);
-    
-    useEffect(() =>{
+
+    useEffect(() => {
         setAllVideos([])
     }, [sortBy, sortType])
 }

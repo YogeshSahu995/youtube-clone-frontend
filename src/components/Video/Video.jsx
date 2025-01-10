@@ -12,7 +12,7 @@ export function Video({
     history = false,
     videoInfo,
     isPlaying = false,
-    thumbnailSize = "h-[150px] w-[80vw] sm:h-[200px] sm:w-[360px] md:h-[220px] md:w-[350px]",
+    thumbnailSize = "h-[180px]  w-[80vw] sm:h-[190px] sm:w-[50vw] md:h-[190px] md:w-[300px] lg:h-[220px] lg:w-[400px]",
     gridLayout = "grid grid-row sm:grid-cols-custom justify-items-stretch",
     adjustWidth = "w-fit mx-auto mb-4 sm:mx-2 sm:w-full",
     setFetch = Function,
@@ -36,7 +36,7 @@ export function Video({
     } = videoInfo
 
     const userData = useSelector(state => state.data)
-    const { username, email, avatar, fullname } = owner
+    const { username, avatar, fullname } = owner
     const isCurrentUser = userData._id == owner._id
 
     async function handleDelete() {
@@ -55,7 +55,7 @@ export function Video({
     }
 
     return (
-        <>
+        <div className="relative w-auto mx-auto mb-4">
             <AddVideoInPlaylist
                 setAddVideoForm={setAddVideoForm}
                 isHidden={addVideoForm}
@@ -69,8 +69,8 @@ export function Video({
                 message="Are you sure you want to delete this video? Once its deleted, you will not be able to recover it."
                 title="Permanently delete"
             />
-            <div className={`${gridLayout} ${adjustWidth} rounded-lg hover:bg-[#ffffff1e]`}>
-                <Link to={`/video/${_id}/${userData._id}`} className={isPlaying ? "cursor-wait" : "cursor-pointer"}>
+            <div className={`${gridLayout} ${adjustWidth} rounded-lg hover:bg-[#0000005d]`}>
+                <Link to={isPublished && `/video/${_id}/${userData._id}`} className={`${isPlaying && "cursor-wait"} ${!isPublished ? "cursor-not-allowed": "cursor-pointer"} `}>
                     <div
                         className={` ${thumbnailSize} relative bg-cover bg-no-repeat bg-center bg-black rounded-lg`}
                         style={{ backgroundImage: `url(${thumbnail})` }}
@@ -81,14 +81,21 @@ export function Video({
                                 Playling...
                             </div>
                         )}
+                        {!isPublished && (
+                            <div
+                            className="absolute top-0 left-0 text-lg h-full w-full flex justify-center items-center bg-[#000000cc] rounded-lg">
+                            Private video
+                        </div>
+                        )
+                        }
                         <div className="absolute bottom-2 right-2 p-1 text-white bg-[#000000ab] rounded-lg">
                             {<FormatteDuration seconds={duration} />}
                         </div>
                     </div>
                 </Link>
 
-                <div className="flex justify-between">
-                    <Link to={`/video/${_id}/${userData._id}`} className={isPlaying ? "cursor-wait" : "cursor-pointer"}>
+                <div className="flex justify-between relative pb-2">
+                    <Link to={isPublished && `/video/${_id}/${userData._id}`} className={`${isPlaying && "cursor-wait"} ${!isPublished ? "cursor-not-allowed": "cursor-pointer"} `}>
                         <div className="h-fit w-full text-[#fff] px-2 text-lg text-wrap whitespace-wrap relative flex flex-col ">
                             <h3 className="text-xl">{title}</h3>
                             <p className="text-base"> {description}</p>
@@ -139,6 +146,6 @@ export function Video({
                     }
                 </div>
             </div>
-        </>
+        </div>
     )
 }

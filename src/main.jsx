@@ -8,7 +8,7 @@ import {
   Register, 
   Channel, 
   AnotherChannel, 
-  Home, 
+  HomePage, 
   AddVideo, 
   CreatePost, 
   CreatePlaylist, 
@@ -43,7 +43,7 @@ const router = createBrowserRouter([
         children: [
           {
             path: "/",
-            element: <AuthLayout children={<Home />} authentication />
+            element: <AuthLayout children={<HomePage />} authentication />
           },
           {
             path:'/:username',

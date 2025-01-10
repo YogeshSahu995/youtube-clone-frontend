@@ -7,7 +7,7 @@ export function Protectedpage () {
                 <h1 className="text-6xl mb-3">Access Denied</h1>
                 <p className="text-4xl mb-3">You must be logged in to access this page.</p>
                 <p className="text-2xl">
-                    <Link className="text-cyan-700" to='/login'>
+                    <Link className="text-[#10e3ff]" to='/login'>
                         Login here
                     </Link> to continue.
                 </p>

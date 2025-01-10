@@ -196,13 +196,12 @@ export function Register({ userData }) {
                 <Button
                     value={userData ? "Save Changes" : "Sign up"}
                     type="submit"
-                    bgColor="bg-cyan-700"
-                    className="mr-2 mt-4 hover:bg-opacity-70"
+                    className="mr-2 mt-4"
                 />
                 {!userData && (
                     <p className="font-semibold text-blue-100 mt-2">
                         you have any account ?
-                        <Link to='/login' className="text-cyan-700 ">
+                        <Link to='/login' className="text-[#10e3ff] ">
                             _Login_
                         </Link>
                     </p>

@@ -18,9 +18,10 @@ api.interceptors.response.use(
                 await api.post("/users/refresh-token")
                 // retry the original request
                 return api(error.config) 
+
             } catch (refreshError) {
                 console.error('Refresh failed. Redirecting to login.')
-                window.location.href = '/login' // todo set login 
+                window.location.href = '/login' // to do set login 
                 return Promise.reject(refreshError)
             }
         }

@@ -37,14 +37,14 @@ export function Sidebar () {
         },
     ];
     return (
-        <nav className={`${!authStatus && "hidden"} fixed z-[9999] bottom-0 md:top-[90px] h-fit w-[97%] md:h-[80vh] md:w-fit px-3  rounded-xl bg-[#222] md:bg-white md:bg-opacity-10`}>
+        <nav className={`${!authStatus && "hidden"} boxShadow fixed z-[9999] bottom-0 md:top-[90px] h-fit w-[97%] md:h-[80vh] md:w-fit px-3  rounded-xl bg-[#222] md:bg-white md:bg-opacity-10`}>
             <ul className='md:h-full w-full list-none flex justify-around md:flex-col md:justify-around'>
                 {listOfIcons.map((item) => (
                     <li key={item.name}>
                         <NavLink 
                             to={item.slug}
                             className={({isActive}) => 
-                                ` text-lg ${isActive? "text-cyan-600": "text-gray-400"} text-xl font-semibold hover:text-cyan-700`
+                                ` text-lg ${isActive? "text-[#10e3ff]": "text-gray-400"} text-xl font-semibold textEffect`
                             }>
                                 <div className='flex'>
                                     {item.element}

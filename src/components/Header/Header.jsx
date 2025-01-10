@@ -3,7 +3,7 @@ import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 
 
-export function Header () {
+export function Header ({setSearchInput}) {
     const authstatus = useSelector(state => state.status)
     const userData = useSelector(state => state.data)
     const navigate = useNavigate()
@@ -29,7 +29,8 @@ export function Header () {
                         <Input 
                             type="text" 
                             placeholder="Search..."
-                            className="px-2 py-1 w-[150px] sm:w-[400px] min-[400px]:w-[250px] "
+                            className="px-2 py-1 w-[150px] sm:w-[400px] min-[400px]:w-[250px] boxShadow outline-0"
+                            onChange = {(e) => {setSearchInput(e.target.value)}}
                         />
                     </>
                 )}
@@ -40,8 +41,7 @@ export function Header () {
                                 key={but.name}
                                 value={but.name}
                                 onClick = {(e) => navigate(but.slug) }
-                                bgColor="bg-cyan-700"
-                                className="mr-2 hover:bg-opacity-70"
+                                className="mr-2"
                             />
                         ):null
                         )}

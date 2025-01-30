@@ -5,9 +5,10 @@ import { useSelector } from "react-redux";
 export default function AuthLayout({authentication = true, children}){
     const authStatus = useSelector(state => state.status)
     const navigate = useNavigate()
-    const [loader, setLoader] = useState(true)
+    const [loader, setLoader] = useState(false)
 
     useEffect(() => {
+        setLoader(true)
         if(authentication && authStatus){
             navigate('/')
         }
@@ -17,13 +18,9 @@ export default function AuthLayout({authentication = true, children}){
         setLoader(false)
     }, [authStatus, authentication])
 
-    return !loader?(
+    return !loader &&(
         <div>
             {children}
-        </div>
-    ):(
-        <div>
-            Loading...
         </div>
     )
 }

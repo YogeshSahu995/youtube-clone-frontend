@@ -97,14 +97,12 @@ export function Home() {
 
     if (!query) {
         return (
-            <div className=" h-[70vh] w-full relative">
-                <div className="w-full absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]">
-                    <div className="text-center text-[#ffffff88] textShadow text-2xl font-medium ">
-                        <h2 className="">Welcome to the <span className="text-cyan-500">Home Page</span> </h2>
-                        <p className="text-lg font-normal">Search for a channel and videos using the search bar above to get started.</p>
-                        <div className=" rounded-3xl w-fit h-fit mx-auto">
-                            <img src="/images/plsSearch.png" alt="Search illustration" className="w-[400px] mx-auto mt-[10px]" />
-                        </div>
+            <div className=" h-[80vh] w-full flex justify-center items-center">
+                <div className="text-center text-[#ffffff88] textShadow text-2xl font-medium ">
+                    <h2 className="">Welcome to the <span className="text-cyan-500">Home Page</span> </h2>
+                    <p className="text-lg font-normal">Search for a channel and videos using the search bar above to get started.</p>
+                    <div className=" rounded-3xl w-fit h-fit mx-auto">
+                        <img src="/images/plsSearch.png" alt="Search illustration" className="w-[400px] mx-auto mt-[10px]" />
                     </div>
                 </div>
             </div>
@@ -164,13 +162,13 @@ export function Home() {
                     </>
                 )
                 }
-                { allUsers.length == 0 && (
+                {allUsers.length == 0 && (
                     <EmptyPageResponse
-                    isCurrentUser={true}
-                    mainicon={<i className="ri-group-line text-4xl"></i>}
-                    para="Please try again with a different keyword."
-                    title={`No channels found for your search query "${query}"`}
-                />
+                        isCurrentUser={true}
+                        mainicon={<i className="ri-group-line text-4xl"></i>}
+                        para="Please try again with a different keyword."
+                        title={`No channels found for your search query "${query}"`}
+                    />
                 )
                 }
             </div>

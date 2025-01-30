@@ -4,7 +4,7 @@ import { Avatar, TimeAgo, DropDown } from "../LayoutComponents"
 import { LikeToggle } from "../Video/LikeToggle"
 import { useNavigate } from "react-router-dom"
 
-export function Comment({ comment, setIsHidden, setCommentId }) {
+export function Comment({ comment, setIsHidden, setChangeForm, setCommentId }) {
     const { owner, content, createdAt, updatedAt, _id, likes, isLiked } = comment
     const [Like, setLike] = useState(isLiked)
     const [likeCount, setLikeCount] = useState(likes)
@@ -38,7 +38,10 @@ export function Comment({ comment, setIsHidden, setCommentId }) {
                                     </div>
                                     <div
                                         className="dropDownLi"
-                                        onClick={() => navigate(`/`)}
+                                        onClick={() => {
+                                            setChangeForm(false)
+                                            setCommentId(_id)
+                                        }}
                                     >
                                         change comment
                                     </div>

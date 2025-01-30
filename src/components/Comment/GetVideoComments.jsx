@@ -6,6 +6,8 @@ import { Button, Input } from "../LayoutComponents";
 import { DeleteForm } from ".."
 import { deleteComment } from "../../services/commentService";
 import { useNavigate } from "react-router-dom";
+import { ChangeComment } from "./ChangeComment";
+import toast, { Toaster } from "react-hot-toast";
 
 export function GetVideoComment({
     videoId,
@@ -20,8 +22,9 @@ export function GetVideoComment({
     const [comment, setComment] = useState("")
     const [noOfComment, setNoOfComment] = useState(commentCount)
     const mainRef = useRef(null)
-    const [isHidden, setIsHidden] = useState(true)
     const [commentId, setCommentId] = useState("")
+    const [isHidden, setIsHidden] = useState(true)
+    const [changeForm, setChangeForm] = useState(true)
     const navigate = useNavigate()
 
 
@@ -45,7 +48,7 @@ export function GetVideoComment({
                 setLoading(false);
             }
         })();
-    }, [page, noOfComment]);
+    }, [page, noOfComment, changeForm, isHidden]);
 
     useEffect(() => {
         const container = mainRef.current;
@@ -74,7 +77,7 @@ export function GetVideoComment({
             const response = await deleteComment({commentId: commentId})
             if (response.data.data) {
                 setIsHidden(true)
-                //todo
+                toast("Successfully delete comment")
             }
             else {
                 console.log('anyProblem is delete')
@@ -106,11 +109,20 @@ export function GetVideoComment({
                 ref={mainRef}
                 className="h-[300px] bg-[#0000006d] rounded-xl overflow-x-hidden scrollbar-thin scrollbar-thumb-[#444] scrollbar-track-transparent p-2"
             >
+                <Toaster />
+
                 <DeleteForm
                     deleteFunction={handleDelete}
                     isHidden={isHidden}
                     setIsHidden={setIsHidden}
                 />
+
+                <ChangeComment 
+                    changeForm={changeForm} 
+                    commentId={commentId} 
+                    setChangeForm={setChangeForm} 
+                />
+
                 {
                     allComments.length == 0 ? (
                         <div className="h-full w-full flex justify-center items-center text-xl">
@@ -127,6 +139,7 @@ export function GetVideoComment({
                                             comment={comment} 
                                             setIsHidden={setIsHidden}
                                             setCommentId = {setCommentId}
+                                            setChangeForm={setChangeForm}
                                         />
                                     </li>
                                 )

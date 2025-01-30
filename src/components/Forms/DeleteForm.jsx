@@ -11,23 +11,21 @@ export function DeleteForm ({
         <Popup isHidden={isHidden}>
             <div className="h-fit w-fit p-4 grid gap-4 rounded-xl bg-[#00000083]">
                 <span className="text-2xl font-semibold">
-                    <i className="ri-delete-bin-6-line text-red-500 px-2 py-2 bg-red-300 rounded-full mr-2 font-light"></i>
+                    <i className="ri-delete-bin-6-line text-[#000000] px-2 py-2 bg-cyan-400 rounded-full mr-2 font-light"></i>
                     {title}
                 </span>
                 <p> {message} </p>
                 <div className="w-full flex justify-between items-center">
-                    <Button 
+                    <input 
+                        type="button"
                         value="Cancel" 
-                        bgColor="bg-[#ffffff9d]"
-                        textColor="text-[#222]"
-                        className="px-4 py-2 font-semibold hover:text-black hover:bg-white"
+                        className="px-4 py-2 font-semibold bg-white text-[#000] rounded-xl cursor-pointer ease-out duration-200 hover:scale-105"
                         onClick = {() => {setIsHidden(true)}}
                     />
-                    <Button
+                    <input
+                        type="button"
                         value="Delete" 
-                        bgColor="bg-red-400"
-                        textColor="text-[#ffffff9d]"
-                        className="px-4 py-2 font-semibold hover:text-red-600 hover:bg-red-200"
+                        className="px-4 py-2 font-semibold hover:scale-105 bg-cyan-400 text-[#000000] rounded-xl cursor-pointer ease-out duration-200"
                         onClick = {deleteFunction}
                     />
                 </div>

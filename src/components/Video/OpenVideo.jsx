@@ -4,12 +4,12 @@ import { Link, useOutletContext, useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { toggleVideoLike } from "../../services/likeService"
 import { GetChannelVideos } from "../Channel"
-import { GetVideoComment } from "./GetVideoComments"
+import { GetVideoComment } from "../Comment/GetVideoComments"
 import { addVideoInHistory, handleVideoViews } from "../../services/videoService"
 import { LikeToggle } from "./LikeToggle"
 
 export function OpenVideo({ video, userId, watcherId }) {
-    const { _id, videoFile, thumbnail, title, description, views, likes, comments, isPublished, owner, isLiked, createdAt } = video
+    const { _id, videoFile, thumbnail, title, description, views, likes, comments, owner, isLiked, createdAt } = video
     const [loading, setLoading] = useState(false)
     const [data, setData] = useState({});
     const [allVideos, setAllVideos] = useState([]);
@@ -66,7 +66,7 @@ export function OpenVideo({ video, userId, watcherId }) {
                 <div className="grid grid-rows-custom text-white gap-2">
                     <section className="h-fit p-2">
                         <video
-                            className="h-fit max-h-[400px] w-full sm:max-w-[80vw] md:max-w-[70vw] lg:min-w-[40vw] object-contain object-center mx-auto"
+                            className="h-fit min-h-[300px] max-h-[400px] w-full sm:max-w-[80vw] md:max-w-[70vw] lg:min-w-[40vw] object-contain object-center mx-auto"
                             controls
                             poster={thumbnail}
                         >

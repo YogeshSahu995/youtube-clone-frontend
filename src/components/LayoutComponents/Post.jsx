@@ -71,7 +71,7 @@ export function Post({ postInfo, isCurrentUser }) {
                             {isCurrentUser && (
                                 <>
                                     <div
-                                        className="hover:bg-[#00000038] px-1 rounded-md mb-1 cursor-pointer"
+                                        className="dropDownLi"
                                         onClick={() => {
                                             setIsHidden(false)
                                         }}
@@ -79,7 +79,7 @@ export function Post({ postInfo, isCurrentUser }) {
                                         Delete
                                     </div>
                                     <div
-                                        className="hover:bg-[#00000038] px-1 rounded-md mb-1"
+                                        className="dropDownLi"
                                         onClick={() => navigate(`/edit/post/${_id}`)}
                                     >
                                         Edit Post

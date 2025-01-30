@@ -19,7 +19,8 @@ import {
   PlayVideoPage,
   EditVideoPage,
   EditPostPage,
-  YouFeedPage
+  YouFeedPage,
+  DashboardPage
 } from './pages/index.js'
 import { 
   ChannelVideos, 
@@ -115,7 +116,7 @@ const router = createBrowserRouter([
           },
           {
             path: '/edit/Change-Password',
-            element: <AuthLayout children={<ChangePasswordPage />} />
+            element: <AuthLayout children={<ChangePasswordPage />} authentication />
           },
           {
             path: '/add-video',
@@ -140,6 +141,10 @@ const router = createBrowserRouter([
           {
             path: '/playlist/edit/:playlistId',
             element: <AuthLayout children={<EditPlaylist />} authentication />
+          },
+          {
+            path: '/dashboard',
+            element: <AuthLayout children={<DashboardPage />} authentication />
           },
           {
             path: '/subscriptions',

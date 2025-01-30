@@ -36,7 +36,11 @@ export function LogoutBtn ({userData}) {
                             <h4>{username}</h4>
                         </div>
                     </div>
-                    <Link to={`/channel/${username}`} className="text-[#10e3ff]  font-medium"> View your channel</Link>
+                    <Link to={`/channel/${username}`} className="text-cyan-500 font-medium"> View your channel</Link>
+                    <hr></hr>
+                    <Link to={`/edit/Change-Password`} className="text-cyan-500 font-medium"> Change Password</Link>
+                    <hr></hr>
+                    <Link to={`/dashboard`} className="text-cyan-500 font-medium"> Dashboard </Link>
                     <hr></hr>
                     <Button 
                         value="Sign Out"

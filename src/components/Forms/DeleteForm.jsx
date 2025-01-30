@@ -5,7 +5,6 @@ export function DeleteForm ({
     message = "Are you sure you want to delete? Once it's deleted You will not be able to recover it.",
     isHidden,
     setIsHidden,
-    setIsDelete,
     deleteFunction,
 }) {
     return (

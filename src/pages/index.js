@@ -14,6 +14,7 @@ import { PlayVideoPage } from "./PlayVideoPage";
 import {EditVideoPage} from "./EditVideoPage"
 import { EditPostPage } from "./EditPostPage";
 import { YouFeedPage } from "./YouFeedPage";
+import { DashboardPage } from "./DashboardPage";
 
 export {
     Channel, 
@@ -31,5 +32,6 @@ export {
     PlayVideoPage,
     EditVideoPage,
     EditPostPage,
-    YouFeedPage
+    YouFeedPage,
+    DashboardPage
 }

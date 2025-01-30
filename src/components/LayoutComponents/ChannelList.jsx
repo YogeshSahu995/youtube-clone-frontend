@@ -40,11 +40,11 @@ export function ChannelList({ channelInfo }) {
                 className="px-4 py-2 flex flex-col flex-wrap gap-2 min-[420px]:flex-row border border-[#ffffff5d] rounded-lg justify-between items-center mb-2 hover:bg-[#0e7490ba]">
                 <div
                     onClick={() => navigate(`/${username}`)}
-                    className="flex my-2 min-[420px]:mb-0 hover:cursor-pointer"
+                    className="flex flex-col min-[300px]:flex-row items-center my-2 min-[420px]:mb-0 hover:cursor-pointer"
                 >
                     <Avatar
                         avatar={avatar}
-                        heightWidth="h-[70px] w-[70px] mr-4"
+                        heightWidth="h-[10vh] w-[10vh] sm:h-[10vw] sm:w-[10vw] md:h-[70px] md:w-[70px] mr-4"
                     />
 
                     <div

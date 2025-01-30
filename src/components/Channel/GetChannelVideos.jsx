@@ -2,21 +2,22 @@ import { useEffect } from "react";
 import { getChannelVideos } from "../../services/videoService";
 import { errorHandler, paginationHandler } from "../../utils";
 
-export function GetChannelVideos({
-    setLoading,
-    setError,
-    setAllVideos,
-    setData,
-    mainRef,
-    sortBy,
-    sortType,
-    setPage,
-    page,
-    userId,
-    data,
-    setEnd
-}) 
-{
+export function GetChannelVideos(
+    {
+        setLoading,
+        setError,
+        setAllVideos,
+        setData,
+        mainRef,
+        sortBy,
+        sortType,
+        setPage,
+        page,
+        userId,
+        data,
+        setEnd
+    }
+) {
     useEffect(() => {
         const controller = new AbortController()
         ; (async () => {

@@ -135,14 +135,14 @@ export function OpenPlaylist({ playlistId }) {
                                         <Button
                                             value="Play"
                                             className="px-8 font-bold"
-                                            onClick={() => navigate('/')}
+                                            onClick={() => navigate(`/video/${videos[0]?._id}/${userData._id}`)}
                                         />
                                     </div>) :
                                     (<div className="w-full flex justify-between items-center mt-2">
                                         <Button
                                             value="Play"
                                             className="px-8 font-bold"
-                                            onClick={() => navigate('/')} //todo
+                                            onClick={() => navigate(`/video/${videos[0]?._id}/${userData._id}`)} //todo
                                         />
                                         <div className="flex">
                                             <Link to={`/playlist/edit/${data._id}`} className="text-2xl mr-4 textEffect ">

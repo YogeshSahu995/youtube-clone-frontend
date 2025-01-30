@@ -7,14 +7,14 @@ export function VideoDropDown ({setIsHidden, setAddVideoForm, isCurrentUser}) {
             <div className="text-base">
                 {isCurrentUser && (
                     <div 
-                        className="hover:bg-[#00000038] px-1 rounded-md mb-1 cursor-pointer" 
+                        className="dropDownLi" 
                         onClick={() => setIsHidden(false)}
                     >
                         Delete
                     </div>
                 )}
                 <div 
-                    className="hover:bg-[#00000038] px-1 rounded-md mb-1"
+                    className="dropDownLi"
                     onClick={() => setAddVideoForm(false)}
                 >
                     Add to playlist

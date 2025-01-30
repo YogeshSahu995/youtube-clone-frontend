@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { getAllVideos } from "../../services/videoService";
 import { paginationHandler } from "../../utils";
 import { Video, Loading2, Error } from "../index";
+import { EmptyPageResponse } from "./EmptyPageResponse";
 
 export function ChannelSearchVideos() {
     const [page, setPage] = useState(1);
@@ -14,53 +15,63 @@ export function ChannelSearchVideos() {
     const [data, setData] = useState({})
     const [end, setEnd] = useState(false)
     const [error, setError] = useState("")
-    const {searchQuery, mainRef, userId} = useOutletContext()
-    const query = useDebounce({value: searchQuery, delay : 500}) //custom hook 
+    const { searchQuery, mainRef, userId } = useOutletContext()
+    const query = useDebounce({ value: searchQuery, delay: 500 }) //custom hook 
 
     useEffect(() => {
         setAllVideos([])
-        ;(async() => {
-            setLoading(true)
-            setError("")
-            try {
-                const response = await getAllVideos({page, limit: "5", query, sortBy, sortType, userId })
-                const data = response.data.data;
-                if (data) {
-                    setAllVideos((prev) => [...prev, ...data.docs].filter((video) => video.isPublished ));
-                } 
-                else{
-                    setError(errorHandler(response));
+            ; (async () => {
+                setLoading(true)
+                setError("")
+                try {
+                    const response = await getAllVideos({ page, limit: "5", query, sortBy, sortType, userId })
+                    const data = response.data.data;
+                    if (data) {
+                        setAllVideos((prev) => [...prev, ...data.docs].filter((video) => video.isPublished));
+                    }
+                    else {
+                        setError(errorHandler(response));
+                    }
+                } catch (error) {
+                    setError(error.message)
+                } finally {
+                    setLoading(false);
                 }
-            } catch (error) {
-                setError(error.message)
-            }finally {
-                setLoading(false);
-            }
-        })()
+            })()
     }, [query])
 
     useEffect(() => {
         const container = mainRef.current;
-        const handleScroll = paginationHandler({container, data, setPage, setEnd})
+        const handleScroll = paginationHandler({ container, data, setPage, setEnd })
         return () => {
             if (container) container.removeEventListener("scroll", handleScroll);
         };
     }, [data, mainRef]);
 
-    if(loading){
+    if (loading) {
         return <Loading2 />
     }
 
-    if(!query){
+    if (!query) {
         return (
-            <div className="mt-4 text-xl text-center text-[#ffffff8e]">
-                <h4>Search any Video of Channel</h4>
+            <div className="mx-auto w-fit">
+                <EmptyPageResponse
+                    isCurrentUser={false}
+                    title={`Search any video of channel`}
+                    mainicon={
+                        <img 
+                            src={'/images/plsSearch.png'} 
+                            alt="" 
+                            className="h-fit w-[60vw] sm:w-[40vw] md:w-[30vw] lg:w-[20vw] object-cover object-center mx-auto"
+                        />
+                    }
+                />
             </div>
         )
     }
 
-    if(allVideos.length === 0){
-        return(
+    if (allVideos.length === 0) {
+        return (
             <div className="mt-4 text-xl text-center text-[#ffffff8e]">
                 <h4>This channel has no content that matched " {`${query}`} ".</h4>
             </div>
@@ -70,17 +81,17 @@ export function ChannelSearchVideos() {
     return (
         <div>
             {error && (<Error message={error} />)}
-            {query &&(
+            {query && (
                 <>
-                <ul className="">
-                    {allVideos.map((video) => (
-                        <li key={video._id} className="my-4">
-                            <Video videoInfo={video} />
-                        </li>
-                    ))}
-                </ul>
-                {loading && <Loading2 />}
-                {end && <p className="text-white text-center italic underline-offset-1">No More Videos</p>}
+                    <ul className="">
+                        {allVideos.map((video) => (
+                            <li key={video._id} className="my-4">
+                                <Video videoInfo={video} />
+                            </li>
+                        ))}
+                    </ul>
+                    {loading && <Loading2 />}
+                    {end && <p className="text-white text-center italic underline-offset-1">No More Videos</p>}
                 </>
             )}
         </div>

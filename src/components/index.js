@@ -41,6 +41,7 @@ import {
 
 import { YouMainPage } from "./You/YouMainPage.jsx";
 import { Home } from "./Home/Home.jsx";
+import { Dashboard } from "./Dashboard/Dashboard.jsx";
 
 export {
     Home,
@@ -88,5 +89,6 @@ export {
     ScrollDiv,
     ChannelList,
     NavbarOfChannel,
-    YouMainPage
+    YouMainPage,
+    Dashboard
 }

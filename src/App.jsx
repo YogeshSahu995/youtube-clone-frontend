@@ -14,7 +14,7 @@ function App() {
   useEffect(() => {
     getcurrentUser()
       .then((res) => {
-        if(res.data){
+        if(Object.keys(res.data.data).length>0){
           const {
             username, 
             fullname, 
@@ -33,6 +33,7 @@ function App() {
           navigate("/login")
         }
       })
+      .catch((err) => navigate("/login"))
       .finally(() => setLoading(false))
   }, [navigate]); 
 

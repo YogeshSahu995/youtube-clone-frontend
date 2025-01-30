@@ -25,14 +25,14 @@ export function HistoryDropDown ({setAddVideoForm, isCurrentUser, videoId, setFe
             <div className="text-base">
                 {isCurrentUser && (
                     <div 
-                        className="hover:bg-[#00000038] px-1 rounded-md mb-1 cursor-pointer" 
+                        className="dropDownLi" 
                         onClick={() => handleRemoveVideo()}
                     >
                         Remove
                     </div>
                 )}
                 <div 
-                    className="hover:bg-[#00000038] px-1 rounded-md mb-1"
+                    className="dropDownLi"
                     onClick={() => setAddVideoForm(false)}
                 >
                     Add to playlist

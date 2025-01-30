@@ -100,10 +100,21 @@ body {
   }
 
   .textShadow{
-    text-shadow: -4px 4px 10px black;
+    text-shadow: -4px 4px 10px #0e0e0ea1;
   }
 
   .boxShadow{
-    box-shadow: -4px 4px 15px #0e0e0e;
+    box-shadow: -4px 4px 15px #0e0e0ea1;
+  }
+
+  .dropDownLi{
+    padding: 4px;
+    border-radius: 10px;
+    margin-bottom: 2px;
+    cursor: pointer;
+  }
+
+  .dropDownLi:hover{
+    background-color: #00000038;
   }
     

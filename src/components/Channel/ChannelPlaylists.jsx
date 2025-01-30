@@ -32,22 +32,31 @@ export function ChannelPlaylists () {
         })()
     }, [])
 
+    if(loading) return <Loading2 />
+
     if (allPlaylist.length === 0) {
         return (
-            <EmptyPageResponse 
-                isCurrentUser={isCurrentUser}
-                title="No playlist created" 
-                anotherpara="There are no playlist created on this channel." 
-                para="This Channel yet to make a Playlist"
-                path="/create-playlist"
-                buttonValue="Create Playlist"
-                buttonicon={<i className="ri-play-list-add-fill"></i>}
-                mainicon={<i className="ri-play-list-2-fill"></i>}
-            />
+            <div className="w-fit mx-auto">
+                <EmptyPageResponse 
+                    isCurrentUser={isCurrentUser}
+                    title="No playlist created" 
+                    anotherpara="There are no playlist created on this channel." 
+                    para="This Channel yet to make a Playlist"
+                    path="/create-playlist"
+                    buttonValue="Create Playlist"
+                    buttonicon={<i className="ri-play-list-add-fill"></i>}
+                    mainicon={
+                        <img
+                            src={'/images/NoContent.png'}
+                            alt=""
+                            className="h-fit w-[60vw] sm:w-[40vw] md:w-[30vw] lg:w-[20vw] object-cover object-center mx-auto"
+                        />
+                    }
+                />
+            </div>
         )
     }
 
-    if(loading) return <Loading2 />
     return(
         <div>
             {error && <Error message={error} />}

@@ -16,7 +16,7 @@ function App() {
     const handleOffline = () => setOffline(true);
     const handleOnline = () => {
       setOffline(false);
-      window.location.reload(); // Internet wapas aaye to page reload ho
+      window.location.reload();
     };
 
     window.addEventListener("offline", handleOffline);

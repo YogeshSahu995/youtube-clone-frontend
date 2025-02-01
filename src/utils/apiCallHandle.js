@@ -7,7 +7,8 @@ export const apiCall = async(endpoint, method='GET', data = null, headers) => {
             url: `${baseURL}/${endpoint}`,
             method,
             data,
-            headers
+            headers,
+            withCredentials: true
         })
     } catch (error) {
         if(error.response){

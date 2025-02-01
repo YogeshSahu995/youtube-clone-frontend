@@ -3,7 +3,7 @@ import { baseURL } from "../constants.js";
 
 const api = axios.create({
     baseURL: baseURL,
-    withCredentials: true,
+    withCredentials: true, // 👈 Cookies send karega
 })
 
 api.interceptors.response.use(

@@ -1,5 +1,5 @@
 import { Header } from "./Header/Header.jsx";
-import { LogoutBtn } from "./Header/logoutBtn.jsx";
+import { LogoutBtn } from "./Header/LogoutBtn.jsx";
 import { Login, Register, HandelPreview } from "./Auth/index.js";
 import { OpenPlaylist, Playlist } from "./Playlist/index.js";
 import { Video, OpenVideo } from "./Video/index.js";

@@ -35,7 +35,7 @@ export function ChangeComment({ commentId, changeForm, setChangeForm }) {
                     <div className="flex gap-4">
                         <h1 className="text-2xl">Change comment Content</h1>
                         <button onClick={() => setChangeForm(true)}>
-                            <i class="ri-close-line text-2xl cursor-pointer"></i>
+                            <i className="ri-close-line text-2xl cursor-pointer"></i>
                         </button>
                     </div>
                     <Input

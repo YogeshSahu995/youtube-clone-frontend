@@ -170,18 +170,16 @@ export function Register({ userData }) {
 
                     </div>
                     <div>
-                        <div className="grid md:grid-cols-2 items-center">
-                            <Input
-                                type="file"
-                                label="Upload Avatar"
-                                accept="image/*"
-                                onInput={(e) => HandelPreview(e, setTempAvatar)}
-                                {...register("avatar", {
-                                    required: (userData ? false : "avatar is required"),
-                                })}
-                            />
-                            <Avatar avatar={temAvatar} className="mx-auto mb-2" />
-                        </div>
+                        <Input
+                            type="file"
+                            label="Upload Avatar"
+                            accept="image/*"
+                            onInput={(e) => HandelPreview(e, setTempAvatar)}
+                            {...register("avatar", {
+                                required: (userData ? false : "avatar is required"),
+                            })}
+                        />
+                        <Avatar avatar={temAvatar} className="mx-auto mb-2" />
                         <Input
                             type="file"
                             label="Upload Cover-image"

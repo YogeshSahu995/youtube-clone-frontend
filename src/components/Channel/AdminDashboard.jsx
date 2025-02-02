@@ -49,7 +49,7 @@ export function ChannelDetails() {
                         </Link>
                     </div>
                     <div className="flex gap-4">
-                        <i class="ri-group-line"></i>
+                        <i className="ri-group-line"></i>
                         <h3>{}</h3>
                     </div>
                 </div>

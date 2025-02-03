@@ -7,6 +7,7 @@ import { DeleteForm, AddVideoInPlaylist } from "../Forms"
 import { useState } from "react"
 import { VideoDropDown } from "./index"
 import { HistoryDropDown } from "./HistoryDropDown"
+import toast from "react-hot-toast"
 
 export function Video({
     history = false,
@@ -44,10 +45,11 @@ export function Video({
             const response = await deleteVideo({ videoId: _id })
             if (response.data.data) {
                 setIsHidden(true)
+                toast(`Successfully delete video ${_id}`)
                 navigate(`/channel/${username}/videos`)
             }
             else {
-                console.log('anyProblem is delete')
+                toast(`Any problem in deleting`)
             }
         } catch (error) {
             console.error('Any Problem in deleting your playlist')

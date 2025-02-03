@@ -12,7 +12,6 @@ export const apiCall = async(endpoint, method='GET', data = null, headers) => {
         })
     } catch (error) {
         if(error.response){
-            console.log(error.response)
             return error.response? error.response.data : error
         }
         else if(error.request){

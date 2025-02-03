@@ -73,7 +73,6 @@ export function GetVideoComment({
 
     async function handleDelete() {
         try {
-            console.log(commentId)
             const response = await deleteComment({commentId: commentId})
             if (response.data.data) {
                 setIsHidden(true)

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { changePassword } from "../../services/userService";
 import { useNavigate } from "react-router-dom";
 import { errorHandler } from "../../utils";
+import toast from "react-hot-toast";
 
 export function ChangePasswordForm() {
     const [Error, setError] = useState("")
@@ -16,11 +17,12 @@ export function ChangePasswordForm() {
             const {newPassword, confirmPassword, oldPassword} = data
 
             if(confirmPassword !== newPassword){
-                setError("Please make sure your password match")
+                toast("Please make sure your password match with confirm password")
             }
 
             const response = await changePassword(data)
             if(response.data.data){
+                toast("Successfully changed password")
                 navigate("/")
             }
             else{

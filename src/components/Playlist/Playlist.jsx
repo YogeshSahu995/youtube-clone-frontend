@@ -25,7 +25,7 @@ export function Playlist({playlistInfo}){
                     setImage("/images/no-video.jpg");
                 }
             } catch (error) {
-                console.log(error);
+                console.log(error.message);
             }
         })()
     }, [videos])

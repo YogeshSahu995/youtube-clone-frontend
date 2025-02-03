@@ -10,13 +10,12 @@ export function HistoryDropDown ({setAddVideoForm, isCurrentUser, videoId, setFe
             const response = await removeVideoFromHistory(videoId)
             if(response.data.data){
                 setFetch(prev => !prev)
-                console.log("hogya akhir kar")
             }
             else{
                 navigate("/")
             }
         } catch (error) {
-            console.log(error.message)
+            console.error(error.message)
         }
     }
 

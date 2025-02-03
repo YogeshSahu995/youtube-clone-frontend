@@ -65,7 +65,6 @@ export function Register({ userData }) {
         else {
             setError("")
             setLoading(true)
-            console.log(data)
             try {
                 if (data.fullname && data.email) {
                     await updateAccountdetails({

@@ -1,4 +1,4 @@
-import { Popup, Button } from "../index"
+import { Popup } from "../index"
 
 export function DeleteForm ({
     title = "Delete",

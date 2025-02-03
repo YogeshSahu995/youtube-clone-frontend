@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { addVideoInPlaylist, removeVideoFromPlaylist } from "../../services/playlistService";
 import { Input } from "../LayoutComponents";
 import { checkAlreadyVideoExist } from "../../services/playlistService";
+import toast from "react-hot-toast";
 
 export function CheckBoxHandler({playlistId, videoId, name}){
     const [checkbox, setCheckbox] = useState(false)
-    const [notification, setNotification] = useState("")
     
     useEffect(() => {
         ;(
@@ -28,24 +28,21 @@ export function CheckBoxHandler({playlistId, videoId, name}){
             if(event.target.checked){
                 const response = await addVideoInPlaylist({videoId, playlistId})
                 if(response.data.data){
-                    setNotification("Successfully add video in playlist")
+                    toast("Successfully add video in playlist")
                 }
                 else{
-                    console.error("any problem in adding")
+                    toast("any problem in adding video")
                 }
             }
             else{
                 const response = await removeVideoFromPlaylist({videoId, playlistId})
                 if(response.data.data){
-                    setNotification("Successfully remove video from playlist")
+                    toast("Successfully remove video from playlist")
                 }
                 else{
-                    console.error("any problem in removing")
+                    toast("Any problem in removing video from playlist")
                 }
             }
-
-            setTimeout(() => setNotification(""), 3000)
-            
         } catch (error) {
             console.error(error.message)
         }
@@ -63,13 +60,6 @@ export function CheckBoxHandler({playlistId, videoId, name}){
                 />
                 {name}
             </label>
-            <div className="relative bottom-2 left-2">
-                {notification && (
-                    <div className="fixed bottom-2 left-2 bg-cyan-800 text-white py-2 px-4 rounded shadow-lg animate-pulse">
-                        {notification}
-                    </div>
-                )}
-            </div>
         </div>
     )
 }

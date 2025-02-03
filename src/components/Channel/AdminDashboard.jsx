@@ -30,9 +30,7 @@ export function ChannelDetails() {
     }, [userId])
 
     if (loading) return <Loading />
-    console.log(userInfo)
-    console.log(userData)
-
+    
     if(userInfo){
         const {username} = userData
         const {subscribedChannels, totalLikes, totalSubscribers, totalVideos, totalViews} = userInfo

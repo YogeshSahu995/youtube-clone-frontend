@@ -6,6 +6,7 @@ import { useForm, Controller } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { publishVideo, updateVideo } from "../../services/videoService";
 import { HandelPreview } from "../Auth";
+import toast from "react-hot-toast";
 
 export function VideoForm({ videoInfo }) {
     const userData = useSelector(state => state.data);
@@ -25,7 +26,6 @@ export function VideoForm({ videoInfo }) {
     });
 
     const dataSubmit = async (data) => {
-        console.log(data);
         setError("");
         setLoading(true);
         const formData = new FormData();
@@ -39,14 +39,14 @@ export function VideoForm({ videoInfo }) {
             try {
                 const response = await updateVideo({ videoId: videoInfo._id, formData });
                 if (response.data) {
-                    navigate(`/channel/${videoInfo.owner.username}/videos`);
+                    toast(`Sucessfully video is Updated id:${videoInfo._id}`)
+                    navigate(`/video/${videoInfo._id}/${userData._id}`);
                 } else {
                     const errMsg = errorHandler(response);
                     setError(errMsg);
                 }
             } catch (error) {
-                console.error("Error:", error.message);
-                setError("Something went wrong. Please try again.");
+                toast(error.message);
             } finally {
                 setLoading(false);
             }
@@ -61,7 +61,8 @@ export function VideoForm({ videoInfo }) {
             try {
                 const response = await publishVideo(formData);
                 if (response.data) {
-                    navigate(`/channel/${username}/videos`);
+                    toast(`Sucessfully video is uploaded id:${videoInfo._id}`)
+                    navigate(`/video/${videoInfo._id}/${userData._id}`);
                 } else {
                     const errMsg = errorHandler(response);
                     setError(errMsg);

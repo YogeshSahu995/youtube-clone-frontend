@@ -5,6 +5,7 @@ import { errorHandler } from "../../utils"
 import { useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { createPlaylist, updatePlaylist } from "../../services/playlistService"
+import toast from "react-hot-toast"
 
 export function PlaylistForm({playlist, playlistId}){
     const [error, setError] = useState("")
@@ -25,8 +26,8 @@ export function PlaylistForm({playlist, playlistId}){
             try {
                 const response = await updatePlaylist({playlistId, data});
                 if (response.data.data) {
-                    console.log(username)
                     navigate(`/channel/${username}/playlists`)
+                    toast("Successfully update a playlist")
                 } else {
                     const errMsg = errorHandler(response);
                     setError(errMsg);
@@ -43,8 +44,8 @@ export function PlaylistForm({playlist, playlistId}){
             try {
                 const response = await createPlaylist({data});
                 if (response.data.data) {
-                    console.log(username)
                     navigate(`/channel/${username}/playlists`)
+                    toast("Successfully created a playlist")
                 } else {
                     const errMsg = errorHandler(response);
                     setError(errMsg);
@@ -62,7 +63,8 @@ export function PlaylistForm({playlist, playlistId}){
     if(loading) return <Loading />
 
     return(
-        <FormStyle heading={playlist?"Update Playlist" : " Create Playlist"}>
+        <FormStyle heading={playlist ? "Update Playlist" : " Create Playlist"}>
+            
             {error && <Error message={error} />}
 
             <form onSubmit={handleSubmit(dataSubmit)}>

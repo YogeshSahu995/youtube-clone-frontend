@@ -3,6 +3,7 @@ import { getPlaylistById, deletePlaylist } from "../../services/playlistService"
 import { Button, Loading, TimeAgo, Popup, DeleteForm, Video, ScrollDiv, Container } from "../index";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 export function OpenPlaylist({ playlistId }) {
     const [data, setData] = useState({})
@@ -48,7 +49,7 @@ export function OpenPlaylist({ playlistId }) {
                     setFrontImage("/images/no-video.jpg");
                 }
             } catch (error) {
-                console.log(error);
+                console.log(error.message);
             }
         })()
     }, [videos, playlistId])
@@ -57,12 +58,12 @@ export function OpenPlaylist({ playlistId }) {
         try {
             const response = await deletePlaylist({ playlistId })
             if (response.data.data) {
-                console.log('successfully delete playlist')
+                toast('successfully delete a playlist')
                 setIsHidden(true)
                 navigate(`/channel/${data.owner.username}/playlists`)
             }
             else {
-                console.log('anyProblem is delete')
+                toast("Any problem in deleting playlist", {className: "bg-red-300"})
             }
         } catch (error) {
             console.error('Any Problem in deleting your playlist')

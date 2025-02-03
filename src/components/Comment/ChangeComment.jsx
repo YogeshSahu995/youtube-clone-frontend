@@ -8,7 +8,6 @@ export function ChangeComment({ commentId, changeForm, setChangeForm }) {
 
     const changeContent = async (data) => {
         try {
-            console.log(data)
             if (data.content.trim()) {
                 const response = await updateComment({ commentId, data })
                 if (response.data.data) {

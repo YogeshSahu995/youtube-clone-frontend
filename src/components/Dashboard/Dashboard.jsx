@@ -98,7 +98,7 @@ export function Dashboard() {
                         <EmptyPageResponse
                             isCurrentUser={true}
                             title="No Content available"
-                            para="This channel has yet to upload a video"
+                            para="YOu don't upload any video"
                             path="/add-video"
                             buttonValue="upload Video"
                             buttonicon={<i className="ri-video-add-fill text-2xl"></i>}

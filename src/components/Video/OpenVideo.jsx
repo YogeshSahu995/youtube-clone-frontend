@@ -98,8 +98,16 @@ export function OpenVideo({ video, userId, watcherId }) {
                                     </div>
                                 </Link>
                                 {isCurrentUser ?
-                                    (<Button value="Edit" onClick={() => navigate(`/edit/video/${videoId}`)} />) :
-                                    (<SubscriptionButton channelId={_id} isSubscribed={isSubscribed} />)
+                                    (<Button 
+                                        value="Edit" 
+                                        onClick={() => 
+                                            navigate(`/edit/video/${videoId}`)
+                                        } 
+                                    />) :
+                                    (<SubscriptionButton 
+                                        channelId={_id} 
+                                        isSubscribed={isSubscribed} 
+                                    />)
                                 }
                             </div>
                             <div>

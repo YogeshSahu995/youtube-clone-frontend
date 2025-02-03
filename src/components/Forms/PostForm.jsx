@@ -52,7 +52,7 @@ export function PostForm ({post}) {
             try {
                 const response = await createATweet(formData);
                 if (response.data.data) {
-                    toast(`Successfully upload a post id:${post._id}`)
+                    toast(`Successfully upload a post`)
                     navigate(`/channel/${username}/posts`);
                 } else {
                     const errMsg = errorHandler(response);

@@ -51,7 +51,6 @@ export function VideoForm({ videoInfo }) {
                 setLoading(false);
             }
         } else {
-            const { username } = userData;
             if (data.videoFile?.[0]) formData.append("videoFile", data.videoFile[0]);
             if (data.thumbnail?.[0]) formData.append("thumbnail", data.thumbnail[0]);
             formData.append("title", data.title);
@@ -61,7 +60,7 @@ export function VideoForm({ videoInfo }) {
             try {
                 const response = await publishVideo(formData);
                 if (response.data) {
-                    toast(`Sucessfully video is uploaded id:${videoInfo._id}`)
+                    toast(`Sucessfully video is uploaded`)
                     navigate(`/video/${videoInfo._id}/${userData._id}`);
                 } else {
                     const errMsg = errorHandler(response);

@@ -28,19 +28,19 @@ export function CheckBoxHandler({playlistId, videoId, name}){
             if(event.target.checked){
                 const response = await addVideoInPlaylist({videoId, playlistId})
                 if(response.data.data){
-                    toast("Successfully add video in playlist")
+                    toast.success("Successfully add video in playlist")
                 }
                 else{
-                    toast("any problem in adding video")
+                    toast.error("any problem in adding video")
                 }
             }
             else{
                 const response = await removeVideoFromPlaylist({videoId, playlistId})
                 if(response.data.data){
-                    toast("Successfully remove video from playlist")
+                    toast.success("Successfully remove video from playlist")
                 }
                 else{
-                    toast("Any problem in removing video from playlist")
+                    toast.error("Any problem in removing video from playlist")
                 }
             }
         } catch (error) {

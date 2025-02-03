@@ -107,7 +107,7 @@ export function Register({ userData }) {
 
     return (
         <>
-            <FormStyle className="md:w-[700px] relative" heading={userData ? "Customise" : "Sign up"}>
+            <FormStyle heading={userData ? "Customise" : "Sign up"}>
                 {error && <Error message={error} />}
                 {errors.avatar && (
                     <Error message={errors.avatar.message} />

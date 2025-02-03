@@ -38,7 +38,7 @@ export function AddVideoInPlaylist ({
         <Popup isHidden={isHidden}>
             <div className="h-fit w-fit p-4 grid gap-4 rounded-xl bg-[#000000bd]">
                 <div className="w-full flex justify-between">
-                    <span className="text-2xl font-semibold">
+                    <span className="text-2xl font-semibold text-nowrap">
                         <i className="ri-play-list-add-fill text-[#222] bg-white px-2 py-2 rounded-full mr-2 font-light"></i>
                         Save video to... 
                     </span>

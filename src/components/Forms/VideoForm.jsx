@@ -103,7 +103,6 @@ export function VideoForm({ videoInfo }) {
                     {...register("description", { required: "Description is required" })}
                 />
 
-                {errors.isPublished && <Error message="Publishing option is required" />}
                 <Controller
                     name="isPublished"
                     control={control}
@@ -116,7 +115,7 @@ export function VideoForm({ videoInfo }) {
                     )}
                 />
 
-                {errors.video && <Error message={errors.video.message} />}
+                {errors.videoFile && <Error message={errors.videoFile.message} />}
                 {!videoInfo && (
                     <Input
                         type="file"

@@ -77,6 +77,7 @@ export function PostForm ({post}) {
 
             <form onSubmit={handleSubmit(dataSubmit)}>
 
+                {errors.image && <Error message={errors.image.message} />}
                 <Input
                     type="file"
                     label="Upload image"
@@ -84,16 +85,15 @@ export function PostForm ({post}) {
                     onInput = {(e) => HandelPreview(e, setPostImage)}
                     {...register("image", {required: "Image is required"})}
                 />
-                {errors.image && <Error message={errors.image.message} />}
                 {postImage && <img src={postImage} className="h-[250px] w-[300px] mx-auto object-cover object-center" />}
 
+                {errors.content && <Error message={errors.content.message} />}
                 <RTE 
                     control={control}
                     defaultValue = {getValues("content")}
                     label= 'Content : '
                     {...register("content", {required: "Content is required"})}
                 />
-                {errors.content && <Error message={errors.content.message} />}
 
                 <Button
                     type="submit"

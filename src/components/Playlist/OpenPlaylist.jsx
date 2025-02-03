@@ -58,12 +58,12 @@ export function OpenPlaylist({ playlistId }) {
         try {
             const response = await deletePlaylist({ playlistId })
             if (response.data.data) {
-                toast('successfully delete a playlist')
+                toast.success('successfully delete a playlist')
                 setIsHidden(true)
                 navigate(`/channel/${data.owner.username}/playlists`)
             }
             else {
-                toast("Any problem in deleting playlist", {className: "bg-red-300"})
+                toast.error("Any problem in deleting playlist")
             }
         } catch (error) {
             console.error('Any Problem in deleting your playlist')

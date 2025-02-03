@@ -48,7 +48,7 @@ export function Register({ userData }) {
                     if (userData) {
                         dispatch(login({ email, password, username, fullname }))
                         navigate("/")
-                        toast("successfully register details")
+                        toast.success("successfully register details")
                     }
                 }
                 else {

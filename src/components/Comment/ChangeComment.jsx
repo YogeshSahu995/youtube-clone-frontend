@@ -11,11 +11,11 @@ export function ChangeComment({ commentId, changeForm, setChangeForm }) {
             if (data.content.trim()) {
                 const response = await updateComment({ commentId, data })
                 if (response.data.data) {
-                    toast("Successfully change comment")
+                    toast.success("Successfully change comment")
                     setChangeForm(true)
                 }
                 else {
-                    console.error("any problem in change comment")
+                    toast.error("any problem in change comment")
                 }
             }
         } catch (error) {

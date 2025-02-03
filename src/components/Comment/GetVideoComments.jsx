@@ -76,10 +76,10 @@ export function GetVideoComment({
             const response = await deleteComment({commentId: commentId})
             if (response.data.data) {
                 setIsHidden(true)
-                toast("Successfully delete comment")
+                toast.success("Successfully delete comment")
             }
             else {
-                console.log('anyProblem is delete')
+                toast.error('Any problem in delete')
             }
         } catch (error) {
             console.error('Any Problem in deleting your playlist: '+ error.message)
@@ -108,8 +108,6 @@ export function GetVideoComment({
                 ref={mainRef}
                 className="h-[300px] bg-[#0000006d] rounded-xl overflow-x-hidden scrollbar-thin scrollbar-thumb-[#444] scrollbar-track-transparent p-2"
             >
-                <Toaster />
-
                 <DeleteForm
                     deleteFunction={handleDelete}
                     isHidden={isHidden}

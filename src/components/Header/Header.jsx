@@ -32,7 +32,10 @@ export function Header ({setSearchInput}) {
                                 type="text" 
                                 placeholder="Search..."
                                 className="px-2 py-1 w-[150px] sm:w-[400px] min-[400px]:w-[250px] boxShadow outline-0"
-                                onChange = {(e) => {setSearchInput(e.target.value)}}
+                                onChange = {(e) => {
+                                    setSearchInput(e.target.value); 
+                                    navigate("/")
+                                }}
                             />
                         </>
                     )}

@@ -61,7 +61,7 @@ export function VideoForm({ videoInfo }) {
                 const response = await publishVideo(formData);
                 if (response.data) {
                     toast(`Sucessfully video is uploaded`)
-                    navigate(`/channel`);
+                    navigate(`/channel/${userData.username}`);
                 } else {
                     const errMsg = errorHandler(response);
                     setError(errMsg);

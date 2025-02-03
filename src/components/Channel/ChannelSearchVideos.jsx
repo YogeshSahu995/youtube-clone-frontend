@@ -3,7 +3,8 @@ import { useDebounce } from "../../utils";
 import { useEffect, useState } from "react";
 import { getAllVideos } from "../../services/videoService";
 import { paginationHandler } from "../../utils";
-import { Video, Loading2, Error } from "../index";
+import { Video } from "../Video";
+import { Loading2, Error } from "../LayoutComponents";
 import { EmptyPageResponse } from "./EmptyPageResponse";
 
 export function ChannelSearchVideos() {

@@ -1,6 +1,6 @@
-import { NavLink, useNavigate } from "react-router-dom"
-import { Input, NavbarOfChannel } from "../index"
+import { useNavigate } from "react-router-dom"
 import { useEffect } from "react"
+import { NavbarOfChannel } from ".."
 
 export function ChannelNav({ username, handleSearchChange }) {
     const navigate = useNavigate()

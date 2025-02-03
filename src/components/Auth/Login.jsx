@@ -12,8 +12,10 @@ export function Login(){
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [error, setError] = useState('')
+    const [loading, setLoading] = useState(false)
 
     const dataSubmit = async(data) => {
+        setLoading(true)
         setError("")
             try {
                 const response = await loginUser(data)
@@ -31,6 +33,9 @@ export function Login(){
                 }
             } catch (error) {
                 setError(error.message)
+            }
+            finally{
+                setLoading(false)
             }
         }
 
@@ -64,8 +69,9 @@ export function Login(){
                 />
 
                 <Button 
-                    value="Sign In"
+                    value={loading? "Sign In..." : "Sign In"}
                     type="submit"
+                    bgColor = {loading? "bg-cyan-900" : "bg-cyan-700"}
                     className="mr-2 mt-2"
                 />
             </form>

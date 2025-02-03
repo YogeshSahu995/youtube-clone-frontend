@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form"
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { login } from "../../store/authSlice"
+import toast from "react-hot-toast"
 import { registerUser, loginUser, updateAccountdetails, updateAvatar, updateCoverImage } from "../../services/userService"
 import { Link } from "react-router-dom"
 import { errorHandler } from "../../utils/errorHandler"
@@ -47,6 +48,7 @@ export function Register({ userData }) {
                     if (userData) {
                         dispatch(login({ email, password, username, fullname }))
                         navigate("/")
+                        toast("successfully register details")
                     }
                 }
                 else {
@@ -105,108 +107,110 @@ export function Register({ userData }) {
     if (loading) return <Loading />
 
     return (
-        <FormStyle className="md:w-[700px] relative" heading={userData ? "Customise" : "Sign up"}>
-            {error && <Error message={error} />}
-            {errors.avatar && (
-                <Error message={errors.avatar.message} />
-            )}
-            {userData && (
-                <Link
-                    className="text-[#ffffff81] hover:text-white absolute right-4 top-8"
-                    to="/edit/Change-Password"
-                >
-                    Change Password
-                </Link>
-            )}
-            <form onSubmit={handleSubmit(dataSubmit)}>
-                <div className={`w-full ${userData ? "inline" : "grid"} sm:grid-cols-2`}>
-                    <div>
-                        <Input
-                            label="Email"
-                            type="email"
-                            placeholder="Enter Email.."
-                            outline="outline-white outline-1"
-                            {...register("email", {
-                                required: (userData ? false : true),
-                                pattern: {
-                                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                                    message: "Invailed Email Address"
-                                }
-                            })}
-                        />
-                        {!userData && (
+        <>
+            <FormStyle className="md:w-[700px] relative" heading={userData ? "Customise" : "Sign up"}>
+                {error && <Error message={error} />}
+                {errors.avatar && (
+                    <Error message={errors.avatar.message} />
+                )}
+                {userData && (
+                    <Link
+                        className="text-[#ffffff81] hover:text-white absolute right-4 top-8"
+                        to="/edit/Change-Password"
+                    >
+                        Change Password
+                    </Link>
+                )}
+                <form onSubmit={handleSubmit(dataSubmit)}>
+                    <div className={`w-full ${userData ? "inline" : "grid"} sm:grid-cols-2`}>
+                        <div>
                             <Input
-                                label="Username"
-                                placeholder="Enter Username.."
+                                label="Email"
+                                type="email"
+                                placeholder="Enter Email.."
                                 outline="outline-white outline-1"
-                                {...register("username", {
+                                {...register("email", {
+                                    required: (userData ? false : true),
+                                    pattern: {
+                                        value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                                        message: "Invailed Email Address"
+                                    }
+                                })}
+                            />
+                            {!userData && (
+                                <Input
+                                    label="Username"
+                                    placeholder="Enter Username.."
+                                    outline="outline-white outline-1"
+                                    {...register("username", {
+                                        required: false
+                                    })}
+                                />
+                            )}
+                            <Input
+                                label="Full Name"
+                                placeholder="Enter fullname.."
+                                outline="outline-white outline-1"
+                                {...register("fullname", {
+                                    required: (userData ? false : true)
+                                })}
+                            />
+                            {!userData && (
+                                <Input
+                                    type="password"
+                                    label="Password"
+                                    outline="outline-white outline-1"
+                                    placeholder="Enter Password"
+                                    {...register("password", {
+                                        required: true,
+                                        minLength: {
+                                            value: 8,
+                                            message: "Password must be at least 8 characters",
+                                        },
+                                    })}
+                                />
+                            )}
+
+                        </div>
+                        <div>
+                            <Input
+                                type="file"
+                                label="Upload Avatar"
+                                accept="image/*"
+                                onInput={(e) => HandelPreview(e, setTempAvatar)}
+                                {...register("avatar", {
+                                    required: (userData ? false : "avatar is required"),
+                                })}
+                            />
+                            <Avatar avatar={temAvatar} className="mx-auto mb-2" />
+                            <Input
+                                type="file"
+                                label="Upload Cover-image"
+                                accept="image/*"
+                                onInput={(e) => HandelPreview(e, setTempCoverImage)}
+                                {...register("coverImage", {
                                     required: false
                                 })}
                             />
-                        )}
-                        <Input
-                            label="Full Name"
-                            placeholder="Enter fullname.."
-                            outline="outline-white outline-1"
-                            {...register("fullname", {
-                                required: (userData ? false : true)
-                            })}
-                        />
-                        {!userData && (
-                            <Input
-                                type="password"
-                                label="Password"
-                                outline="outline-white outline-1"
-                                placeholder="Enter Password"
-                                {...register("password", {
-                                    required: true,
-                                    minLength: {
-                                        value: 8,
-                                        message: "Password must be at least 8 characters",
-                                    },
-                                })}
-                            />
-                        )}
-
+                            <CoverImage coverImage={tempCoverImage} />
+                        </div>
                     </div>
-                    <div>
-                        <Input
-                            type="file"
-                            label="Upload Avatar"
-                            accept="image/*"
-                            onInput={(e) => HandelPreview(e, setTempAvatar)}
-                            {...register("avatar", {
-                                required: (userData ? false : "avatar is required"),
-                            })}
-                        />
-                        <Avatar avatar={temAvatar} className="mx-auto mb-2" />
-                        <Input
-                            type="file"
-                            label="Upload Cover-image"
-                            accept="image/*"
-                            onInput={(e) => HandelPreview(e, setTempCoverImage)}
-                            {...register("coverImage", {
-                                required: false
-                            })}
-                        />
-                        <CoverImage coverImage={tempCoverImage} />
-                    </div>
-                </div>
 
-                <Button
-                    value={userData ? "Save Changes" : "Sign up"}
-                    type="submit"
-                    className="mr-2 mt-4"
-                />
-                {!userData && (
-                    <p className="font-semibold text-blue-100 mt-2">
-                        you have any account ?
-                        <Link to='/login' className="text-[#10e3ff] ">
-                            _Login_
-                        </Link>
-                    </p>
-                )}
-            </form>
-        </FormStyle>
+                    <Button
+                        value={userData ? "Save Changes" : "Sign up"}
+                        type="submit"
+                        className="mr-2 mt-4"
+                    />
+                    {!userData && (
+                        <p className="font-semibold text-blue-100 mt-2">
+                            you have any account ?
+                            <Link to='/login' className="text-[#10e3ff] ">
+                                _Login_
+                            </Link>
+                        </p>
+                    )}
+                </form>
+            </FormStyle>
+        </>
     )
 }

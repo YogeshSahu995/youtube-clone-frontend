@@ -3,8 +3,9 @@ import { Protectedpage } from "../LayoutComponents/Protectedpage"
 import { getUserChannelProfile } from "../../services/userService"
 import { useEffect, useState } from "react"
 import { errorHandler } from "../../utils"
-import { Loading, ChannelHeader} from "../index"
 import { Outlet, useOutletContext } from "react-router-dom"
+import { ChannelHeader } from "./ChannelHeader"
+import { Loading } from "../LayoutComponents"
 
 export function Channel({ username, Navbar }) {
     const {mainRef} = useOutletContext() // get ref pass from parent

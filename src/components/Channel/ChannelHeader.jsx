@@ -1,5 +1,6 @@
-import { Button, Avatar, SubscriptionButton, CoverImage } from "../index"
+import { Avatar, Button, CoverImage } from "../LayoutComponents"
 import { useNavigate } from "react-router-dom"
+import { SubscriptionButton } from "./SubscriptionButton"
 
 export function ChannelHeader({profile, isCurrentUser})
 {

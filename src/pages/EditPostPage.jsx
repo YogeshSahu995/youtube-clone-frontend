@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Loading, PostForm } from "../components";
-import { getVideoById } from "../services/videoService";
 import { useParams } from "react-router-dom";
 import { getTweetById } from "../services/tweetService";
 

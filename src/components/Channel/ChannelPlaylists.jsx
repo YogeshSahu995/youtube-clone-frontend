@@ -2,7 +2,8 @@ import { getUserPlaylists } from "../../services/playlistService"
 import { useState, useEffect } from "react"
 import { useOutletContext } from "react-router-dom"
 import { errorHandler } from "../../utils"
-import { Error, Loading2, Playlist } from "../index"
+import { Error, Loading2 } from "../LayoutComponents"
+import { Playlist } from "../Playlist"
 import { EmptyPageResponse } from "./EmptyPageResponse";
 
 

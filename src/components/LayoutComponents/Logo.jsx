@@ -7,7 +7,8 @@ export function Logo (
 ) {
     return (
         <img 
-            src="./images/logo4.png" 
+            src="/images/logo4.png" 
+            alt="Logo"
             className={`${height} ${width} object-cover object-center`}
         />
     )

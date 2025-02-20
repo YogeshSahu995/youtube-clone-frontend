@@ -121,7 +121,7 @@ export function Register({ userData }) {
                     </Link>
                 )}
                 <form onSubmit={handleSubmit(dataSubmit)}>
-                    <div className={`w-full ${userData ? "inline" : "grid"} sm:grid-cols-2`}>
+                    <div className={`${userData ? "inline" : "grid"} sm:grid-cols-2`}>
                         <div>
                             <Input
                                 label="Email"

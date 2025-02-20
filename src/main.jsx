@@ -100,19 +100,19 @@ const router = createBrowserRouter([
           },
           {
             path: "/feed/you",
-            element: <AuthLayout children={<YouFeedPage />} />
+            element: <AuthLayout children={<YouFeedPage />} authentication />
           },
           {
             path: '/edit/post/:postId',
-            element: <AuthLayout children={<EditPostPage />} />
+            element: <AuthLayout children={<EditPostPage />} authentication />
           },
           {
             path: '/edit/video/:videoId',
-            element: <AuthLayout children={<EditVideoPage />} />
+            element: <AuthLayout children={<EditVideoPage />} authentication />
           },
           {
             path: '/edit/channel/:channelId',
-            element: <AuthLayout children={<CustomizePage />} />
+            element: <AuthLayout children={<CustomizePage />} authentication />
           },
           {
             path: '/edit/Change-Password',

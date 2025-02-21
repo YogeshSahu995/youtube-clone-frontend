@@ -12,11 +12,13 @@ export function ChannelPost() {
     const [end, setEnd] = useState(false)
 
     useEffect(() => {
+        const controller = new AbortController(); 
+        const signal = controller.signal;
         ; (async () => {
             try {
                 setLoading(true)
                 setError("")
-                const response = await getUserTweets(userId)
+                const response = await getUserTweets({userId, signal})
                 if (response.data.data) {
                     setAllPosts(response.data.data)
                 }
@@ -29,6 +31,7 @@ export function ChannelPost() {
                 setLoading(false)
             }
         })()
+        return () => controller.abort()
     }, [])
 
     if (loading) {

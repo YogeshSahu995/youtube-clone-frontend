@@ -29,11 +29,13 @@ export function GetVideoComment({
 
 
     useEffect(() => {
+        const controller = new AbortController()
+        const signal = controller.signal;
         ; (async () => {
             try {
                 setLoading(true);
                 setError("");
-                const response = await getVideoComments({ videoId, page, limit: "5" });
+                const response = await getVideoComments({ videoId, page, limit: "5", signal});
                 const data = response.data.data;
                 if (data) {
                     setAllComments((prev) => [...prev, ...data.docs]);
@@ -48,6 +50,8 @@ export function GetVideoComment({
                 setLoading(false);
             }
         })();
+
+        return () => controller.abort()
     }, [page, noOfComment, changeForm, isHidden]);
 
     useEffect(() => {

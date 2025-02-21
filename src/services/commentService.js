@@ -1,8 +1,8 @@
 import { jsonFormatte } from "../constants.js";
 import { apiCall } from "../utils/apiCallHandle.js";
 
-const getVideoComments = ({videoId, page, limit}) => {
-    return apiCall(`comments/${videoId}?page=${page}&limit=${limit}`, 'GET')
+const getVideoComments = ({videoId, page, limit, signal}) => {
+    return apiCall(`comments/${videoId}?page=${page}&limit=${limit}`, 'GET', {}, {}, signal)
 }
 
 const addComment = ({videoId, data}) => {

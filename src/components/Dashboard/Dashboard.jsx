@@ -19,11 +19,13 @@ export function Dashboard() {
     const [sortType, setSortType] = useState("des");
 
     useEffect(() => {
+        const controller = new AbortController()
+        const signal = controller.signal;
         ; (async () => {
             try {
                 setLoading(true);
                 setError("");
-                const response = await getChannelVideos({ page, query: userData._id, limit: "10", sortBy, sortType });
+                const response = await getChannelVideos({ page, query: userData._id, limit: "10", sortBy, sortType, signal });
                 const data = response.data.data;
                 if (data) {
                     setAllVideos((prev) => [...prev, ...data.docs]);
@@ -39,6 +41,7 @@ export function Dashboard() {
             }
         })();
 
+        return () => controller.abort()
     }, [page, sortBy, sortType]);
 
     useEffect(() => {

@@ -20,11 +20,12 @@ export function GetChannelVideos(
 ) {
     useEffect(() => {
         const controller = new AbortController()
+        const signal = controller.signal;
         ; (async () => {
             try {
                 setLoading(true);
                 setError("");
-                const response = await getChannelVideos({ page, query: userId, limit: "10", sortBy, sortType });
+                const response = await getChannelVideos({ page, query: userId, limit: "10", sortBy, sortType, signal });
                 const data = response.data.data;
                 if (data) {
                     setAllVideos((prev) => [...prev, ...data.docs].filter((video) => video.isPublished));

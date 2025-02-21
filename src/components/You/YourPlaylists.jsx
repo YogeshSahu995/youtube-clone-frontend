@@ -12,11 +12,13 @@ export function YourPlaylists({userId}) {
     const navigate = useNavigate()
 
     useEffect(() => {
+        const controller = new AbortController()
+        const signal = controller.signal;
         ; (async () => {
             try {
                 setLoading(true)
                 setError("")
-                const response = await getUserPlaylists({ userId })
+                const response = await getUserPlaylists({ userId, signal })
                 if (response.data.data) {
                     setAllPlaylist(response.data.data)
                 }
@@ -29,6 +31,8 @@ export function YourPlaylists({userId}) {
                 setLoading(false)
             }
         })()
+
+        return () => controller.abort() 
     }, [])
 
     if (loading) return <Loading2 />

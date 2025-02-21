@@ -20,12 +20,14 @@ export function ChannelSearchVideos() {
     const query = useDebounce({ value: searchQuery, delay: 500 }) //custom hook 
 
     useEffect(() => {
+        const controller = new AbortController();
+        const signal = controller.signal;
         setAllVideos([])
             ; (async () => {
                 setLoading(true)
                 setError("")
                 try {
-                    const response = await getAllVideos({ page, limit: "5", query, sortBy, sortType, userId })
+                    const response = await getAllVideos({ page, limit: "5", query, sortBy, sortType, userId, signal })
                     const data = response.data.data;
                     if (data) {
                         setAllVideos((prev) => [...prev, ...data.docs].filter((video) => video.isPublished));
@@ -39,6 +41,8 @@ export function ChannelSearchVideos() {
                     setLoading(false);
                 }
             })()
+
+            return () => controller.abort()
     }, [query])
 
     useEffect(() => {

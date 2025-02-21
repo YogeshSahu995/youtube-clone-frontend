@@ -8,10 +8,12 @@ export function YourLikedVideos(){
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
+        const controller = new AbortController()
+        const signal = controller.signal;
         setLoading(true)
         ;(async() => {
             try {
-                const response = await getLikedVideos()
+                const response = await getLikedVideos(signal)
                 if(response.data.data){
                     setAllLikedVideos(response.data.data)
                 }
@@ -24,6 +26,8 @@ export function YourLikedVideos(){
                 setLoading(false)
             }
         })()
+
+        return () => controller.abort()
     },[fetch])
 
     if(loading) return <Loading2 />

@@ -12,8 +12,8 @@ const toggleTweetLike = (tweetId) => {
     return apiCall(`likes/toggle/t/${tweetId}`, 'POST')
 }
 
-const getLikedVideos = () => {
-    return apiCall('likes/videos', 'GET')
+const getLikedVideos = (signal) => {
+    return apiCall('likes/videos', 'GET', {}, {}, signal)
 }
 
 export{

@@ -22,6 +22,9 @@ export function Channel({ username, Navbar }) {
     const userData = useSelector((state) => state.data)    
     
     useEffect(() => {
+        const controller = new AbortController();
+        const signal = controller.signal;
+
         if(username == userData.username){
             setIsCurrentUser(true)
         }
@@ -34,7 +37,7 @@ export function Channel({ username, Navbar }) {
         ; (async () => {
             if(username){
                 try {
-                    const response = await getUserChannelProfile(username)
+                    const response = await getUserChannelProfile({username, signal})
                     if (response.data) {
                         setProfile(response.data.data)
                     }
@@ -49,6 +52,10 @@ export function Channel({ username, Navbar }) {
                 }
             }
         })()
+
+        return () => {
+            controller.abort();
+        }
     },[username])
     
     if(Object.keys(profile).length > 0){

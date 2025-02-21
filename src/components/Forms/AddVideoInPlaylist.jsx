@@ -15,11 +15,13 @@ export function AddVideoInPlaylist ({
     const userData = useSelector(state => state.data)
 
     useEffect(() => {
+        const controller = new AbortController()
+        const signal = controller.signal;
         ;(async () => {
             try {
                 setLoading(true)
                 setError("")
-                const response = await getUserPlaylists({userId: userData._id})
+                const response = await getUserPlaylists({userId: userData._id, signal})
                 if(response.data.data){
                     setAllPlaylist(response.data.data)
                 }
@@ -32,6 +34,7 @@ export function AddVideoInPlaylist ({
                 setLoading(false)
             }
         })()
+        return () => controller.abort()
     }, [])
 
     return (

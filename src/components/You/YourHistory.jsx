@@ -11,10 +11,12 @@ export function YourHistory(){
     const [fetch, setFetch] = useState(true)
 
     useEffect(() => {
+        const controller = new AbortController()
+        const signal = controller.signal;
         setLoading(true)
         ;(async() => {
             try {
-                const response = await getUserHistory()
+                const response = await getUserHistory({signal})
                 if(response.data.data){
                     setAllHistory(response.data.data)
                 }
@@ -27,6 +29,7 @@ export function YourHistory(){
                 setLoading(false)
             }
         })()
+        return () => controller.abort()
     },[fetch])
 
     const handleClearHistory = async() => {

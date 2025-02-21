@@ -9,11 +9,13 @@ export function SubscribedChannelInfo({isCurrentUser, userId}){
     const [subscribedChannels, setSubscribedChannel] = useState([])
 
     useEffect(() => {
+        const controller = new AbortController()
+        const signal = controller.signal;
         ;(async () => {
             try {
                 setLoading(true)
                 setError("")
-                const response = await getSubscribedChannels({channelId: userId})
+                const response = await getSubscribedChannels({channelId: userId, signal})
                 if(response.data.data){
                     setSubscribedChannel(response.data.data)
                 }
@@ -26,6 +28,8 @@ export function SubscribedChannelInfo({isCurrentUser, userId}){
                 setLoading(false)
             }
         })()
+
+        return () => controller.abort()
     }, [userId])
 
     if(loading){

@@ -5,8 +5,8 @@ const createPlaylist = ({data}) => {
     return apiCall('playlist/', 'POST', data, jsonFormatte)
 }
 
-const getPlaylistById = ({playlistId}) => {
-    return apiCall(`playlist/${playlistId}`, 'GET')
+const getPlaylistById = ({playlistId, signal}) => {
+    return apiCall(`playlist/${playlistId}`, 'GET', {}, {}, signal)
 }
 
 const updatePlaylist = ({playlistId, data}) => {
@@ -29,8 +29,8 @@ const removeVideoFromPlaylist = ({videoId, playlistId}) => {
     return apiCall(`playlist/remove/${videoId}/${playlistId}`, 'PATCH')
 }
 
-const getUserPlaylists = ({userId}) => {
-    return apiCall(`playlist/user/${userId}`, 'GET')
+const getUserPlaylists = ({userId, signal}) => {
+    return apiCall(`playlist/user/${userId}`, 'GET', {}, {}, signal)
 }
 
 export {

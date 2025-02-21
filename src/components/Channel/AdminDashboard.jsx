@@ -10,11 +10,13 @@ export function ChannelDetails() {
     const [userInfo, setUserInfo] = useState({})
 
     useEffect(() => {
+        const controller = new AbortController();
+        const signal = controller.signal;
         ; (async () => {
             try {
                 setLoading(true)
                 setError("")
-                const response = await getChannelInfo({ userId })
+                const response = await getChannelInfo({ userId, signal})
                 if (response.data.data) {
                     setUserInfo(response.data.data)
                 }
@@ -27,6 +29,10 @@ export function ChannelDetails() {
                 setLoading(false)
             }
         })()
+
+        return () => {
+            controller.abort();
+        };
     }, [userId])
 
     if (loading) return <Loading />

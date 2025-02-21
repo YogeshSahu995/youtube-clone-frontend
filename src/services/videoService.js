@@ -5,29 +5,30 @@ const publishVideo = (formData) => {
     return apiCall('videos/', 'POST', formData, multipartFormatte)
 }
 
-const getAllVideos = ({page = '1', limit = '10', query, sortBy = 'createdAt', sortType = 'asc', userId}) => {
+const getAllVideos = ({page = '1', limit = '10', query, sortBy = 'createdAt', sortType = 'asc', userId, signal}) => {
     return apiCall(
         `videos/?page=${page}&limit=${limit}&query=${query}&sortBy=${sortBy}&sortType=${sortType}&userId=${userId}`,
         'GET',
+        {}, {}, signal
     )
 }
 
-const getChannelVideos = ({page = '1', limit = '10', query, sortBy = 'createdAt', sortType = 'asc'}) => {
+const getChannelVideos = ({page = '1', limit = '10', query, sortBy = 'createdAt', sortType = 'asc', signal}) => {
     return apiCall(
         `videos/c/?page=${page}&limit=${limit}&query=${query}&sortBy=${sortBy}&sortType=${sortType}`,
-        'GET',
+        'GET', {}, {}, signal
     )
 }
 
-const getVideosByTitle = ({page = '1', limit = '20', query, sortBy = 'createdAt', sortType = 'des'}) => {
+const getVideosByTitle = ({page = '1', limit = '20', query, sortBy = 'createdAt', sortType = 'des',signal}) => {
     return apiCall(
         `videos/t?page=${page}&limit=${limit}&query=${query}&sortBy=${sortBy}&sortType = ${sortType}`,
-        'GET'
+        'GET', {}, {}, signal
     )
 }
 
-const getVideoById = ({videoId}) => {
-    return apiCall(`videos/${videoId}`, 'GET')
+const getVideoById = ({videoId, signal}) => {
+    return apiCall(`videos/${videoId}`, 'GET', {}, {}, signal)
 }
 
 const updateVideo = ({videoId, formData}) => {
@@ -50,8 +51,8 @@ const handleVideoViews = ({videoId, userId}) => {
     return apiCall(`videos/view/${videoId}/${userId}`, 'POST')
 }
 
-const getUserHistory = () => {
-    return apiCall("videos/get/history", "GET")
+const getUserHistory = ({signal}) => {
+    return apiCall("videos/get/history", "GET", {}, {}, signal)
 }
 
 export { 

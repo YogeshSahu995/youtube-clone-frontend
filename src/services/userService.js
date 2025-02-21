@@ -21,8 +21,8 @@ const refreshToken = () => {
     return apiCall('users/refresh-token', 'POST')
 }
 
-const getcurrentUser = () => {
-    return apiCall('users/current-user', 'GET')
+const getcurrentUser = ({signal}) => {
+    return apiCall('users/current-user', 'GET', {}, {} , signal)
 }
 
 const updateAccountdetails = (data) => {
@@ -37,12 +37,12 @@ const updateCoverImage = (data) => {
     return apiCall('users/update-cover-image', 'PATCH', data, multipartFormatte)
 }
 
-const getUserChannelProfile = (username) => {
-    return apiCall(`users/channel/${username}`, 'GET')
+const getUserChannelProfile = ({username, signal}) => {
+    return apiCall(`users/channel/${username}`, 'GET', {}, {}, signal)
 }
 
-const getUserHistory = () => {
-    return apiCall('users/watch-history', 'GET')
+const getUserHistory = ({signal}) => {
+    return apiCall('users/watch-history', 'GET', {}, {}, signal)
 }
 
 const removeVideoFromHistory = (videoId) => {
@@ -53,8 +53,8 @@ const clearAllHistory = () => {
     return apiCall(`users/watch-history/clear-all`, "POST")
 }
 
-const getUserChannelByName = (username) => {
-    return apiCall(`users/get/users/${username}`, "get")
+const getUserChannelByName = ({username, signal}) => {
+    return apiCall(`users/get/users/${username}`, "get", {}, {}, signal)
 }
 
 

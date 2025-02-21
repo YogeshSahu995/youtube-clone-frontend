@@ -14,11 +14,13 @@ export function ChannelPlaylists () {
     const {userId, isCurrentUser} = useOutletContext()
 
     useEffect(() => {
+        const controller = new AbortController();
+        const signal = controller.signal;
         ;(async () => {
             try {
                 setLoading(true)
                 setError("")
-                const response = await getUserPlaylists({userId})
+                const response = await getUserPlaylists({userId, signal})
                 if(response.data.data){
                     setAllPlaylist(response.data.data)
                 }
@@ -31,6 +33,8 @@ export function ChannelPlaylists () {
                 setLoading(false)
             }
         })()
+
+        return () => controller.abort()
     }, [])
 
     if(loading) return <Loading2 />

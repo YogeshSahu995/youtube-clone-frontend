@@ -25,11 +25,13 @@ export function Home() {
     }, [query])
 
     useEffect(() => {
+        const controller = new AbortController()
+        const signal = controller.signal;
         ; (async () => {
             setVideoLoader(true)
             setError("")
             try {
-                const response = await getVideosByTitle({ page, limit: "4", query })
+                const response = await getVideosByTitle({ page, limit: "4", query, signal })
                 if (response?.data?.data?.docs) {
                     const filteredVideos = response.data.data.docs?.filter((video) => video.isPublished)
                     setData(response.data.data)
@@ -62,14 +64,17 @@ export function Home() {
             }
         })()
 
+        return () => controller.abort()
     }, [query, page])
 
     useEffect(() => {
+        const controller = new AbortController()
+        const signal = controller.signal;
         ; (async () => {
             setChannelLoader(true)
             setError("")
             try {
-                const response = await getUserChannelByName(query)
+                const response = await getUserChannelByName({username: query, signal})
                 if (response?.data?.data) {
                     setAllUsers(response.data.data)
                 }
@@ -84,6 +89,8 @@ export function Home() {
                 setChannelLoader(false)
             }
         })()
+
+        return () => controller.abort() 
     }, [query])
 
 

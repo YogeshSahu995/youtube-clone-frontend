@@ -1,16 +1,20 @@
 import { baseURL } from "../constants"
 import api from "./apiInterceptor"
 
-export const apiCall = async(endpoint, method='GET', data = null, headers) => {
+export const apiCall = async(endpoint, method='GET', data = null, headers, signal) => {
     try {
         return await api({
             url: `${baseURL}/${endpoint}`,
             method,
             data,
             headers,
-            withCredentials: true
+            withCredentials: true,
+            signal
         })
     } catch (error) {
+        if (axios.isCancel(error)) {
+            return
+        } 
         if(error.response){
             return error.response? error.response.data : error
         }

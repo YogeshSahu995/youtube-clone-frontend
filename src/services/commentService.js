@@ -1,3 +1,4 @@
+import { jsonFormatte } from "../constants.js";
 import { apiCall } from "../utils/apiCallHandle.js";
 
 const getVideoComments = ({videoId, page, limit}) => {
@@ -5,11 +6,11 @@ const getVideoComments = ({videoId, page, limit}) => {
 }
 
 const addComment = ({videoId, data}) => {
-    return apiCall(`comments/${videoId}`, 'POST', data)
+    return apiCall(`comments/${videoId}`, 'POST', data, jsonFormatte)
 }
 
 const updateComment = ({commentId, data}) => {
-    return apiCall(`comments/c/${commentId}`, 'PATCH', data)
+    return apiCall(`comments/c/${commentId}`, 'PATCH', data, jsonFormatte)
 }
 
 const deleteComment = ({commentId}) => {

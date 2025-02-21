@@ -24,13 +24,10 @@ export function PlaylistForm({ playlist, playlistId }) {
     const dataSubmit = async (data) => {
         setError("")
         setLoading(true)
-        const formData = new FormData();
 
         if (playlist) {
-            formData.append("name", data.name)
-            formData.append("description", data.description)
             try {
-                const response = await updatePlaylist({ playlistId, data: formData });
+                const response = await updatePlaylist({ playlistId, data });
                 if (response.data.data) {
                     navigate(`/channel/${username}/playlists`)
                     toast("Successfully update a playlist")
@@ -48,10 +45,7 @@ export function PlaylistForm({ playlist, playlistId }) {
         }
         else {
             try {
-                formData.append("name", data.name)
-                formData.append("description", data.description)
-
-                const response = await createPlaylist({ ...formData });
+                const response = await createPlaylist({data})
 
                 if (response.data.data) {
                     navigate(`/channel/${username}/playlists`)

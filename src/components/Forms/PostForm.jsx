@@ -30,7 +30,7 @@ export function PostForm ({post}) {
             if(data.image?.[0]) formData.append("image", data?.image?.[0])
             formData.append("content", data?.content)
             try {
-                const response = await updateATweet({tweetId:post._id, formData:formData})
+                const response = await updateATweet({tweetId:post._id, formData})
                 if (response.data.data) {
                     navigate(`/channel/${username}/posts`);
                     toast(`Successfully update a post id:${post._id}`)

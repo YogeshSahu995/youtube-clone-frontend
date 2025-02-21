@@ -1,12 +1,12 @@
 import { apiCall } from "../utils/apiCallHandle.js";
-import {multipartFormatte } from "../constants.js";
+import {jsonFormatte, multipartFormatte } from "../constants.js";
 
 const registerUser = (formData) => {
     return apiCall('users/register', 'POST', formData, multipartFormatte)
 }
 
 const loginUser = (data) => {
-    return apiCall('users/login', 'POST', data)
+    return apiCall('users/login', 'POST', data, jsonFormatte)
 }
 
 const logout = () => {
@@ -14,7 +14,7 @@ const logout = () => {
 }
 
 const changePassword = (data) => {
-    return apiCall('users/change-password', 'POST', data )
+    return apiCall('users/change-password', 'POST', data, jsonFormatte )
 }
 
 const refreshToken = () => {
@@ -26,7 +26,7 @@ const getcurrentUser = () => {
 }
 
 const updateAccountdetails = (data) => {
-    return apiCall('users/update-account', 'PATCH', data )
+    return apiCall('users/update-account', 'PATCH', data, jsonFormatte )
 }
 
 const updateAvatar = (data) => {

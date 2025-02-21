@@ -1,7 +1,8 @@
 import { apiCall } from "../utils/apiCallHandle.js";
+import { jsonFormatte } from "../constants.js";
 
 const createPlaylist = ({data}) => {
-    return apiCall('playlist/', 'POST', data)
+    return apiCall('playlist/', 'POST', data, jsonFormatte)
 }
 
 const getPlaylistById = ({playlistId}) => {
@@ -9,7 +10,7 @@ const getPlaylistById = ({playlistId}) => {
 }
 
 const updatePlaylist = ({playlistId, data}) => {
-    return apiCall(`playlist/${playlistId}`, 'PATCH', data)
+    return apiCall(`playlist/${playlistId}`, 'PATCH', data, jsonFormatte)
 }
 
 const deletePlaylist = ({playlistId}) => {

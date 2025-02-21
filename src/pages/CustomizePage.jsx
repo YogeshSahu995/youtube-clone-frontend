@@ -8,11 +8,13 @@ export function CustomizePage () {
     const [userData, setUserData] = useState({})
 
     useEffect(() => {
+        const controller = new AbortController()
+        const signal = controller.signal;
         ;(async() => {
             try {
                 setLoading(true)
                 setError("")
-                const response = await getcurrentUser()
+                const response = await getcurrentUser(signal)
                 if(response.data.data){
                     setUserData(response.data.data)
                 }
@@ -25,6 +27,8 @@ export function CustomizePage () {
                 setLoading(false)
             }
         })()
+
+        return () => controller.abort()
     },[])
 
     if(loading) return <Loading />

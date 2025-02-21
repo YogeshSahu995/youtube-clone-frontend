@@ -12,11 +12,13 @@ export function EditPlaylist (){
     const {playlistId} = useParams()
 
     useEffect(() => {
+        const controller = new AbortController()
+        const signal = controller.signal;
         ; (async () => {
             try {
                 setLoading(true)
                 setError("")
-                const response = await getPlaylistById({ playlistId })
+                const response = await getPlaylistById({ playlistId, signal })
                 if (response.data.data) {
                     setData(response.data.data)
                 }
@@ -29,6 +31,8 @@ export function EditPlaylist (){
                 setLoading(false)
             }
         })()
+
+        return () => controller.abort()
     }, [playlistId])
 
     if(loading) return (<Loading />)

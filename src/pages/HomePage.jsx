@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Container, Home } from "../components";
+import { Home } from "../components";
 import { useDispatch } from "react-redux";
 import { login } from "../store/authSlice";
 import { getcurrentUser } from "../services/userService";
@@ -7,9 +7,11 @@ import { getcurrentUser } from "../services/userService";
 export function HomePage () {
     const dispatch = useDispatch()
     useEffect(() => {
-        getcurrentUser()
+        const controller = new AbortController()
+        const signal = controller.signal;
+        getcurrentUser(signal)
         .then((res) => {
-            if(res.data){
+            if(res?.data?.data){
                 const {
                     username, 
                     fullname, 
@@ -23,6 +25,7 @@ export function HomePage () {
                 dispatch(login({username, fullname, email, _id, coverImage, avatar, createdAt, updateAt}))
             }
         })
+        return () => controller.abort()
     },[])
     return (
         <div>

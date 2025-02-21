@@ -15,12 +15,14 @@ export function Login(){
     const [loading, setLoading] = useState(false)
 
     const dataSubmit = async(data) => {
+        const controller = new AbortController()
+        const signal = controller.signal
         setLoading(true)
         setError("")
             try {
                 const response = await loginUser(data)
                 if(response.data){
-                    const userData = await getcurrentUser()
+                    const userData = await getcurrentUser(signal)
                     if(userData) {
                         const {username, fullname, email, _id} = userData.data.data
                         dispatch(login({username, fullname, email, _id}))
@@ -37,7 +39,9 @@ export function Login(){
             finally{
                 setLoading(false)
             }
+            return () => controller.abort()
         }
+
 
     return (
         <FormStyle heading="Sign In">

@@ -9,10 +9,12 @@ export function PlayVideoPage(){
     const [Loading, setLoading] = useState(false)
     
     useEffect(() => {
+        const controller = new AbortController()
+        const signal = controller.signal;
         setLoading(true)
         ;(async() => {
             try {
-                const response = await getVideoById({videoId})
+                const response = await getVideoById({videoId, signal})
                 if(response.data.data){
                     setVideoInfo(response.data.data)
                 }
@@ -23,6 +25,7 @@ export function PlayVideoPage(){
                 setLoading(false)
             }
         })()
+        return () => controller.abort()
     }, [videoId])
 
     if(Loading) return <Loading2 />

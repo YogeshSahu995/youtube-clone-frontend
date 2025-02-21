@@ -74,14 +74,15 @@ export function Home() {
             setChannelLoader(true)
             setError("")
             try {
-                const response = await getUserChannelByName({username: query, signal})
-                if (response?.data?.data) {
-                    setAllUsers(response.data.data)
+                if(query){
+                    let response = await getUserChannelByName({username: query, signal})
+                    if (response?.data?.data) {
+                        setAllUsers(response.data.data)
+                    }
+                    else {
+                        setError(errorHandler(response))
+                    }
                 }
-                else {
-                    setError(errorHandler(response))
-                }
-
             } catch (error) {
                 setError(error.message)
             }

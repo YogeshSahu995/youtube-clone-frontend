@@ -10,11 +10,13 @@ export function EditPostPage () {
     const {postId} = useParams()
 
     useEffect(() => {
+        const controller = new AbortController()
+        const signal = controller.signal;
         ;(async() => {
             try {
                 setLoading(true)
                 setError("")
-                const response = await getTweetById(postId)
+                const response = await getTweetById({tweetId: postId, signal})
                 if(response.data.data){
                     setPost(response.data.data)
                 }
@@ -27,6 +29,7 @@ export function EditPostPage () {
                 setLoading(false)
             }
         })()
+        return () => controller.abort()
     },[])
 
     if(loading) return <Loading />

@@ -21,8 +21,8 @@ const refreshToken = () => {
     return apiCall('users/refresh-token', 'POST')
 }
 
-const getcurrentUser = ({signal}) => {
-    return apiCall('users/current-user', 'GET', {}, {} , signal)
+const getcurrentUser = (signal) => {
+    return apiCall('users/current-user', 'GET', {}, {}, signal)
 }
 
 const updateAccountdetails = (data) => {

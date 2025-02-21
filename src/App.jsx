@@ -33,7 +33,7 @@ function App() {
       setLoading(true);
       getcurrentUser()
         .then((res) => {
-          if (Object.keys(res.data.data).length > 0) {
+          if (res?.data?.data) {
             const { username, fullname, email, _id, coverImage, avatar, createdAt, updateAt } = res.data.data;
             dispatch(login({ username, fullname, email, _id, coverImage, avatar, createdAt, updateAt }));
             navigate("/");

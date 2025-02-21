@@ -9,11 +9,13 @@ export function Playlist({playlistInfo}){
     const { _id, createdAt, description, name, updatedAt, owner, videos } = playlistInfo
 
     useEffect(() => {
+        const controller = new AbortController()
+        const signal = controller.signal;
         ;(async function fetchFirstVideo() {
             try {
                 if (videos.length > 0) {
                     setVideoCount(`${videos.length} videos`)
-                    const response = await getVideoById({ videoId: videos[0] });
+                    const response = await getVideoById({ videoId: videos[0], signal });
                     if (response.data.data?.thumbnail) {
                         setImage(response.data.data.thumbnail);
                     }
@@ -28,6 +30,7 @@ export function Playlist({playlistInfo}){
                 console.log(error.message);
             }
         })()
+        return () => controller.abort()
     }, [videos])
 
     return(

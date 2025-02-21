@@ -12,10 +12,12 @@ export function ChannelList({ channelInfo }) {
     const navigate = useNavigate()
 
     useEffect(() => {
+        const controller = new AbortController()
+        const signal = controller.signal;
         setLoading(true)
             ; (async () => {
                 try {
-                    const response = await getUserChannelProfile(username)
+                    const response = await getUserChannelProfile({username, signal})
                     if (response.data.data) {
                         const data = response.data.data
                         setUserData(data)
@@ -29,6 +31,8 @@ export function ChannelList({ channelInfo }) {
                     setLoading(false)
                 }
             })()
+
+            return () => controller.abort()
     }, [channelInfo])
 
 

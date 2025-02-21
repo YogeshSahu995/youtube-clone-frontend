@@ -10,11 +10,13 @@ export function EditVideoPage () {
     const {videoId} = useParams()
 
     useEffect(() => {
+        const controller = new AbortController()
+        const signal = controller.signal;
         ;(async() => {
             try {
                 setLoading(true)
                 setError("")
-                const response = await getVideoById({videoId})
+                const response = await getVideoById({videoId, signal})
                 if(response.data.data){
                     setVideoInfo(response.data.data)
                 }
@@ -27,6 +29,7 @@ export function EditVideoPage () {
                 setLoading(false)
             }
         })()
+        return () => controller.abort()
     },[])
 
     if(loading) return <Loading />

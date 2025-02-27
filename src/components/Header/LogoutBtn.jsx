@@ -6,29 +6,29 @@ import { Link, useNavigate } from "react-router-dom"
 import { Avatar } from "../LayoutComponents"
 import { useState } from "react"
 
-export function LogoutBtn ({userData}) {
+export function LogoutBtn({ userData }) {
     const [isHidden, setIsHidden] = useState(true)
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
     const handleLogout = () => {
         LogOut()
-        .then((res) => {
-            dispatch(logout())
-            navigate('/login')
-        })
+            .then(() => {
+                dispatch(logout())
+                navigate('/login')
+            })
     }
 
-    if(userData){
-        const {username, fullname, avatar} = userData
+    if (userData) {
+        const { username, fullname, avatar } = userData
 
-        return(
+        return (
             <div className="relative flex flex-col p-1 z-auto mr-2 text-white">
                 <div onClick={() => setIsHidden(prev => !prev)} className="text-right text-lg cursor-pointer">
-                    <Avatar avatar={avatar} heightWidth={`h-[50px] w-[50px] ${isHidden? "" : "border-2 border-cyan-300"}`} />
+                    <Avatar avatar={avatar} heightWidth={`h-[50px] w-[50px] ${isHidden ? "" : "border-2 border-cyan-300"}`} />
                 </div>
-                <div 
-                className={`absolute right-[60px] top-7 flex flex-col gap-3 ${isHidden? "hidden" : "block"} text-center p-2 w-[200px] rounded-lg bg-[#484848] text-white`}>
+                <div
+                    className={`absolute right-[60px] top-7 flex flex-col gap-3 ${isHidden ? "hidden" : "block"} text-center p-2 w-[200px] rounded-lg bg-[#484848] text-white`}>
                     <div className="flex gap-2">
                         <Avatar avatar={avatar} heightWidth="h-[40px] w-[40px]" />
                         <div className="text-left">
@@ -42,9 +42,9 @@ export function LogoutBtn ({userData}) {
                     <hr></hr>
                     <Link to={`/dashboard`} className="text-cyan-500 font-medium"> Dashboard </Link>
                     <hr></hr>
-                    <Button 
+                    <Button
                         value="Sign Out"
-                        onClick = {handleLogout}
+                        onClick={handleLogout}
                     />
                 </div>
             </div>

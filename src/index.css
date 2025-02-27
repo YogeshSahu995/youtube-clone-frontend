@@ -3,118 +3,139 @@
 @tailwind utilities;
 
 body {
-    font-family: "Roboto", sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 .loader {
-    width: 50px;
-    height: 165px;
-    position: relative;
-  }
-  .loader::before {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: 0;
-    transform: translate(-50% , 0);
-    width: 16px;
-    height: 16px;
-    background: #0e7490;
-    border-radius: 50%;
-    animation: bounce 2s linear infinite;
-  }
-  .loader::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
-    height: 48px;
-    width: 48px;
-    background: #fff;
-    border-radius: 4px;
-    animation: rotate 2s linear infinite;
-  }
-  
-  @keyframes bounce {
-    0% , 50% , 100%{
-      transform: translate(-50%, 0px);
-      height: 20px;
-    }
-    20% {
-      transform: translate(-25%, 85px);
-      height: 28px;
-    }
-    25% {
-      transform: translate(-25%, 110px);
-      height: 12px;
-    }
-    70% {
-      transform: translate(-75%, 85px);
-      height: 28px;
-    }
-    75% {
-      transform: translate(-75%, 108px);
-      height: 12px;
-    }
-  }
-  @keyframes rotate {
-    0% , 50% , 100%{ transform: rotate(0deg)}
-    25% { transform: rotate(90deg)}
-    75%{ transform: rotate(-90deg)}
+  width: 50px;
+  height: 165px;
+  position: relative;
+}
+
+.loader::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translate(-50%, 0);
+  width: 16px;
+  height: 16px;
+  background: #0e7490;
+  border-radius: 50%;
+  animation: bounce 2s linear infinite;
+}
+
+.loader::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  height: 48px;
+  width: 48px;
+  background: #fff;
+  border-radius: 4px;
+  animation: rotate 2s linear infinite;
+}
+
+@keyframes bounce {
+
+  0%,
+  50%,
+  100% {
+    transform: translate(-50%, 0px);
+    height: 20px;
   }
 
-  .loader2 {
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    display: inline-block;
-    border-top: 3px solid #ffffff;
-    border-right: 3px solid transparent;
-    box-sizing: border-box;
-    animation: rotating 0.8s linear infinite;
-  }
-  
-  @keyframes rotating {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  } 
-  
-  .effect{
-    transition: all 0.2s ease-in-out;
+  20% {
+    transform: translate(-25%, 85px);
+    height: 28px;
   }
 
-  .effect:hover{
-    background-color: #1ce4ff;
-    box-shadow: 0px 0px 10px #1ce4ff ;
-  }
-  
-  .textEffect:hover{
-    text-shadow: 0px 0px 2px #10e3ff;
-    color: #10e3ff
+  25% {
+    transform: translate(-25%, 110px);
+    height: 12px;
   }
 
-  .textShadow{
-    text-shadow: -4px 4px 10px #0e0e0ea1;
+  70% {
+    transform: translate(-75%, 85px);
+    height: 28px;
   }
 
-  .boxShadow{
-    box-shadow: -4px 4px 15px #0e0e0ea1;
+  75% {
+    transform: translate(-75%, 108px);
+    height: 12px;
+  }
+}
+
+@keyframes rotate {
+
+  0%,
+  50%,
+  100% {
+    transform: rotate(0deg)
   }
 
-  .dropDownLi{
-    padding: 4px;
-    border-radius: 10px;
-    margin-bottom: 2px;
-    cursor: pointer;
+  25% {
+    transform: rotate(90deg)
   }
 
-  .dropDownLi:hover{
-    background-color: #00000038;
+  75% {
+    transform: rotate(-90deg)
   }
-    
+}
+
+.loader2 {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: inline-block;
+  border-top: 3px solid #ffffff;
+  border-right: 3px solid transparent;
+  box-sizing: border-box;
+  animation: rotating 0.8s linear infinite;
+}
+
+@keyframes rotating {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.effect {
+  transition: all 0.2s ease-in-out;
+}
+
+.effect:hover {
+  background-color: #1ce4ff;
+  box-shadow: 0px 0px 10px #1ce4ff;
+}
+
+.textEffect:hover {
+  text-shadow: 0px 0px 2px #10e3ff;
+  color: #10e3ff
+}
+
+.textShadow {
+  text-shadow: -4px 4px 10px #0e0e0ea1;
+}
+
+.boxShadow {
+  box-shadow: -4px 4px 15px #0e0e0ea1;
+}
+
+.dropDownLi {
+  padding: 4px;
+  border-radius: 10px;
+  margin-bottom: 2px;
+  cursor: pointer;
+}
+
+.dropDownLi:hover {
+  background-color: #00000038;
+}

@@ -16,7 +16,7 @@ const getLikedVideos = (signal) => {
     return apiCall('likes/videos', 'GET', {}, {}, signal)
 }
 
-export{
+export {
     toggleCommentLike,
     toggleTweetLike,
     toggleVideoLike,

@@ -8,12 +8,12 @@ import toast, { Toaster } from "react-hot-toast";
 import { errorHandler } from "../../utils";
 
 export function PostForm({ post }) {
-    const userData = useSelector(state => state.data);
-    const { username } = userData
-    const navigate = useNavigate();
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false)
     const [postImage, setPostImage] = useState(post?.image)
+    const navigate = useNavigate();
+    const userData = useSelector(state => state.data);
+    const { username } = userData
 
     const { register, handleSubmit, control, getValues, formState: { errors } } = useForm({
         defaultValues: {
@@ -71,37 +71,37 @@ export function PostForm({ post }) {
     if (loading) return (<Loading />)
 
     return (
-    <>
-        <FormStyle heading={post ? "Update Post" : "Create Post"}>
-            {error && <Error message={error} />}
+        <>
+            <FormStyle heading={post ? "Update Post" : "Create Post"}>
+                {error && <Error message={error} />}
 
-            <form onSubmit={handleSubmit(dataSubmit)}>
+                <form onSubmit={handleSubmit(dataSubmit)}>
 
-                {errors.image && <Error message={errors.image.message} />}
-                <Input
-                    type="file"
-                    label="Upload image"
-                    accept="image/*"
-                    onInput={(e) => HandelPreview(e, setPostImage)}
-                    {...register("image", { required: "Image is required" })}
-                />
-                {postImage && <img src={postImage} className="h-[250px] w-[300px] mx-auto object-cover object-center" />}
+                    {errors.image && <Error message={errors.image.message} />}
+                    <Input
+                        type="file"
+                        label="Upload image"
+                        accept="image/*"
+                        onInput={(e) => HandelPreview(e, setPostImage)}
+                        {...register("image", { required: "Image is required" })}
+                    />
+                    {postImage && <img src={postImage} className="h-[250px] w-[300px] mx-auto object-cover object-center" />}
 
-                {errors.content && <Error message={errors.content.message} />}
-                <RTE
-                    control={control}
-                    defaultValue={post ? post.content : getValues("content")}
-                    label='Content : '
-                    {...register("content", { required: "Content is required" })}
-                />
+                    {errors.content && <Error message={errors.content.message} />}
+                    <RTE
+                        control={control}
+                        defaultValue={post ? post.content : getValues("content")}
+                        label='Content : '
+                        {...register("content", { required: "Content is required" })}
+                    />
 
-                <Button
-                    type="submit"
-                    value={post ? "Update Post" : "Upload Post"}
-                    className="mr-2 mt-2"
-                />
-            </form>
-        </FormStyle>
-    </>
+                    <Button
+                        type="submit"
+                        value={post ? "Update Post" : "Upload Post"}
+                        className="mr-2 mt-2"
+                    />
+                </form>
+            </FormStyle>
+        </>
     )
 }

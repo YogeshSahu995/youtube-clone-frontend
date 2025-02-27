@@ -2,20 +2,20 @@ import { Editor } from '@tinymce/tinymce-react';
 import { Controller } from 'react-hook-form';
 import { forwardRef, useId } from 'react';
 
-function RTE ({name, control, label, defaultValue =""}, ref){
+function RTE({ name, control, label, defaultValue = "" }, ref) {
     const id = useId()
     return (
-        <div className='w-full'> 
+        <div className='w-full'>
             {label && <label className='text-lg text-blue-100' id={id}>{label}</label>}
-        
+
             <Controller
-                id = {id}
+                id={id}
                 name={name || "content"}
                 control={control}
-                render={({field: {onChange}}) => (
-                    <Editor 
+                render={({ field: { onChange } }) => (
+                    <Editor
                         apiKey='38r3g774dt277t5t3ox2rmm2ystiu8s2aykhqlfkfv38g2dv'
-                        initialValue={defaultValue|| "Write your Content"}
+                        initialValue={defaultValue || "Write your Content"}
                         init={{
                             initialValue: defaultValue,
                             height: 250,
@@ -43,7 +43,7 @@ function RTE ({name, control, label, defaultValue =""}, ref){
                                 "anchor",
                             ],
                             toolbar:
-                            "undo redo | blocks | image | bold italic forecolor | alignleft aligncenter bold italic forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent |removeformat | help",
+                                "undo redo | blocks | image | bold italic forecolor | alignleft aligncenter bold italic forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent |removeformat | help",
                             content_style: "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }"
                         }}
                         onEditorChange={onChange}

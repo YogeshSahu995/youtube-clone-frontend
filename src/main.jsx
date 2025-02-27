@@ -4,15 +4,15 @@ import { store } from './store/store.js';
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import {
-  Login, 
-  Register, 
-  Channel, 
-  AnotherChannel, 
-  HomePage, 
-  AddVideo, 
-  CreatePost, 
-  CreatePlaylist, 
-  ViewFullPlaylist, 
+  Login,
+  Register,
+  Channel,
+  AnotherChannel,
+  HomePage,
+  AddVideo,
+  CreatePost,
+  CreatePlaylist,
+  ViewFullPlaylist,
   EditPlaylist,
   SubscriptionPage,
   ChangePasswordPage,
@@ -22,14 +22,14 @@ import {
   YouFeedPage,
   DashboardPage
 } from './pages/index.js'
-import { 
-  ChannelVideos, 
-  ChannelPost, 
-  ChannelSearchVideos, 
-  ChannelPlaylists, 
+import {
+  ChannelVideos,
+  ChannelPost,
+  ChannelSearchVideos,
+  ChannelPlaylists,
   SubscribedChannels,
 } from './components/index.js';
-import {Layout, AuthLayout} from './layouts/index.js'
+import { Layout, AuthLayout } from './layouts/index.js'
 import App from './App.jsx';
 import { CustomizePage } from './pages/CustomizePage.jsx';
 
@@ -47,8 +47,8 @@ const router = createBrowserRouter([
             element: <AuthLayout children={<HomePage />} authentication />
           },
           {
-            path:'/:username',
-            element: <AuthLayout children={<AnotherChannel  />} authentication />,
+            path: '/:username',
+            element: <AuthLayout children={<AnotherChannel />} authentication />,
             children: [
               {
                 path: "/:username/videos",
@@ -72,9 +72,9 @@ const router = createBrowserRouter([
               }
             ]
           },
-          { 
-            path: '/channel/:username', 
-            element:  <AuthLayout children={<Channel />} authentication />,
+          {
+            path: '/channel/:username',
+            element: <AuthLayout children={<Channel />} authentication />,
             children: [
               {
                 path: "/channel/:username/videos",
@@ -152,11 +152,11 @@ const router = createBrowserRouter([
           },
           {
             path: '/login',
-            element: <AuthLayout children={<Login />} authentication ={false} />,
+            element: <AuthLayout children={<Login />} authentication={false} />,
           },
           {
             path: '/register',
-            element: <AuthLayout children={<Register />} authentication ={false} />,
+            element: <AuthLayout children={<Register />} authentication={false} />,
           },
         ],
       },

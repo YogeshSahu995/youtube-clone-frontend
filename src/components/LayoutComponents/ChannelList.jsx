@@ -18,7 +18,7 @@ export function ChannelList({ channelInfo }) {
         setLoading(true)
             ; (async () => {
                 try {
-                    const response = await getUserChannelProfile({username, signal})
+                    const response = await getUserChannelProfile({ username, signal })
                     if (response?.data?.data) {
                         const data = response.data.data
                         setUserData(data)
@@ -33,10 +33,10 @@ export function ChannelList({ channelInfo }) {
                 }
             })()
 
-            return () => controller.abort()
+        return () => controller.abort()
     }, [username])
 
-    if(loading) return <Loading2 />
+    if (loading) return <Loading2 />
 
     if (Object.keys(userData).length > 0) {
         const { avatar, fullname, isSubscribed, subscribersCount, _id, username } = userData

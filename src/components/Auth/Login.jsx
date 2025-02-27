@@ -8,36 +8,36 @@ import { useForm } from "react-hook-form"
 import { errorHandler } from "../../utils/errorHandler"
 import toast from "react-hot-toast"
 
-export function Login(){
-    const {register, handleSubmit} = useForm()
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
+export function Login() {
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
+    const { register, handleSubmit } = useForm()
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
 
-    const dataSubmit = async(data) => {
+    const dataSubmit = async (data) => {
         const controller = new AbortController()
         const signal = controller.signal
         setLoading(true)
         setError("")
         try {
             const response = await loginUser(data)
-            if(response?.data?.data){
+            if (response?.data?.data) {
                 const userData = await getcurrentUser(signal)
-                if(userData) {
-                    const {username, fullname, email, _id} = userData.data.data
-                    dispatch(login({username, fullname, email, _id}))
+                if (userData) {
+                    const { username, fullname, email, _id } = userData.data.data
+                    dispatch(login({ username, fullname, email, _id }))
                     navigate('/')
                     toast.success("Successfully login")
                 }
             }
-            else{
+            else {
                 toast.error(errorHandler(response))
             }
         } catch (error) {
             toast.error(error.message)
         }
-        finally{
+        finally {
             setLoading(false)
         }
         return () => controller.abort()
@@ -46,14 +46,16 @@ export function Login(){
 
     return (
         <FormStyle heading="Sign In">
+
             {error && <Error message={error} />}
+            
             <form onSubmit={handleSubmit(dataSubmit)}>
-                <Input 
+                <Input
                     label="Email"
-                    type = "email"
+                    type="email"
                     placeholder="enter your email.."
-                    outline = "outline-none"
-                    {...register("email",{
+                    outline="outline-none"
+                    {...register("email", {
                         required: true,
                         pattern: {
                             value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
@@ -62,26 +64,26 @@ export function Login(){
                     })}
                 />
 
-                <Input 
+                <Input
                     type="password"
                     label="Password..."
-                    outline = "outline-none"
-                    placeholder = "Enter Password"
-                    {...register("password",{
+                    outline="outline-none"
+                    placeholder="Enter Password"
+                    {...register("password", {
                         required: true,
 
                     })}
                 />
 
-                <Button 
-                    value={loading? "Sign In..." : "Sign In"}
+                <Button
+                    value={loading ? "Sign In..." : "Sign In"}
                     type="submit"
-                    bgColor = {loading? "bg-cyan-900" : "bg-cyan-700"}
+                    bgColor={loading ? "bg-cyan-900" : "bg-cyan-700"}
                     className="mr-2 mt-2"
                 />
             </form>
             <p className="font-semibold text-blue-100 mt-2">
-                Don't have an account ?  
+                Don't have an account ?
                 <Link to='/register' className="text-[#10e3ff] ">
                     _Create Account_
                 </Link>

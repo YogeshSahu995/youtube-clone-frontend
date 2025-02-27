@@ -10,12 +10,12 @@ api.interceptors.response.use(
     response => response,
 
     async error => {
-        if(axios.isCancel(error)) return 
-        if(error.response?.status === 401 && !error.config._retry){
+        if (axios.isCancel(error)) return
+        if (error.response?.status === 401 && !error.config._retry) {
             error.config._retry = true;
             try {
                 await api.post("/users/refresh-token")
-                return api(error.config) 
+                return api(error.config)
 
             } catch (refreshError) {
                 console.error('Refresh failed. Redirecting to login.')

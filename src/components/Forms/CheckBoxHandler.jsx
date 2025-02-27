@@ -4,15 +4,15 @@ import { Input } from "../LayoutComponents";
 import toast from "react-hot-toast";
 import { errorHandler } from "../../utils";
 
-export function CheckBoxHandler({playlistId, videoId, name}){
+export function CheckBoxHandler({ playlistId, videoId, name }) {
     const [checkbox, setCheckbox] = useState(false)
-    
+
     useEffect(() => {
-        ;(
-            async() => {
+        ; (
+            async () => {
                 try {
-                    const response = await checkAlreadyVideoExist({playlistId, videoId})
-                    if(response?.data?.data){
+                    const response = await checkAlreadyVideoExist({ playlistId, videoId })
+                    if (response?.data?.data) {
                         setCheckbox(response.data.data)
                     }
                 } catch (error) {
@@ -22,18 +22,18 @@ export function CheckBoxHandler({playlistId, videoId, name}){
         )()
     }, [playlistId, videoId])
 
-    const handleCheckBoxChange = async(event) => {
+    const handleCheckBoxChange = async (event) => {
         try {
             setCheckbox(event.target.checked)
-            if(event.target.checked){
-                const response = await addVideoInPlaylist({videoId, playlistId})
-                if(response?.data?.data){
+            if (event.target.checked) {
+                const response = await addVideoInPlaylist({ videoId, playlistId })
+                if (response?.data?.data) {
                     toast.success("Successfully add video in playlist")
                 }
             }
-            else{
-                const response = await removeVideoFromPlaylist({videoId, playlistId})
-                if(response?.data?.data){
+            else {
+                const response = await removeVideoFromPlaylist({ videoId, playlistId })
+                if (response?.data?.data) {
                     toast.success("Successfully remove video from playlist")
                 }
             }
@@ -42,15 +42,15 @@ export function CheckBoxHandler({playlistId, videoId, name}){
         }
     }
 
-    return(
+    return (
         <div>
             <label className="flex items-center" key={playlistId}>
                 <Input
                     type="checkbox"
-                    value = {playlistId}
-                    checked = {checkbox}
-                    onChange = {handleCheckBoxChange}
-                    className = "cursor-pointer"
+                    value={playlistId}
+                    checked={checkbox}
+                    onChange={handleCheckBoxChange}
+                    className="cursor-pointer"
                 />
                 {name}
             </label>

@@ -4,7 +4,7 @@ import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 
 
-export function Header ({setSearchInput}) {
+export function Header({ setSearchInput }) {
     const authstatus = useSelector(state => state.status)
     const userData = useSelector(state => state.data)
     const navigate = useNavigate()
@@ -28,33 +28,33 @@ export function Header ({setSearchInput}) {
                     <Logo />
                     {authstatus && (
                         <>
-                            <Input 
-                                type="text" 
+                            <Input
+                                type="text"
                                 placeholder="Search..."
                                 className="px-2 py-1 w-[150px] sm:w-[400px] min-[400px]:w-[250px] boxShadow outline-0"
-                                onChange = {(e) => {
-                                    setSearchInput(e.target.value); 
+                                onChange={(e) => {
+                                    setSearchInput(e.target.value);
                                 }}
-                                onClick = {() => navigate('/')}
+                                onClick={() => navigate('/')}
                             />
                         </>
                     )}
-                    {!authstatus? (
+                    {!authstatus ? (
                         <div className="w-max">
                             {buttons.map((but) => but.status ? (
-                                <Button 
+                                <Button
                                     key={but.name}
                                     value={but.name}
-                                    onClick = {(e) => navigate(but.slug) }
+                                    onClick={(e) => navigate(but.slug)}
                                     className="mr-2"
                                 />
-                            ):null
+                            ) : null
                             )}
                         </div>
-                    ): 
-                    (<div className="w-max">
-                        <LogoutBtn userData={userData} />
-                    </div>)
+                    ) :
+                        (<div className="w-max">
+                            <LogoutBtn userData={userData} />
+                        </div>)
                     }
                 </div>
             </header>

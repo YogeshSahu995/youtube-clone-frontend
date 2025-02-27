@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { Video } from "../Video";
-import { Button, Loading2, Error} from "../LayoutComponents";
+import { Button, Loading2, Error } from "../LayoutComponents";
 import { useOutletContext } from "react-router-dom";
 import { EmptyPageResponse } from "./EmptyPageResponse";
 import { GetChannelVideos } from "./GetChannelVideos";
 
 export function ChannelVideos() {
-    const {mainRef, userId, isCurrentUser} = useOutletContext()
     const [data, setData] = useState({});
     const [allVideos, setAllVideos] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -15,16 +14,17 @@ export function ChannelVideos() {
     const [page, setPage] = useState(1);
     const [sortBy, setSortBy] = useState("createdAt");
     const [sortType, setSortType] = useState("des");
+    const { mainRef, userId, isCurrentUser } = useOutletContext()
 
     GetChannelVideos({
-        setAllVideos, 
+        setAllVideos,
         setData,
-        setEnd, 
-        mainRef, 
-        setLoading, 
-        setError, 
-        setPage, 
-        sortBy, 
+        setEnd,
+        mainRef,
+        setLoading,
+        setError,
+        setPage,
+        sortBy,
         sortType,
         data,
         page,
@@ -36,12 +36,12 @@ export function ChannelVideos() {
     }
 
     if (allVideos.length === 0) {
-        return(
+        return (
             <div className="w-fit mx-auto">
-                <EmptyPageResponse 
+                <EmptyPageResponse
                     isCurrentUser={isCurrentUser}
-                    title="No Videos Uploaded" 
-                    anotherpara="This Channel does not have any content" 
+                    title="No Videos Uploaded"
+                    anotherpara="This Channel does not have any content"
                     para="This channel has yet to upload a video"
                     path="/add-video"
                     buttonValue="Add Video"
@@ -61,41 +61,41 @@ export function ChannelVideos() {
     return (
         <div className="px-4">
             <div>
-                <Button 
-                 value="Latest"
-                 bgColor="bg-[#0000009c]"
-                 className="mr-3 mt-2"
-                 onClick={() => {
-                    if((sortBy !== "createdAt") || (sortType !== "des")) {
-                        setSortBy("createdAt")
-                        setSortType("des")
-                        setPage(1)
-                    }
-                }}
+                <Button
+                    value="Latest"
+                    bgColor="bg-[#0000009c]"
+                    className="mr-3 mt-2"
+                    onClick={() => {
+                        if ((sortBy !== "createdAt") || (sortType !== "des")) {
+                            setSortBy("createdAt")
+                            setSortType("des")
+                            setPage(1)
+                        }
+                    }}
                 />
-                <Button 
-                 value="Popular"
-                 bgColor="bg-[#0000009c]"
-                 className="mr-3 mt-2"
-                 onClick={() => {
-                    if((sortBy !== "likes") || (sortType !== "des")){
-                        setSortBy("likes")
-                        setSortType("des")
-                        setPage(1)
-                    } 
-                }}
+                <Button
+                    value="Popular"
+                    bgColor="bg-[#0000009c]"
+                    className="mr-3 mt-2"
+                    onClick={() => {
+                        if ((sortBy !== "likes") || (sortType !== "des")) {
+                            setSortBy("likes")
+                            setSortType("des")
+                            setPage(1)
+                        }
+                    }}
                 />
-                <Button 
-                 value="Oldest"
-                 bgColor="bg-[#0000009c]"
-                 className="mr-3 mt-2 "
-                 onClick = {() => {
-                    if((sortBy !== "createdAt") || (sortType !== "asc")){
-                        setSortBy("createdAt")
-                        setSortType("asc")
-                        setPage(1)
-                    }
-                 }}
+                <Button
+                    value="Oldest"
+                    bgColor="bg-[#0000009c]"
+                    className="mr-3 mt-2 "
+                    onClick={() => {
+                        if ((sortBy !== "createdAt") || (sortType !== "asc")) {
+                            setSortBy("createdAt")
+                            setSortType("asc")
+                            setPage(1)
+                        }
+                    }}
                 />
             </div>
             <ul className="">

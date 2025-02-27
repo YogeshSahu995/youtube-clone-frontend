@@ -6,4 +6,4 @@ import { ChangePasswordForm } from "./ChangePasswordForm";
 import { AddVideoInPlaylist } from "./AddVideoInPlaylist";
 import { CheckBoxHandler } from "./CheckBoxHandler";
 
-export {VideoForm, PostForm, PlaylistForm, DeleteForm, ChangePasswordForm, AddVideoInPlaylist, CheckBoxHandler}
+export { VideoForm, PostForm, PlaylistForm, DeleteForm, ChangePasswordForm, AddVideoInPlaylist, CheckBoxHandler }

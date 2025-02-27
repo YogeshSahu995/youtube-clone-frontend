@@ -1,15 +1,15 @@
 import { apiCall } from "../utils/apiCallHandle.js";
 
-const getChannelSubscribers = ({channelId, signal}) => {
+const getChannelSubscribers = ({ channelId, signal }) => {
     return apiCall(`subscriptions/c/${channelId}`, 'GET', {}, {}, signal)
 }
 
-const getSubscribedChannels = ({channelId, signal}) => {
+const getSubscribedChannels = ({ channelId, signal }) => {
     return apiCall(`subscriptions/u/${channelId}`, 'GET', {}, {}, signal)
-} 
+}
 
-const toggleSubscription = ({anotherChannelId}) => {
+const toggleSubscription = ({ anotherChannelId }) => {
     return apiCall(`subscriptions/c/${anotherChannelId}`, 'POST')
 }
 
-export {getChannelSubscribers, getSubscribedChannels, toggleSubscription}
+export { getChannelSubscribers, getSubscribedChannels, toggleSubscription }

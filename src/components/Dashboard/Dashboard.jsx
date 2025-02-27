@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { VideoLi } from "./VideoLi";
 import { EmptyPageResponse } from "../Channel";
 import toast from "react-hot-toast";
+import { Loading2 } from "../LayoutComponents";
 
 export function Dashboard() {
     const userData = useSelector((state) => state.data)
@@ -56,6 +57,8 @@ export function Dashboard() {
     useEffect(() => {
         setAllVideos([])
     }, [sortBy, sortType])
+
+    if(loading) return <Loading2 />
 
 
     return (

@@ -9,12 +9,12 @@ import { HandelPreview } from "../Auth";
 import toast from "react-hot-toast";
 
 export function VideoForm({ videoInfo }) {
-    const userData = useSelector(state => state.data);
-    const navigate = useNavigate();
     const [publishStatus, setPublishStatus] = useState(videoInfo?.isPublished || true);
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const [image, setImage] = useState(videoInfo?.thumbnail);
+    const userData = useSelector(state => state.data);
+    const navigate = useNavigate();
 
     const { register, handleSubmit, formState: { errors }, control } = useForm({
         defaultValues: {
@@ -42,7 +42,7 @@ export function VideoForm({ videoInfo }) {
                     toast.success(`Sucessfully video is Updated id:${videoInfo._id}`)
                     navigate(`/video/${videoInfo._id}/${userData._id}`);
                 } else {
-                   response && toast.error(errorHandler(response))
+                    response && toast.error(errorHandler(response))
                 }
             } catch (error) {
                 toast(error.message);

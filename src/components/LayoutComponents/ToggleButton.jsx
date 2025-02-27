@@ -2,14 +2,14 @@ import { forwardRef, useEffect, useState } from "react";
 import { togglePublishBtn } from "../../services/videoService";
 import { Button } from "./Button";
 
-function ToggleButton({ setPublishStatus, publishStatus, videoId }, ref){
+function ToggleButton({ setPublishStatus, publishStatus, videoId }, ref) {
     const [active, setActive] = useState(Boolean);
 
     useEffect(() => {
         setActive(publishStatus);
     }, [publishStatus]);
 
-    const toggleActiveState = async() => {
+    const toggleActiveState = async () => {
         setActive((prevState) => !prevState);
 
         if (setPublishStatus) {

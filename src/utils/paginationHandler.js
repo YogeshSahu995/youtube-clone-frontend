@@ -1,4 +1,4 @@
-export function paginationHandler ({container, data, setPage, setEnd}) {
+export function paginationHandler({ container, data, setPage, setEnd }) {
 
     function handleScroll() {
         if (!container || !data) return;

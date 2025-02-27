@@ -13,9 +13,9 @@ export function Register({ userData }) {
     const [loading, setLoading] = useState(false)
     const [tempCoverImage, setTempCoverImage] = useState("")
     const [temAvatar, setTempAvatar] = useState("")
+    const [error, setError] = useState('')
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const [error, setError] = useState('')
 
     const { register, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {

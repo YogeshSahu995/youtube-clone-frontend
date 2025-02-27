@@ -7,14 +7,14 @@ import toast from "react-hot-toast";
 import { errorHandler } from "../../utils";
 
 export function ChannelPost() {
-    const { userId, isCurrentUser } = useOutletContext()
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState("")
     const [allPosts, setAllPosts] = useState([])
     const [end, setEnd] = useState(false)
+    const { userId, isCurrentUser } = useOutletContext()
 
     useEffect(() => {
-        const controller = new AbortController(); 
+        const controller = new AbortController();
         const signal = controller.signal;
         ; (async () => {
             try {

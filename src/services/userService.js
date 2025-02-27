@@ -1,5 +1,5 @@
 import { apiCall } from "../utils/apiCallHandle.js";
-import {jsonFormatte, multipartFormatte } from "../constants.js";
+import { jsonFormatte, multipartFormatte } from "../constants.js";
 
 const registerUser = (formData) => {
     return apiCall('users/register', 'POST', formData, multipartFormatte)
@@ -14,7 +14,7 @@ const logout = () => {
 }
 
 const changePassword = (data) => {
-    return apiCall('users/change-password', 'POST', data, jsonFormatte )
+    return apiCall('users/change-password', 'POST', data, jsonFormatte)
 }
 
 const refreshToken = () => {
@@ -26,7 +26,7 @@ const getcurrentUser = (signal) => {
 }
 
 const updateAccountdetails = (data) => {
-    return apiCall('users/update-account', 'PATCH', data, jsonFormatte )
+    return apiCall('users/update-account', 'PATCH', data, jsonFormatte)
 }
 
 const updateAvatar = (data) => {
@@ -37,11 +37,11 @@ const updateCoverImage = (data) => {
     return apiCall('users/update-cover-image', 'PATCH', data, multipartFormatte)
 }
 
-const getUserChannelProfile = ({username, signal}) => {
+const getUserChannelProfile = ({ username, signal }) => {
     return apiCall(`users/channel/${username}`, 'GET', {}, {}, signal)
 }
 
-const getUserHistory = ({signal}) => {
+const getUserHistory = ({ signal }) => {
     return apiCall('users/watch-history', 'GET', {}, {}, signal)
 }
 
@@ -53,25 +53,25 @@ const clearAllHistory = () => {
     return apiCall(`users/watch-history/clear-all`, "POST")
 }
 
-const getUserChannelByName = ({username, signal}) => {
+const getUserChannelByName = ({ username, signal }) => {
     return apiCall(`users/get/users/${username}`, "get", {}, {}, signal)
 }
 
 
 
-export { 
-        registerUser, 
-        loginUser, 
-        logout, 
-        changePassword, 
-        refreshToken, 
-        getcurrentUser, 
-        updateAccountdetails, 
-        updateAvatar, 
-        updateCoverImage, 
-        getUserChannelProfile, 
-        getUserHistory,
-        removeVideoFromHistory,
-        clearAllHistory,
-        getUserChannelByName
-    }
+export {
+    registerUser,
+    loginUser,
+    logout,
+    changePassword,
+    refreshToken,
+    getcurrentUser,
+    updateAccountdetails,
+    updateAvatar,
+    updateCoverImage,
+    getUserChannelProfile,
+    getUserHistory,
+    removeVideoFromHistory,
+    clearAllHistory,
+    getUserChannelByName
+}

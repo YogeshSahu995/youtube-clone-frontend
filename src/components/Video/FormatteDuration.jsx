@@ -1,7 +1,7 @@
 
-export function FormatteDuration({seconds}){
-    const hours = Math.floor(seconds/3600)
-    const min = Math.floor((seconds % 3600)/60)
+export function FormatteDuration({ seconds }) {
+    const hours = Math.floor(seconds / 3600)
+    const min = Math.floor((seconds % 3600) / 60)
     const sec = Math.floor(seconds % 60)
 
     return [
@@ -9,6 +9,6 @@ export function FormatteDuration({seconds}){
         String(min).padStart(2, '0'),
         String(sec).padStart(2, '0')
     ]
-    .filter(Boolean)
-    .join(':')
+        .filter(Boolean)
+        .join(':')
 }

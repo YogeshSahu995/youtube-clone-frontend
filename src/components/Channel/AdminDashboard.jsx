@@ -4,10 +4,10 @@ import { useState, useEffect } from "react";
 import { Loading } from "../LayoutComponents";
 
 export function ChannelDetails() {
-    const { userId, userData } = useOutletContext() //Nhi use kerna hai sidha state se lena hai
     const [error, setError] = useState("")
     const [loading, setLoading] = useState(false)
     const [userInfo, setUserInfo] = useState({})
+    const { userId, userData } = useOutletContext()
 
     useEffect(() => {
         const controller = new AbortController();
@@ -16,7 +16,7 @@ export function ChannelDetails() {
             try {
                 setLoading(true)
                 setError("")
-                const response = await getChannelInfo({ userId, signal})
+                const response = await getChannelInfo({ userId, signal })
                 if (response.data.data) {
                     setUserInfo(response.data.data)
                 }
@@ -36,10 +36,10 @@ export function ChannelDetails() {
     }, [userId])
 
     if (loading) return <Loading />
-    
-    if(userInfo){
-        const {username} = userData
-        const {subscribedChannels, totalLikes, totalSubscribers, totalVideos, totalViews} = userInfo
+
+    if (userInfo) {
+        const { username } = userData
+        const { subscribedChannels, totalLikes, totalSubscribers, totalVideos, totalViews } = userInfo
         return (
             <div className="w-full h-full text-white">
                 <h1 className="text-3xl font-medium mb-5">More Details</h1>
@@ -54,7 +54,7 @@ export function ChannelDetails() {
                     </div>
                     <div className="flex gap-4">
                         <i className="ri-group-line"></i>
-                        <h3>{}</h3>
+                        <h3>{ }</h3>
                     </div>
                 </div>
             </div>

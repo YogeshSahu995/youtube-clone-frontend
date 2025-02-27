@@ -5,12 +5,12 @@ import { getPlaylistById } from "../services/playlistService";
 import { errorHandler } from "../utils";
 import toast from "react-hot-toast";
 
-export function EditPlaylist (){
+export function EditPlaylist() {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState("")
     const [data, setData] = useState({})
 
-    const {playlistId} = useParams()
+    const { playlistId } = useParams()
 
     useEffect(() => {
         const controller = new AbortController()
@@ -36,14 +36,14 @@ export function EditPlaylist (){
         return () => controller.abort()
     }, [playlistId])
 
-    if(loading) return (<Loading />)
+    if (loading) return (<Loading />)
 
-    if(error) return (<Error message={error} />)
+    if (error) return (<Error message={error} />)
 
-    if(data.name && data.description){
-        const {name, description} = data
-        return(
-            <PlaylistForm playlist={{name, description}} playlistId={playlistId} />
+    if (data.name && data.description) {
+        const { name, description } = data
+        return (
+            <PlaylistForm playlist={{ name, description }} playlistId={playlistId} />
         )
     }
 }

@@ -23,11 +23,11 @@ export function ChannelNav({ username, handleSearchChange }) {
 
 
     return (
-        <NavbarOfChannel 
-            channelNav={channelNav} 
-            username={username} 
-            handleSearchChange={handleSearchChange} 
-            searchPath={`/channel/${username}/search`} 
+        <NavbarOfChannel
+            channelNav={channelNav}
+            username={username}
+            handleSearchChange={handleSearchChange}
+            searchPath={`/channel/${username}/search`}
         />
     )
 }

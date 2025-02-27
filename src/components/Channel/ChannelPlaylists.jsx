@@ -7,29 +7,29 @@ import { Playlist } from "../Playlist"
 import { EmptyPageResponse } from "./EmptyPageResponse";
 import toast from "react-hot-toast"
 
-export function ChannelPlaylists () {
+export function ChannelPlaylists() {
     const [allPlaylist, setAllPlaylist] = useState([])
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState("")
-    const {userId, isCurrentUser} = useOutletContext()
+    const { userId, isCurrentUser } = useOutletContext()
 
     useEffect(() => {
         const controller = new AbortController();
         const signal = controller.signal;
-        ;(async () => {
+        ; (async () => {
             try {
                 setLoading(true)
                 setError("")
-                const response = await getUserPlaylists({userId, signal})
-                if(response?.data?.data){
+                const response = await getUserPlaylists({ userId, signal })
+                if (response?.data?.data) {
                     setAllPlaylist(response.data.data)
                 }
-                else{
+                else {
                     toast.error(errorHandler(response));
                 }
             } catch (error) {
                 toast.error(error.message);
-            } finally{
+            } finally {
                 setLoading(false)
             }
         })()
@@ -37,15 +37,15 @@ export function ChannelPlaylists () {
         return () => controller.abort()
     }, [])
 
-    if(loading) return <Loading2 />
+    if (loading) return <Loading2 />
 
     if (allPlaylist.length === 0) {
         return (
             <div className="w-fit mx-auto">
-                <EmptyPageResponse 
+                <EmptyPageResponse
                     isCurrentUser={isCurrentUser}
-                    title="No playlist created" 
-                    anotherpara="There are no playlist created on this channel." 
+                    title="No playlist created"
+                    anotherpara="There are no playlist created on this channel."
                     para="This Channel yet to make a Playlist"
                     path="/create-playlist"
                     buttonValue="Create Playlist"
@@ -62,7 +62,7 @@ export function ChannelPlaylists () {
         )
     }
 
-    return(
+    return (
         <div>
             {error && <Error message={error} />}
             <ul className="flex flex-wrap justify-around gap-4">

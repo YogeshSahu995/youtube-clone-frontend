@@ -4,16 +4,16 @@ import { DropDown } from "../LayoutComponents"
 import toast from "react-hot-toast"
 import { errorHandler } from "../../utils"
 
-export function HistoryDropDown ({setAddVideoForm, isCurrentUser, videoId, setFetch}) {
+export function HistoryDropDown({ setAddVideoForm, isCurrentUser, videoId, setFetch }) {
     const navigate = useNavigate()
 
-    const handleRemoveVideo = async() => {
+    const handleRemoveVideo = async () => {
         try {
             const response = await removeVideoFromHistory(videoId)
-            if(response?.data?.data){
+            if (response?.data?.data) {
                 setFetch(prev => !prev)
             }
-            else{
+            else {
                 navigate("/")
                 toast.error(errorHandler(response))
             }
@@ -26,14 +26,14 @@ export function HistoryDropDown ({setAddVideoForm, isCurrentUser, videoId, setFe
         <DropDown>
             <div className="text-base">
                 {isCurrentUser && (
-                    <div 
-                        className="dropDownLi" 
+                    <div
+                        className="dropDownLi"
                         onClick={() => handleRemoveVideo()}
                     >
                         Remove
                     </div>
                 )}
-                <div 
+                <div
                     className="dropDownLi"
                     onClick={() => setAddVideoForm(false)}
                 >

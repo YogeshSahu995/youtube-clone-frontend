@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react"
 import { useOutletContext } from "react-router-dom"
 import { getVideosByTitle } from "../../services/videoService"
-import { errorHandler, paginationHandler, useDebounce } from "../../utils"
+import { paginationHandler, useDebounce } from "../../utils"
 import { ChannelList, Loading2 } from "../LayoutComponents"
 import { Video } from "../Video"
 import { EmptyPageResponse } from "../Channel"
 import { getUserChannelByName } from "../../services/userService"
-import toast from "react-hot-toast"
 
 
 export function Home() {
@@ -62,8 +61,8 @@ export function Home() {
             setError("")
             setAllUsers([])
             try {
-                if(query){
-                    const response = await getUserChannelByName({username: query, signal})
+                if (query) {
+                    const response = await getUserChannelByName({ username: query, signal })
                     if (response?.data?.data) {
                         setAllUsers(response.data.data)
                     }
@@ -76,7 +75,7 @@ export function Home() {
             }
         })()
 
-        return () => controller.abort() 
+        return () => controller.abort()
     }, [query])
 
 

@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react"
 import { getUserPlaylists } from "../../services/playlistService"
-import { errorHandler } from "../../utils"
 import { Button, Loading2 } from "../LayoutComponents"
 import { useNavigate } from "react-router-dom"
 import { Playlist } from "../Playlist"

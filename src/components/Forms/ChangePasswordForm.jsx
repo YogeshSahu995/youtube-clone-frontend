@@ -8,46 +8,46 @@ import toast from "react-hot-toast";
 
 export function ChangePasswordForm() {
     const [Error, setError] = useState("")
-    const {register, handleSubmit} = useForm()
+    const { register, handleSubmit } = useForm()
     const navigate = useNavigate()
 
-    const submitData = async(data) => {
+    const submitData = async (data) => {
         try {
             setError("")
-            const {newPassword, confirmPassword} = data
+            const { newPassword, confirmPassword } = data
 
-            if(confirmPassword !== newPassword){
+            if (confirmPassword !== newPassword) {
                 toast.error("Please make sure your password match with confirm password")
             }
 
             const response = await changePassword(data)
-            if(response?.data?.data){
+            if (response?.data?.data) {
                 toast.success("Successfully changed password")
                 navigate("/")
             }
-            else{
+            else {
                 toast.error(errorHandler(response))
             }
-        } 
+        }
         catch (error) {
             toast.error(error.message)
         }
     }
-    return(
+    return (
         <FormStyle heading="Change Password">
             <form onSubmit={handleSubmit(submitData)}>
                 {Error && <ErrorTag message={Error} />}
                 <Input
-                    label = "Current Password"
-                    placeholder = "Current Password"
+                    label="Current Password"
+                    placeholder="Current Password"
                     {...register("oldPassword", {
                         required: "Current Password is required"
                     })}
                 />
 
-                <Input 
-                    label = "New Password"
-                    placeholder = "New Password"
+                <Input
+                    label="New Password"
+                    placeholder="New Password"
                     {...register("newPassword", {
                         required: "New Password is required",
                         minLength: {
@@ -57,9 +57,9 @@ export function ChangePasswordForm() {
                     })}
                 />
 
-                <Input 
-                    label = "Confirm Password"
-                    placeholder = "Confirm Password"
+                <Input
+                    label="Confirm Password"
+                    placeholder="Confirm Password"
                     {...register("confirmPassword", {
                         required: "Confirm Password is required",
                         minLength: {
@@ -69,7 +69,7 @@ export function ChangePasswordForm() {
                     })}
                 />
 
-                <Button 
+                <Button
                     type="submit"
                     value="Change"
                 />

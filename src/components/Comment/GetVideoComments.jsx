@@ -5,7 +5,6 @@ import { Comment } from "./Comment";
 import { Button, Input } from "../LayoutComponents";
 import { DeleteForm } from ".."
 import { deleteComment } from "../../services/commentService";
-import { useNavigate } from "react-router-dom";
 import { ChangeComment } from "./ChangeComment";
 import toast from "react-hot-toast";
 
@@ -25,7 +24,6 @@ export function GetVideoComment({
     const [commentId, setCommentId] = useState("")
     const [isHidden, setIsHidden] = useState(true)
     const [changeForm, setChangeForm] = useState(true)
-    const navigate = useNavigate()
 
 
     useEffect(() => {
@@ -35,7 +33,7 @@ export function GetVideoComment({
             try {
                 setLoading(true);
                 setError("");
-                const response = await getVideoComments({ videoId, page, limit: "5", signal});
+                const response = await getVideoComments({ videoId, page, limit: "5", signal });
                 if (response?.data?.data) {
                     const data = response.data.data;
                     setAllComments((prev) => [...prev, ...data.docs]);
@@ -70,7 +68,7 @@ export function GetVideoComment({
                 setAllComments([])
                 setNoOfComment(prev => prev += 1)
             }
-            else{
+            else {
                 toast.error(errorHandler(response))
             }
         } catch (error) {
@@ -80,10 +78,10 @@ export function GetVideoComment({
 
     async function handleDelete() {
         try {
-            const response = await deleteComment({commentId: commentId})
+            const response = await deleteComment({ commentId: commentId })
             if (response?.data?.data) {
                 setAllComments([])
-                setNoOfComment(prev => prev-1)
+                setNoOfComment(prev => prev - 1)
                 setIsHidden(true)
                 toast.success("Successfully delete comment")
             }
@@ -123,10 +121,10 @@ export function GetVideoComment({
                     setIsHidden={setIsHidden}
                 />
 
-                <ChangeComment 
-                    changeForm={changeForm} 
-                    commentId={commentId} 
-                    setChangeForm={setChangeForm} 
+                <ChangeComment
+                    changeForm={changeForm}
+                    commentId={commentId}
+                    setChangeForm={setChangeForm}
                 />
 
                 {
@@ -141,10 +139,10 @@ export function GetVideoComment({
                             {allComments?.map((comment) => {
                                 return (
                                     <li key={comment._id}>
-                                        <Comment 
-                                            comment={comment} 
+                                        <Comment
+                                            comment={comment}
                                             setIsHidden={setIsHidden}
-                                            setCommentId = {setCommentId}
+                                            setCommentId={setCommentId}
                                             setChangeForm={setChangeForm}
                                         />
                                     </li>

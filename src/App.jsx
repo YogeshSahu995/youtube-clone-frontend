@@ -47,7 +47,7 @@ function App() {
     }
   }, [navigate, offline]);
 
-  if(loading){
+  if (loading) {
     return <Loading />
   }
 
@@ -57,14 +57,15 @@ function App() {
         <img src='./images/no-internet.png' className='h-[5vw] mx-auto' />
         <h1 className='text-red-500 text-xl'>⚠️ No Internet Connection ⚠️</h1>
       </div>
-  )}
+    )
+  }
 
   return (
-    !loading?(
+    !loading ? (
       <div>
         <Outlet /> {/* Render nested routes */}
       </div>
-    ): (<Loading />)
+    ) : (<Loading />)
   );
 }
 

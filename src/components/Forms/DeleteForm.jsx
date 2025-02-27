@@ -1,6 +1,6 @@
 import { Popup } from "../index"
 
-export function DeleteForm ({
+export function DeleteForm({
     title = "Delete",
     message = "Are you sure you want to delete? Once it's deleted You will not be able to recover it.",
     isHidden,
@@ -16,21 +16,21 @@ export function DeleteForm ({
                 </span>
                 <p> {message} </p>
                 <div className="w-full flex justify-between items-center">
-                    <input 
+                    <input
                         type="button"
-                        value="Cancel" 
+                        value="Cancel"
                         className="px-4 py-2 font-semibold bg-white text-[#000] rounded-xl cursor-pointer ease-out duration-200 hover:scale-105"
-                        onClick = {() => {setIsHidden(true)}}
+                        onClick={() => { setIsHidden(true) }}
                     />
                     <input
                         type="button"
-                        value="Delete" 
+                        value="Delete"
                         className="px-4 py-2 font-semibold hover:scale-105 bg-cyan-400 text-[#000000] rounded-xl cursor-pointer ease-out duration-200"
-                        onClick = {deleteFunction}
+                        onClick={deleteFunction}
                     />
                 </div>
-            </div>          
+            </div>
         </Popup>
-        
+
     )
 }

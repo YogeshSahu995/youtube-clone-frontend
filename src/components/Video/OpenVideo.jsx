@@ -11,7 +11,6 @@ import toast from "react-hot-toast"
 import { errorHandler } from "../../utils"
 
 export function OpenVideo({ video, userId, watcherId }) {
-    const { _id, videoFile, thumbnail, title, description, views, likes, comments, owner, isLiked, createdAt } = video
     const [loading, setLoading] = useState(false)
     const [data, setData] = useState({});
     const [allVideos, setAllVideos] = useState([]);
@@ -26,6 +25,7 @@ export function OpenVideo({ video, userId, watcherId }) {
     const { mainRef } = useOutletContext()
     const userData = useSelector(state => state.data)
     const navigate = useNavigate()
+    const { _id, videoFile, thumbnail, title, description, views, likes, comments, owner, isLiked, createdAt } = video
     const videoId = _id
 
     GetChannelVideos({
@@ -53,7 +53,7 @@ export function OpenVideo({ video, userId, watcherId }) {
                         setViewCount(prev => prev + 1)
                     }, 4000)
                 }
-                else{
+                else {
                     toast.error(errorHandler(response))
                 }
             } catch (error) {
@@ -85,7 +85,7 @@ export function OpenVideo({ video, userId, watcherId }) {
                                     _id={videoId}
                                     fn={toggleVideoLike}
                                     likeCount={likeCount}
-                                    setLike={setLike}   
+                                    setLike={setLike}
                                     setLikeCount={setLikeCount}
                                     likes={likes}
                                 />
@@ -103,15 +103,15 @@ export function OpenVideo({ video, userId, watcherId }) {
                                     </div>
                                 </Link>
                                 {isCurrentUser ?
-                                    (<Button 
-                                        value="Edit" 
-                                        onClick={() => 
+                                    (<Button
+                                        value="Edit"
+                                        onClick={() =>
                                             navigate(`/edit/video/${videoId}`)
-                                        } 
+                                        }
                                     />) :
-                                    (<SubscriptionButton 
-                                        channelId={_id} 
-                                        isSubscribed={isSubscribed} 
+                                    (<SubscriptionButton
+                                        channelId={_id}
+                                        isSubscribed={isSubscribed}
                                     />)
                                 }
                             </div>

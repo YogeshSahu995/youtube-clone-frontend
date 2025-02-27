@@ -1,19 +1,19 @@
 import { DropDown } from "../LayoutComponents"
 
-export function VideoDropDown ({setIsHidden, setAddVideoForm, isCurrentUser}) {
+export function VideoDropDown({ setIsHidden, setAddVideoForm, isCurrentUser }) {
 
     return (
         <DropDown>
             <div className="text-base">
                 {isCurrentUser && (
-                    <div 
-                        className="dropDownLi" 
+                    <div
+                        className="dropDownLi"
                         onClick={() => setIsHidden(false)}
                     >
                         Delete
                     </div>
                 )}
-                <div 
+                <div
                     className="dropDownLi"
                     onClick={() => setAddVideoForm(false)}
                 >

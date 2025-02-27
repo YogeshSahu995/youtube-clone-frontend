@@ -19,7 +19,7 @@ export function ChannelSearchVideos() {
     const [end, setEnd] = useState(false)
     const [error, setError] = useState("")
     const { searchQuery, mainRef, userId } = useOutletContext()
-    const query = useDebounce({ value: searchQuery, delay: 500 }) //custom hook 
+    const query = useDebounce({ value: searchQuery, delay: 500 }) // custom Hook 
 
     useEffect(() => {
         const controller = new AbortController();
@@ -44,7 +44,7 @@ export function ChannelSearchVideos() {
                 }
             })()
 
-            return () => controller.abort()
+        return () => controller.abort()
     }, [query, userId, page, sortBy, sortType])
 
     useEffect(() => {
@@ -66,9 +66,9 @@ export function ChannelSearchVideos() {
                     isCurrentUser={false}
                     title={`Search any video of channel`}
                     mainicon={
-                        <img 
-                            src={'/images/plsSearch.png'} 
-                            alt="" 
+                        <img
+                            src={'/images/plsSearch.png'}
+                            alt=""
                             className="h-fit w-[60vw] sm:w-[40vw] md:w-[30vw] lg:w-[20vw] object-cover object-center mx-auto"
                         />
                     }

@@ -73,7 +73,7 @@ export function Video({
                 title="Permanently delete"
             />
             <div className={`${gridLayout} ${adjustWidth} rounded-lg hover:bg-[#0000005d]`}>
-                <Link to={isPublished && `/video/${_id}/${userData._id}`} className={`${isPlaying && "cursor-wait"} ${!isPublished ? "cursor-not-allowed": "cursor-pointer"} `}>
+                <Link to={isPublished && `/video/${_id}/${userData._id}`} className={`${isPlaying && "cursor-wait"} ${!isPublished ? "cursor-not-allowed" : "cursor-pointer"} `}>
                     <div
                         className={` ${thumbnailSize} relative bg-cover bg-no-repeat bg-center bg-black rounded-lg`}
                         style={{ backgroundImage: `url(${thumbnail})` }}
@@ -86,9 +86,9 @@ export function Video({
                         )}
                         {!isPublished && (
                             <div
-                            className="absolute top-0 left-0 text-lg h-full w-full flex justify-center items-center bg-[#000000cc] rounded-lg">
-                            Private video
-                        </div>
+                                className="absolute top-0 left-0 text-lg h-full w-full flex justify-center items-center bg-[#000000cc] rounded-lg">
+                                Private video
+                            </div>
                         )
                         }
                         <div className="absolute bottom-2 right-2 p-1 text-white bg-[#000000ab] rounded-lg">
@@ -98,7 +98,7 @@ export function Video({
                 </Link>
 
                 <div className="flex justify-between relative pb-2">
-                    <Link to={isPublished && `/video/${_id}/${userData._id}`} className={`${isPlaying && "cursor-wait"} ${!isPublished ? "cursor-not-allowed": "cursor-pointer"} `}>
+                    <Link to={isPublished && `/video/${_id}/${userData._id}`} className={`${isPlaying && "cursor-wait"} ${!isPublished ? "cursor-not-allowed" : "cursor-pointer"} `}>
                         <div className="h-fit w-full text-[#fff] px-2 text-lg text-wrap whitespace-wrap relative flex flex-col ">
                             <h3 className="text-xl">{title}</h3>
                             <p className="text-base"> {description}</p>
@@ -137,7 +137,7 @@ export function Video({
                                 setAddVideoForm={setAddVideoForm}
                                 isCurrentUser={isCurrentUser}
                                 videoId={_id}
-                                setFetch ={setFetch}
+                                setFetch={setFetch}
                             />
                         ) : (
                             <VideoDropDown

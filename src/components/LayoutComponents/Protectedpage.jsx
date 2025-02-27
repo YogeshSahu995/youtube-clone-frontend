@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 
-export function Protectedpage () {
+export function Protectedpage() {
     return (
         <div className="grid place-items-center h-[50vh] w-full">
             <div className="text-blue-100 h-fit text-center">

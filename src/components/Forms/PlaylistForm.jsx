@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Input, Button, FormStyle, Loading , Error} from "../index"
+import { Input, Button, FormStyle, Loading, Error } from "../index"
 import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux"
@@ -8,10 +8,10 @@ import toast from "react-hot-toast"
 import { errorHandler } from "../../utils"
 
 export function PlaylistForm({ playlist, playlistId }) {
-    const userData = useSelector((state) => state.data)
-    const navigate = useNavigate()
     const [error, setError] = useState("")
     const [loading, setLoading] = useState(false)
+    const navigate = useNavigate()
+    const userData = useSelector((state) => state.data)
     const { username } = userData
 
     const { handleSubmit, register, formState: { errors } } = useForm({
@@ -43,7 +43,7 @@ export function PlaylistForm({ playlist, playlistId }) {
         }
         else {
             try {
-                const response = await createPlaylist({data})
+                const response = await createPlaylist({ data })
 
                 if (response?.data?.data) {
                     navigate(`/channel/${username}/playlists`)
@@ -63,7 +63,7 @@ export function PlaylistForm({ playlist, playlistId }) {
     if (loading) return <Loading />
 
     return (
-        <FormStyle 
+        <FormStyle
             heading={playlist ? "Update Playlist" : " Create Playlist"}
         >
 

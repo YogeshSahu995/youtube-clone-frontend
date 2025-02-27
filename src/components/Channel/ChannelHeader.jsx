@@ -2,16 +2,15 @@ import { Avatar, Button, CoverImage } from "../LayoutComponents"
 import { useNavigate } from "react-router-dom"
 import { SubscriptionButton } from "./SubscriptionButton"
 
-export function ChannelHeader({profile, isCurrentUser})
-{
+export function ChannelHeader({ profile, isCurrentUser }) {
     const {
         _id,
-        avatar, 
-        coverImage, 
-        fullname, 
-        username, 
-        subscribersCount, 
-        channelsSubscribed, 
+        avatar,
+        coverImage,
+        fullname,
+        username,
+        subscribersCount,
+        channelsSubscribed,
         isSubscribed
     } = profile
 
@@ -35,16 +34,16 @@ export function ChannelHeader({profile, isCurrentUser})
                         {subscribersCount} subscribers . {channelsSubscribed} subscribed
                     </p>
                     {!isCurrentUser && (
-                        <SubscriptionButton 
-                            channelId={_id} 
-                            isSubscribed={isSubscribed} 
+                        <SubscriptionButton
+                            channelId={_id}
+                            isSubscribed={isSubscribed}
                         />
                     )}
                     {isCurrentUser && (
-                        <Button 
+                        <Button
                             className="px-4"
                             value="Customize channel"
-                            onClick = {() => navigate(`/edit/channel/${_id}`)}
+                            onClick={() => navigate(`/edit/channel/${_id}`)}
                         />
                     )}
                 </div>

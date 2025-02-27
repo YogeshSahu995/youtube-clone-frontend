@@ -3,7 +3,6 @@ import { TimeAgo, ToggleButton } from "../LayoutComponents"
 import { Link } from "react-router-dom"
 
 export function VideoLi({ video }) {
-    const [publishStatus, setPublishStatus] = useState(isPublished)
     const { 
         isPublished, 
         createdAt, 
@@ -15,6 +14,7 @@ export function VideoLi({ video }) {
         title, 
         description, 
         owner } = video
+    const [publishStatus, setPublishStatus] = useState(isPublished)
 
     return (
         <div className="min-w-[900px] w-full text-white flex flex-start items-center gap-2 mx-2 px-2 mb-6 py-2 border-b hover:bg-[#ffffff25] text-center" >

@@ -1,13 +1,13 @@
 import { getVideoComments, addComment } from "../../services/commentService"
 import { useState, useEffect, useRef } from "react";
-import { paginationHandler } from "../../utils";
+import { errorHandler, paginationHandler } from "../../utils";
 import { Comment } from "./Comment";
 import { Button, Input } from "../LayoutComponents";
 import { DeleteForm } from ".."
 import { deleteComment } from "../../services/commentService";
 import { useNavigate } from "react-router-dom";
 import { ChangeComment } from "./ChangeComment";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 export function GetVideoComment({
     videoId,
@@ -36,23 +36,23 @@ export function GetVideoComment({
                 setLoading(true);
                 setError("");
                 const response = await getVideoComments({ videoId, page, limit: "5", signal});
-                const data = response.data.data;
-                if (data) {
+                if (response?.data?.data) {
+                    const data = response.data.data;
                     setAllComments((prev) => [...prev, ...data.docs]);
                     setData(data);
                 }
                 else {
-                    setError(errorHandler(response));
+                    toast.error(errorHandler(response));
                 }
             } catch (error) {
-                setError(error.message);
+                toast.error(error.message);
             } finally {
                 setLoading(false);
             }
         })();
 
         return () => controller.abort()
-    }, [page, noOfComment, changeForm, isHidden]);
+    }, [page, noOfComment]);
 
     useEffect(() => {
         const container = mainRef.current;
@@ -65,28 +65,33 @@ export function GetVideoComment({
     const SubmitComment = async () => {
         try {
             const response = await addComment({ videoId, data: { "content": comment } })
-            if (response.data.data) {
+            if (response?.data?.data) {
                 setComment("")
                 setAllComments([])
                 setNoOfComment(prev => prev += 1)
             }
+            else{
+                toast.error(errorHandler(response))
+            }
         } catch (error) {
-            console.error("Error submitting comment:", error.message)
+            toast.error("Error submitting comment:", error.message)
         }
     }
 
     async function handleDelete() {
         try {
             const response = await deleteComment({commentId: commentId})
-            if (response.data.data) {
+            if (response?.data?.data) {
+                setAllComments([])
+                setNoOfComment(prev => prev-1)
                 setIsHidden(true)
                 toast.success("Successfully delete comment")
             }
             else {
-                toast.error('Any problem in delete')
+                toast.error(errorHandler(response))
             }
         } catch (error) {
-            console.error('Any Problem in deleting your playlist: '+ error.message)
+            console.error(error.message)
         }
     }
 

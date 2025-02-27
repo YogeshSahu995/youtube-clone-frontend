@@ -4,6 +4,7 @@ import { Button, Loading, TimeAgo, Popup, DeleteForm, Video, ScrollDiv, Containe
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { errorHandler } from "../../utils";
 
 export function OpenPlaylist({ playlistId }) {
     const [data, setData] = useState({})
@@ -25,15 +26,15 @@ export function OpenPlaylist({ playlistId }) {
                 setLoading(true)
                 setError("")
                 const response = await getPlaylistById({ playlistId, signal })
-                if (response.data.data) {
+                if (response?.data?.data) {
                     setData(response.data.data)
                     setVideos(response.data.data.videos)
                 }
                 else {
-                    setError(errorHandler(response));
+                    toast.error(errorHandler(response));
                 }
             } catch (error) {
-                setError("An unexpected error occurred.");
+                toast.error(error.message);
             } finally {
                 setLoading(false)
             }
@@ -60,16 +61,16 @@ export function OpenPlaylist({ playlistId }) {
     async function handleDelete() {
         try {
             const response = await deletePlaylist({ playlistId })
-            if (response.data.data) {
+            if (response?.data?.data) {
                 toast.success('successfully delete a playlist')
                 setIsHidden(true)
                 navigate(`/channel/${data.owner.username}/playlists`)
             }
             else {
-                toast.error("Any problem in deleting playlist")
+                toast.error(errorHandler(response))
             }
         } catch (error) {
-            console.error('Any Problem in deleting your playlist')
+            toast.error(error.message)
         }
     }
 

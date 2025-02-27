@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import {getSubscribedChannels} from '../../services/subscriptionService'
 import { Loading2, ChannelList } from '../LayoutComponents'
 import { EmptyPageResponse } from "./EmptyPageResponse"
+import { errorHandler } from '../../utils'
+import toast from 'react-hot-toast'
 
 export function SubscribedChannelInfo({isCurrentUser, userId}){
     const [loading, setLoading] = useState(false)
@@ -16,11 +18,11 @@ export function SubscribedChannelInfo({isCurrentUser, userId}){
                 setLoading(true)
                 setError("")
                 const response = await getSubscribedChannels({channelId: userId, signal})
-                if(response.data.data){
+                if(response?.data?.data){
                     setSubscribedChannel(response.data.data)
                 }
                 else{
-                    setError(errorHandler(response));
+                    toast.error(errorHandler(response));
                 }
             } catch (error) {
                 setError("An unexpected error occurred.");

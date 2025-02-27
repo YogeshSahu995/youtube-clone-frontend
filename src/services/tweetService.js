@@ -17,7 +17,7 @@ const deleteATweet = (tweetId) => {
     return apiCall(`tweets/${tweetId}`, 'DELETE')
 }
 
-const getTweetById = (tweetId, signal) => {
+const getTweetById = ({tweetId, signal}) => {
     return apiCall(`tweets/${tweetId}`, "GET", {}, {}, signal)
 }
 

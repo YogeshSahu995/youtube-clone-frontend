@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Loading, Register } from "../components";
 import { getcurrentUser } from "../services/userService";
+import toast from "react-hot-toast";
 
 export function CustomizePage () {
     const [loading, setLoading] = useState(false)
@@ -15,14 +16,14 @@ export function CustomizePage () {
                 setLoading(true)
                 setError("")
                 const response = await getcurrentUser(signal)
-                if(response.data.data){
+                if(response?.data?.data){
                     setUserData(response.data.data)
                 }
                 else{
-                    setError(errorHandler(response));
+                    toast.error(errorHandler(response));
                 }
             } catch (error) {
-                setError("An unexpected error occurred.");
+                toast.error("An unexpected error occurred.");
             } finally{
                 setLoading(false)
             }

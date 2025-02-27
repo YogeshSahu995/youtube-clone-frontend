@@ -7,12 +7,15 @@ import { useState } from "react"
 import { DeleteForm } from "../Forms"
 import { LikeToggle } from "../Video"
 import { toggleTweetLike } from "../../services/likeService"
+import toast from "react-hot-toast"
+import { errorHandler } from "../../utils"
 
 export function Post({ postInfo, isCurrentUser }) {
     const { content, createdAt, owner, _id, image, likes, isLiked } = postInfo
     const { avatar, username } = owner
     const [isHidden, setIsHidden] = useState(true)
     const [likeCount, setLikeCount] = useState(likes)
+    const [isDeleted, setIsDeleted] = useState(false)
     const [like, setLike] = useState(isLiked)
     const navigate = useNavigate()
 
@@ -28,20 +31,22 @@ export function Post({ postInfo, isCurrentUser }) {
     async function handleDelete() {
         try {
             const response = await deleteATweet(_id)
-            if (response.data.data) {
+            if (response?.data?.data) {
                 setIsHidden(true)
                 navigate(`/channel/${username}/posts`)
+                toast.success("Successfully delete a post")
+                setIsDeleted(true)
             }
             else {
-                console.log('anyProblem is delete')
+                toast.error(errorHandler(response))
             }
         } catch (error) {
-            console.error('Any Problem in deleting your post')
+            toast.error(error)
         }
     }
 
     return (
-        <>
+        <div className={`${isDeleted? "hidden": "block"}`}>
             <DeleteForm
                 deleteFunction={handleDelete}
                 isHidden={isHidden}
@@ -80,7 +85,7 @@ export function Post({ postInfo, isCurrentUser }) {
                                     </div>
                                     <div
                                         className="dropDownLi"
-                                        onClick={() => navigate(`/edit/post/${_id}`)}
+                                        onClick={() => navigate(`/edit/post/${postInfo._id}`)}
                                     >
                                         Edit Post
                                     </div>
@@ -105,6 +110,6 @@ export function Post({ postInfo, isCurrentUser }) {
                     _id={_id}
                 />
             </div>
-        </>
+        </div>
     )
 }

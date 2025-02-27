@@ -1,14 +1,12 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { toggleCommentLike } from "../../services/likeService"
 import { Avatar, TimeAgo, DropDown } from "../LayoutComponents"
 import { LikeToggle } from "../Video/LikeToggle"
-import { useNavigate } from "react-router-dom"
 
 export function Comment({ comment, setIsHidden, setChangeForm, setCommentId }) {
-    const { owner, content, createdAt, updatedAt, _id, likes, isLiked } = comment
+    const { owner, content, createdAt, _id, likes, isLiked } = comment
     const [Like, setLike] = useState(isLiked)
     const [likeCount, setLikeCount] = useState(likes)
-    const navigate = useNavigate()
 
     if (owner) {
         const { fullname, avatar, username } = owner

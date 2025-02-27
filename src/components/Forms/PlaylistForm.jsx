@@ -1,11 +1,11 @@
 import { useState } from "react"
 import { Input, Button, FormStyle, Loading , Error} from "../index"
 import { useForm } from "react-hook-form"
-import { errorHandler } from "../../utils"
 import { useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { createPlaylist, updatePlaylist } from "../../services/playlistService"
 import toast from "react-hot-toast"
+import { errorHandler } from "../../utils"
 
 export function PlaylistForm({ playlist, playlistId }) {
     const userData = useSelector((state) => state.data)
@@ -28,16 +28,14 @@ export function PlaylistForm({ playlist, playlistId }) {
         if (playlist) {
             try {
                 const response = await updatePlaylist({ playlistId, data });
-                if (response.data.data) {
+                if (response?.data?.data) {
                     navigate(`/channel/${username}/playlists`)
-                    toast("Successfully update a playlist")
+                    toast.success("Successfully update a playlist")
                 } else {
-                    const errMsg = errorHandler(response);
-                    setError(errMsg);
+                    toast.error(errorHandler(response))
                 }
             } catch (error) {
-                console.error("Error:", error.message);
-                setError("Something went wrong. Please try again.");
+                toast.error(error.message)
             }
             finally {
                 setLoading(false)
@@ -47,16 +45,14 @@ export function PlaylistForm({ playlist, playlistId }) {
             try {
                 const response = await createPlaylist({data})
 
-                if (response.data.data) {
+                if (response?.data?.data) {
                     navigate(`/channel/${username}/playlists`)
-                    toast("Successfully created a playlist")
+                    toast.success("Successfully created a playlist")
                 } else {
-                    const errMsg = errorHandler(response);
-                    setError(errMsg);
+                    toast.error(errorHandler(response))
                 }
             } catch (error) {
-                console.error("Error:", error.message);
-                setError("Something went wrong. Please try again.");
+                toast.error(error.message)
             }
             finally {
                 setLoading(false)

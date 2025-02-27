@@ -8,6 +8,7 @@ import { useState } from "react"
 import { VideoDropDown } from "./index"
 import { HistoryDropDown } from "./HistoryDropDown"
 import toast from "react-hot-toast"
+import { errorHandler } from "../../utils"
 
 export function Video({
     history = false,
@@ -43,16 +44,16 @@ export function Video({
     async function handleDelete() {
         try {
             const response = await deleteVideo({ videoId: _id })
-            if (response.data.data) {
+            if (response?.data?.data) {
                 setIsHidden(true)
                 toast.success(`Successfully delete video ${_id}`)
                 navigate(`/channel/${username}/videos`)
             }
             else {
-                toast.error(`Any problem in deleting`)
+                toast.error(errorHandler(response))
             }
         } catch (error) {
-            console.error('Any Problem in deleting your playlist')
+            toast.error(error.message)
         }
     }
 

@@ -3,6 +3,8 @@ import { getUserTweets } from "../../services/tweetService";
 import { Loading2, Post } from "../LayoutComponents";
 import { EmptyPageResponse } from "./EmptyPageResponse";
 import { useOutletContext } from "react-router-dom";
+import toast from "react-hot-toast";
+import { errorHandler } from "../../utils";
 
 export function ChannelPost() {
     const { userId, isCurrentUser } = useOutletContext()
@@ -18,21 +20,21 @@ export function ChannelPost() {
             try {
                 setLoading(true)
                 setError("")
-                const response = await getUserTweets({userId, signal})
-                if (response.data.data) {
+                const response = await getUserTweets(userId, signal)
+                if (response?.data?.data) {
                     setAllPosts(response.data.data)
                 }
                 else {
-                    setError(errorHandler(response));
+                    toast.error(errorHandler(response));
                 }
             } catch (error) {
-                setError("An unexpected error occurred.");
+                toast.error(error.message);
             } finally {
                 setLoading(false)
             }
         })()
         return () => controller.abort()
-    }, [])
+    }, [userId])
 
     if (loading) {
         return <div className="mt-4">

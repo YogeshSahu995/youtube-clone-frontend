@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { Video } from "../Video"
 import { Loading2 } from "../LayoutComponents"
 import { getLikedVideos } from "../../services/likeService"
+import toast from "react-hot-toast"
 
 export function YourLikedVideos(){
     const [allLikedVideos, setAllLikedVideos] = useState([])
@@ -14,14 +15,11 @@ export function YourLikedVideos(){
         ;(async() => {
             try {
                 const response = await getLikedVideos(signal)
-                if(response.data.data){
+                if(response?.data?.data){
                     setAllLikedVideos(response.data.data)
                 }
-                else{
-                    console.error(errorHandler(response))
-                }
             } catch (error) {
-                console.error(error.message)
+                toast.error(error.message)
             } finally{
                 setLoading(false)
             }

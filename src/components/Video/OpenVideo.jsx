@@ -7,6 +7,8 @@ import { GetChannelVideos } from "../Channel"
 import { GetVideoComment } from "../Comment/GetVideoComments"
 import { addVideoInHistory, handleVideoViews } from "../../services/videoService"
 import { LikeToggle } from "./LikeToggle"
+import toast from "react-hot-toast"
+import { errorHandler } from "../../utils"
 
 export function OpenVideo({ video, userId, watcherId }) {
     const { _id, videoFile, thumbnail, title, description, views, likes, comments, owner, isLiked, createdAt } = video
@@ -44,15 +46,18 @@ export function OpenVideo({ video, userId, watcherId }) {
     useEffect(() => {
         ; (async () => {
             try {
-                const addHistory = await addVideoInHistory({ videoId })
+                await addVideoInHistory({ videoId })
                 const response = await handleVideoViews({ videoId: videoId, userId: watcherId })
-                if (response.data.data) {
+                if (response?.data?.data) {
                     setTimeout(() => {
                         setViewCount(prev => prev + 1)
                     }, 4000)
                 }
+                else{
+                    toast.error(errorHandler(response))
+                }
             } catch (error) {
-                console.error(error.message)
+                toast.error(error.message)
             }
         })()
     }, [])
@@ -116,7 +121,6 @@ export function OpenVideo({ video, userId, watcherId }) {
                         </div>
                         <div>
                             <GetVideoComment
-                                mainRef={mainRef}
                                 videoId={videoId}
                                 commentCount={comments}
                             />

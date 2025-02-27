@@ -5,7 +5,7 @@ import { errorHandler } from "../../utils"
 import { Error, Loading2 } from "../LayoutComponents"
 import { Playlist } from "../Playlist"
 import { EmptyPageResponse } from "./EmptyPageResponse";
-
+import toast from "react-hot-toast"
 
 export function ChannelPlaylists () {
     const [allPlaylist, setAllPlaylist] = useState([])
@@ -21,14 +21,14 @@ export function ChannelPlaylists () {
                 setLoading(true)
                 setError("")
                 const response = await getUserPlaylists({userId, signal})
-                if(response.data.data){
+                if(response?.data?.data){
                     setAllPlaylist(response.data.data)
                 }
                 else{
-                    setError(errorHandler(response));
+                    toast.error(errorHandler(response));
                 }
             } catch (error) {
-                setError("An unexpected error occurred.");
+                toast.error(error.message);
             } finally{
                 setLoading(false)
             }

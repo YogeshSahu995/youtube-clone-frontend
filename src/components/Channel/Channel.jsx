@@ -6,6 +6,7 @@ import { errorHandler } from "../../utils"
 import { Outlet, useOutletContext } from "react-router-dom"
 import { ChannelHeader } from "./ChannelHeader"
 import { Loading } from "../LayoutComponents"
+import toast from "react-hot-toast"
 
 export function Channel({ username, Navbar }) {
     const {mainRef} = useOutletContext() // get ref pass from parent
@@ -38,15 +39,14 @@ export function Channel({ username, Navbar }) {
             if(username){
                 try {
                     const response = await getUserChannelProfile({username, signal})
-                    if (response.data) {
+                    if (response?.data?.data) {
                         setProfile(response.data.data)
                     }
                     else {
-                        const errorMsg = errorHandler(response)
-                        setError(errorMsg)
+                        toast.error(errorHandler(response));
                     }
                 } catch (error) {
-                    throw error
+                    toast.error(error.message)
                 } finally {
                     setLoading(false)
                 }

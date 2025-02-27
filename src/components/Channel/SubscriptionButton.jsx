@@ -3,6 +3,8 @@ import { toggleSubscription } from "../../services/subscriptionService"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
+import toast from "react-hot-toast"
+import { errorHandler } from "../../utils"
 
 export function SubscriptionButton({channelId, isSubscribed}){
     const [Subscribed, setSubscribed] = useState(isSubscribed)
@@ -16,11 +18,14 @@ export function SubscriptionButton({channelId, isSubscribed}){
     async function handleToggle() {
         try {
            const response = await toggleSubscription({anotherChannelId: channelId})
-           if(response.data.data){
+           if(response?.data?.data){
                 setSubscribed(response.data.data.isSubscribed)
            }
+           else{
+            toast.error(errorHandler(response));
+           }
         } catch (error) {
-            console.error(error.message)
+            toast.error(error.message)
         }
     }
 

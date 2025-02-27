@@ -3,6 +3,7 @@ import { Error, Loading, PlaylistForm } from "../components";
 import { useEffect, useState } from "react";
 import { getPlaylistById } from "../services/playlistService";
 import { errorHandler } from "../utils";
+import toast from "react-hot-toast";
 
 export function EditPlaylist (){
     const [loading, setLoading] = useState(false)
@@ -19,14 +20,14 @@ export function EditPlaylist (){
                 setLoading(true)
                 setError("")
                 const response = await getPlaylistById({ playlistId, signal })
-                if (response.data.data) {
+                if (response?.data?.data) {
                     setData(response.data.data)
                 }
                 else {
-                    setError(errorHandler(response));
+                    toast.error(errorHandler(response));
                 }
             } catch (error) {
-                setError(errorHandler(error));
+                toast.error(error.message)
             } finally {
                 setLoading(false)
             }

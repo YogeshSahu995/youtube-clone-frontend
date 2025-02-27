@@ -6,6 +6,7 @@ import { loginUser, getcurrentUser } from "../../services/userService"
 import { Link, useNavigate } from "react-router-dom"
 import { useForm } from "react-hook-form"
 import { errorHandler } from "../../utils/errorHandler"
+import toast from "react-hot-toast"
 
 export function Login(){
     const {register, handleSubmit} = useForm()
@@ -19,28 +20,28 @@ export function Login(){
         const signal = controller.signal
         setLoading(true)
         setError("")
-            try {
-                const response = await loginUser(data)
-                if(response.data){
-                    const userData = await getcurrentUser(signal)
-                    if(userData) {
-                        const {username, fullname, email, _id} = userData.data.data
-                        dispatch(login({username, fullname, email, _id}))
-                        navigate('/')
-                    }
+        try {
+            const response = await loginUser(data)
+            if(response?.data?.data){
+                const userData = await getcurrentUser(signal)
+                if(userData) {
+                    const {username, fullname, email, _id} = userData.data.data
+                    dispatch(login({username, fullname, email, _id}))
+                    navigate('/')
+                    toast.success("Successfully login")
                 }
-                else{
-                    const errorMsg = errorHandler(response)
-                    setError(errorMsg)
-                }
-            } catch (error) {
-                setError(error.message)
             }
-            finally{
-                setLoading(false)
+            else{
+                toast.error(errorHandler(response))
             }
-            return () => controller.abort()
+        } catch (error) {
+            toast.error(error.message)
         }
+        finally{
+            setLoading(false)
+        }
+        return () => controller.abort()
+    }
 
 
     return (

@@ -1,7 +1,8 @@
 import { useForm } from "react-hook-form";
 import { Button, Input, Popup } from "../LayoutComponents";
 import { updateComment } from "../../services/commentService";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
+import { errorHandler } from "../../utils";
 
 export function ChangeComment({ commentId, changeForm, setChangeForm }) {
     const { register, handleSubmit } = useForm()
@@ -10,22 +11,21 @@ export function ChangeComment({ commentId, changeForm, setChangeForm }) {
         try {
             if (data.content.trim()) {
                 const response = await updateComment({ commentId, data })
-                if (response.data.data) {
+                if (response?.data?.data) {
                     toast.success("Successfully change comment")
                     setChangeForm(true)
                 }
                 else {
-                    toast.error("any problem in change comment")
+                    toast.error(errorHandler(response))
                 }
             }
         } catch (error) {
-            console.error(error.message)
+            toast.error(error.message)
         }
     }
 
     return (
         <>
-            <Toaster />
             <Popup isHidden={changeForm}>
                 <form
                     onSubmit={handleSubmit(changeContent)}

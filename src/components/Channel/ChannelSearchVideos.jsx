@@ -6,6 +6,8 @@ import { paginationHandler } from "../../utils";
 import { Video } from "../Video";
 import { Loading2, Error } from "../LayoutComponents";
 import { EmptyPageResponse } from "./EmptyPageResponse";
+import { errorHandler } from "../../utils";
+import toast from "react-hot-toast";
 
 export function ChannelSearchVideos() {
     const [page, setPage] = useState(1);
@@ -28,22 +30,22 @@ export function ChannelSearchVideos() {
                 setError("")
                 try {
                     const response = await getAllVideos({ page, limit: "5", query, sortBy, sortType, userId, signal })
-                    const data = response.data.data;
-                    if (data) {
+                    if (response?.data?.data) {
+                        const data = response.data.data;
                         setAllVideos((prev) => [...prev, ...data.docs].filter((video) => video.isPublished));
                     }
                     else {
-                        setError(errorHandler(response));
+                        toast.error(errorHandler(response));
                     }
                 } catch (error) {
-                    setError(error.message)
+                    toast.error(error.message)
                 } finally {
                     setLoading(false);
                 }
             })()
 
             return () => controller.abort()
-    }, [query])
+    }, [query, userId, page, sortBy, sortType])
 
     useEffect(() => {
         const container = mainRef.current;

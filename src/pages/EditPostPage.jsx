@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { Loading, PostForm } from "../components";
 import { useParams } from "react-router-dom";
 import { getTweetById } from "../services/tweetService";
+import { errorHandler } from "../utils";
+import toast from "react-hot-toast";
 
 export function EditPostPage () {
     const [loading, setLoading] = useState(false)
@@ -16,21 +18,22 @@ export function EditPostPage () {
             try {
                 setLoading(true)
                 setError("")
-                const response = await getTweetById({tweetId: postId, signal})
-                if(response.data.data){
+                const response = await getTweetById({tweetId : postId, signal})
+                if(response?.data?.data){
                     setPost(response.data.data)
                 }
                 else{
-                    setError(errorHandler(response));
+                    toast.error(errorHandler(response));
                 }
             } catch (error) {
-                setError("An unexpected error occurred.");
+                toast.error(error.message)
             } finally{
                 setLoading(false)
             }
         })()
         return () => controller.abort()
-    },[])
+    },[postId])
+
 
     if(loading) return <Loading />
     

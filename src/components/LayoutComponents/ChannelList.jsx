@@ -1,8 +1,9 @@
 import { useNavigate } from "react-router-dom"
-import { Avatar, SubscriptionButton } from "../index"
+import { Avatar, Loading2, SubscriptionButton } from "../index"
 import { useEffect, useState } from "react"
 import { getUserChannelProfile } from "../../services/userService"
 import { errorHandler } from "../../utils/index"
+import toast from "react-hot-toast"
 
 export function ChannelList({ channelInfo }) {
     const [userData, setUserData] = useState({})
@@ -18,23 +19,24 @@ export function ChannelList({ channelInfo }) {
             ; (async () => {
                 try {
                     const response = await getUserChannelProfile({username, signal})
-                    if (response.data.data) {
+                    if (response?.data?.data) {
                         const data = response.data.data
                         setUserData(data)
                     }
                     else {
-                        setError(errorHandler(response))
+                        toast.error(errorHandler(response))
                     }
                 } catch (error) {
-                    setError(error)
+                    toast.error(error.message)
                 } finally {
                     setLoading(false)
                 }
             })()
 
             return () => controller.abort()
-    }, [channelInfo])
+    }, [username])
 
+    if(loading) return <Loading2 />
 
     if (Object.keys(userData).length > 0) {
         const { avatar, fullname, isSubscribed, subscribersCount, _id, username } = userData

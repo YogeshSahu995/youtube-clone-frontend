@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { addVideoInPlaylist, removeVideoFromPlaylist } from "../../services/playlistService";
+import { addVideoInPlaylist, removeVideoFromPlaylist, checkAlreadyVideoExist } from "../../services/playlistService";
 import { Input } from "../LayoutComponents";
-import { checkAlreadyVideoExist } from "../../services/playlistService";
 import toast from "react-hot-toast";
+import { errorHandler } from "../../utils";
 
 export function CheckBoxHandler({playlistId, videoId, name}){
     const [checkbox, setCheckbox] = useState(false)
@@ -12,11 +12,11 @@ export function CheckBoxHandler({playlistId, videoId, name}){
             async() => {
                 try {
                     const response = await checkAlreadyVideoExist({playlistId, videoId})
-                    if(response.data.data){
+                    if(response?.data?.data){
                         setCheckbox(response.data.data)
                     }
                 } catch (error) {
-                    console.error(error.message)
+                    console.log(error.message)
                 }
             }
         )()
@@ -27,20 +27,14 @@ export function CheckBoxHandler({playlistId, videoId, name}){
             setCheckbox(event.target.checked)
             if(event.target.checked){
                 const response = await addVideoInPlaylist({videoId, playlistId})
-                if(response.data.data){
+                if(response?.data?.data){
                     toast.success("Successfully add video in playlist")
-                }
-                else{
-                    toast.error("any problem in adding video")
                 }
             }
             else{
                 const response = await removeVideoFromPlaylist({videoId, playlistId})
-                if(response.data.data){
+                if(response?.data?.data){
                     toast.success("Successfully remove video from playlist")
-                }
-                else{
-                    toast.error("Any problem in removing video from playlist")
                 }
             }
         } catch (error) {

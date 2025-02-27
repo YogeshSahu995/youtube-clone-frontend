@@ -5,6 +5,7 @@ import { useOutletContext, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { VideoLi } from "./VideoLi";
 import { EmptyPageResponse } from "../Channel";
+import toast from "react-hot-toast";
 
 export function Dashboard() {
     const userData = useSelector((state) => state.data)
@@ -32,10 +33,10 @@ export function Dashboard() {
                     setData(data);
                 }
                 else {
-                    setError(errorHandler(response));
+                    toast.error(errorHandler(response));
                 }
             } catch (error) {
-                setError(error.message);
+                toast.error(error.message);
             } finally {
                 setLoading(false);
             }

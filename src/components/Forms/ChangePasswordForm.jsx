@@ -14,27 +14,23 @@ export function ChangePasswordForm() {
     const submitData = async(data) => {
         try {
             setError("")
-            const {newPassword, confirmPassword, oldPassword} = data
+            const {newPassword, confirmPassword} = data
 
             if(confirmPassword !== newPassword){
                 toast.error("Please make sure your password match with confirm password")
             }
 
             const response = await changePassword(data)
-            if(response.data.data){
+            if(response?.data?.data){
                 toast.success("Successfully changed password")
                 navigate("/")
             }
             else{
-                if(!Error){
-                    setError(errorHandler(response.response))
-                }
+                toast.error(errorHandler(response))
             }
         } 
         catch (error) {
-            if(!Error){
-                setError("Any Problem in changing password")
-            }
+            toast.error(error.message)
         }
     }
     return(

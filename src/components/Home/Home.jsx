@@ -6,6 +6,7 @@ import { ChannelList, Loading2 } from "../LayoutComponents"
 import { Video } from "../Video"
 import { EmptyPageResponse } from "../Channel"
 import { getUserChannelByName } from "../../services/userService"
+import toast from "react-hot-toast"
 
 
 export function Home() {
@@ -31,33 +32,19 @@ export function Home() {
             setVideoLoader(true)
             setError("")
             try {
-                const response = await getVideosByTitle({ page, limit: "4", query, signal })
-                if (response?.data?.data?.docs) {
+                const response = await getVideosByTitle({ page, limit: "5", query, signal })
+                if (response?.data?.data) {
                     const filteredVideos = response.data.data.docs?.filter((video) => video.isPublished)
                     setData(response.data.data)
-                    if (query) {
-                        if (page == 1) {
-                            setAllVideos(filteredVideos)
-                        }
-                        else {
-                            setAllVideos(prev => [...prev, ...filteredVideos])
-                        }
+                    if (page == 1) {
+                        setAllVideos(filteredVideos)
                     }
                     else {
-                        if (page == 1) {
-                            setAllVideos(filteredVideos)
-                        }
-                        else {
-                            setAllVideos(prev => [...prev, ...filteredVideos])
-                        }
+                        setAllVideos(prev => [...prev, ...filteredVideos])
                     }
                 }
-                else {
-                    setError(errorHandler(response))
-                }
-
             } catch (error) {
-                setError(error.message)
+                console.error(error.message)
             }
             finally {
                 setVideoLoader(false)
@@ -73,18 +60,16 @@ export function Home() {
         ; (async () => {
             setChannelLoader(true)
             setError("")
+            setAllUsers([])
             try {
                 if(query){
-                    let response = await getUserChannelByName({username: query, signal})
+                    const response = await getUserChannelByName({username: query, signal})
                     if (response?.data?.data) {
                         setAllUsers(response.data.data)
                     }
-                    else {
-                        setError(errorHandler(response))
-                    }
                 }
             } catch (error) {
-                setError(error.message)
+                console.error(error.message)
             }
             finally {
                 setChannelLoader(false)
@@ -131,10 +116,8 @@ export function Home() {
                                 return (
                                     <li key={video._id}>
                                         <Video
-                                            // gridLayout="grid grid-rows lg:grid-cols-2"
                                             videoInfo={video}
                                             thumbnailSize="w-[90vw] sm:w-[50vw] md:w-[40vw] lg:w-[32vw] h-[50vw] sm:h-[30vw] md:h-[28vw] lg:h-[22vw] xl:h-[20vw] mx-auto"
-                                        // adjustWidth=" min-[400px]:w-[70vw] sm:w-[80vw] md:w-auto mx-auto"
                                         />
                                     </li>
                                 )

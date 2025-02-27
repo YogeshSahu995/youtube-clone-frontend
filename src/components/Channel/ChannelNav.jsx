@@ -1,9 +1,6 @@
-import { useNavigate } from "react-router-dom"
-import { useEffect } from "react"
 import { NavbarOfChannel } from ".."
 
 export function ChannelNav({ username, handleSearchChange }) {
-    const navigate = useNavigate()
 
     const channelNav = [
         {
@@ -24,9 +21,6 @@ export function ChannelNav({ username, handleSearchChange }) {
         }
     ]
 
-    useEffect(() => {
-        navigate(`/channel/${username}/videos`)
-    }, [username, navigate])
 
     return (
         <NavbarOfChannel 

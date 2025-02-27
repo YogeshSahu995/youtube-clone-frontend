@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom"
 import { removeVideoFromHistory } from "../../services/userService"
 import { DropDown } from "../LayoutComponents"
+import toast from "react-hot-toast"
+import { errorHandler } from "../../utils"
 
 export function HistoryDropDown ({setAddVideoForm, isCurrentUser, videoId, setFetch}) {
     const navigate = useNavigate()
@@ -8,14 +10,15 @@ export function HistoryDropDown ({setAddVideoForm, isCurrentUser, videoId, setFe
     const handleRemoveVideo = async() => {
         try {
             const response = await removeVideoFromHistory(videoId)
-            if(response.data.data){
+            if(response?.data?.data){
                 setFetch(prev => !prev)
             }
             else{
                 navigate("/")
+                toast.error(errorHandler(response))
             }
         } catch (error) {
-            console.error(error.message)
+            toast.error(error.message)
         }
     }
 

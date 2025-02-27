@@ -42,7 +42,7 @@ export function Register({ userData }) {
             try {
                 const response = await registerUser(formData)
 
-                if (response.data.data) {
+                if (response?.data?.data) {
                     const { email, password, username, fullname } = data
                     const userData = await loginUser({ email, password })
                     if (userData) {
@@ -56,7 +56,7 @@ export function Register({ userData }) {
                     setError(errMsg)
                 }
             } catch (error) {
-                console.error(error.message)
+                console.log(error)
             }
             finally {
                 setLoading(false)
@@ -123,6 +123,9 @@ export function Register({ userData }) {
                 <form onSubmit={handleSubmit(dataSubmit)}>
                     <div className={`${userData ? "inline" : "grid"} sm:grid-cols-2`}>
                         <div>
+                            {errors.email && (
+                                <Error message={errors.email.message} />
+                            )}
                             <Input
                                 label="Email"
                                 type="email"
@@ -137,14 +140,22 @@ export function Register({ userData }) {
                                 })}
                             />
                             {!userData && (
-                                <Input
-                                    label="Username"
-                                    placeholder="Enter Username.."
-                                    outline="outline-white outline-1"
-                                    {...register("username", {
-                                        required: false
-                                    })}
-                                />
+                                <>
+                                    {errors.username && (
+                                        <Error message={errors.username.message} />
+                                    )}
+                                    <Input
+                                        label="Username"
+                                        placeholder="Enter Username.."
+                                        outline="outline-white outline-1"
+                                        {...register("username", {
+                                            required: "username is required"
+                                        })}
+                                    />
+                                </>
+                            )}
+                            {errors.fullname && (
+                                <Error message={errors.fullname.message} />
                             )}
                             <Input
                                 label="Full Name"
@@ -155,19 +166,24 @@ export function Register({ userData }) {
                                 })}
                             />
                             {!userData && (
-                                <Input
-                                    type="password"
-                                    label="Password"
-                                    outline="outline-white outline-1"
-                                    placeholder="Enter Password"
-                                    {...register("password", {
-                                        required: true,
-                                        minLength: {
-                                            value: 8,
-                                            message: "Password must be at least 8 characters",
-                                        },
-                                    })}
-                                />
+                                <>
+                                    {errors.password && (
+                                        <Error message={errors.password.message} />
+                                    )}
+                                    <Input
+                                        type="password"
+                                        label="Password"
+                                        outline="outline-white outline-1"
+                                        placeholder="Enter Password"
+                                        {...register("password", {
+                                            required: "password is required",
+                                            minLength: {
+                                                value: 8,
+                                                message: "Password must be at least 8 characters",
+                                            },
+                                        })}
+                                    />
+                                </>
                             )}
 
                         </div>

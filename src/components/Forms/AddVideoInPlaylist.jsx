@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react"
-import { Popup } from "../index"
+import { Loading2, Popup } from "../index"
 import { getUserPlaylists } from "../../services/playlistService"
 import { useSelector } from "react-redux"
 import { CheckBoxHandler } from "./index"
+import { errorHandler } from "../../utils"
+import toast from "react-hot-toast"
 
 export function AddVideoInPlaylist ({
     videoId,
@@ -21,21 +23,24 @@ export function AddVideoInPlaylist ({
             try {
                 setLoading(true)
                 setError("")
-                const response = await getUserPlaylists({userId: userData._id, signal})
-                if(response.data.data){
+                let response = await getUserPlaylists({userId: userData._id, signal})
+                if(response?.data?.data){
                     setAllPlaylist(response.data.data)
                 }
-                else{
-                    setError(errorHandler(response));
-                }
             } catch (error) {
-                setError("An unexpected error occurred.");
+                toast.error(error.message);
             } finally{
                 setLoading(false)
             }
         })()
         return () => controller.abort()
-    }, [])
+    }, [userData])
+
+    if(loading) return (
+        <Popup isHidden={isHidden}>
+            <Loading2 />
+        </Popup>
+    )
 
     return (
         <Popup isHidden={isHidden}>

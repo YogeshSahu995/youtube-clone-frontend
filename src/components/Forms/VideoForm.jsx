@@ -38,12 +38,11 @@ export function VideoForm({ videoInfo }) {
 
             try {
                 const response = await updateVideo({ videoId: videoInfo._id, formData });
-                if (response.data) {
-                    toast(`Sucessfully video is Updated id:${videoInfo._id}`)
+                if (response?.data?.data) {
+                    toast.success(`Sucessfully video is Updated id:${videoInfo._id}`)
                     navigate(`/video/${videoInfo._id}/${userData._id}`);
                 } else {
-                    const errMsg = errorHandler(response);
-                    setError(errMsg);
+                   response && toast.error(errorHandler(response))
                 }
             } catch (error) {
                 toast(error.message);
@@ -63,12 +62,10 @@ export function VideoForm({ videoInfo }) {
                     toast.success(`Sucessfully video is uploaded`)
                     navigate(`/channel/${userData.username}`);
                 } else {
-                    const errMsg = errorHandler(response);
-                    setError(errMsg);
+                    response && toast.error(errorHandler(response))
                 }
             } catch (error) {
-                console.error("Error:", error.message);
-                setError("Something went wrong. Please try again.");
+                toast.error(error.message)
             } finally {
                 setLoading(false);
             }

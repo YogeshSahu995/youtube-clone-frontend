@@ -48,7 +48,7 @@ export function ChannelDetails() {
                         <i className="ri-global-line"></i>
                         <Link to={`/channel/${userData.username}`}>
                             <h3>
-                                www.youtube.com/{`@${userData.username}`}
+                                www.zippytube.com/{`@${userData.username}`}
                             </h3>
                         </Link>
                     </div>

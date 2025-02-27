@@ -1,5 +1,5 @@
 import { Header, Sidebar, Container, ScrollDiv } from "../components";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useRef, useState } from "react";
 
@@ -7,10 +7,7 @@ import { useRef, useState } from "react";
 export default function Layout (){
     const mainRef = useRef(null) // create ref for scrollbar div
     const authStatus = useSelector(state => state.status)
-    const navigate = useNavigate()
     const [searchInput, setSearchInput] = useState("")
-
-    // if(searchInput) navigate('/')
 
     return (
         <Container>

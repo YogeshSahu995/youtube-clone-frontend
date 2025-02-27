@@ -4,6 +4,7 @@ import { errorHandler } from "../../utils"
 import { Button, Loading2 } from "../LayoutComponents"
 import { useNavigate } from "react-router-dom"
 import { Playlist } from "../Playlist"
+import toast from "react-hot-toast"
 
 export function YourPlaylists({userId}) {
     const [allPlaylist, setAllPlaylist] = useState([])
@@ -19,21 +20,18 @@ export function YourPlaylists({userId}) {
                 setLoading(true)
                 setError("")
                 const response = await getUserPlaylists({ userId, signal })
-                if (response.data.data) {
+                if (response?.data?.data) {
                     setAllPlaylist(response.data.data)
                 }
-                else {
-                    setError(errorHandler(response));
-                }
             } catch (error) {
-                setError("An unexpected error occurred.");
+                toast.error(error.message)
             } finally {
                 setLoading(false)
             }
         })()
 
         return () => controller.abort() 
-    }, [])
+    }, [userId])
 
     if (loading) return <Loading2 />
 
@@ -53,7 +51,7 @@ export function YourPlaylists({userId}) {
                     <ul className="flex gap-6">
                         {allPlaylist?.map((playlist) => {
                             return (
-                                <li key={playlist.name}>
+                                <li key={playlist._id}>
                                     <Playlist
                                         playlistInfo={playlist}
                                     />

@@ -19,10 +19,6 @@ export function Video({
     adjustWidth = "w-fit mx-auto mb-4 sm:mx-2 sm:w-full",
     setFetch = Function,
 }) {
-    const [isHidden, setIsHidden] = useState(true)
-    const [addVideoForm, setAddVideoForm] = useState(true)
-    const navigate = useNavigate()
-
     const {
         _id,
         thumbnail,
@@ -36,6 +32,10 @@ export function Video({
         likes,
         comments,
     } = videoInfo
+    const [isHidden, setIsHidden] = useState(true)
+    const [addVideoForm, setAddVideoForm] = useState(true)
+    const navigate = useNavigate()
+
 
     const userData = useSelector(state => state.data)
     const { username, avatar, fullname } = owner

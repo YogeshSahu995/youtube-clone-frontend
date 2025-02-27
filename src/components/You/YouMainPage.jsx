@@ -3,8 +3,8 @@ import { Avatar, Button } from "..";
 import { YourHistory, YourLikedVideos, YourPlaylists } from "./index";
 
 export function YouMainPage({ userData }) {
-    const navigate = useNavigate()
     const { username, fullname, avatar } = userData
+    const navigate = useNavigate()
     return (
         <div>
             <div className="flex gap-4 items-start">

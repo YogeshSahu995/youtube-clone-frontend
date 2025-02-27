@@ -11,6 +11,7 @@ import toast from "react-hot-toast"
 import { errorHandler } from "../../utils"
 
 export function OpenVideo({ video, userId, watcherId }) {
+    const { _id, videoFile, thumbnail, title, description, views, likes, comments, owner, isLiked, createdAt } = video
     const [loading, setLoading] = useState(false)
     const [data, setData] = useState({});
     const [allVideos, setAllVideos] = useState([]);
@@ -25,7 +26,6 @@ export function OpenVideo({ video, userId, watcherId }) {
     const { mainRef } = useOutletContext()
     const userData = useSelector(state => state.data)
     const navigate = useNavigate()
-    const { _id, videoFile, thumbnail, title, description, views, likes, comments, owner, isLiked, createdAt } = video
     const videoId = _id
 
     GetChannelVideos({

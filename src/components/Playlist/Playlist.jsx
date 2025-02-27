@@ -5,9 +5,9 @@ import { TimeAgo } from "../LayoutComponents/TimeAgo";
 import toast from "react-hot-toast";
 
 export function Playlist({ playlistInfo }) {
+    const { _id, createdAt, description, name, updatedAt, owner, videos } = playlistInfo
     const [image, setImage] = useState("")
     const [videoCount, setVideoCount] = useState("")
-    const { _id, createdAt, description, name, updatedAt, owner, videos } = playlistInfo
 
     useEffect(() => {
         const controller = new AbortController()

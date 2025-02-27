@@ -11,11 +11,11 @@ import toast from "react-hot-toast"
 import { errorHandler } from "../../utils"
 
 export function Post({ postInfo, isCurrentUser }) {
+    const { content, createdAt, owner, _id, image, likes, isLiked } = postInfo
     const [isHidden, setIsHidden] = useState(true)
     const [likeCount, setLikeCount] = useState(likes)
     const [isDeleted, setIsDeleted] = useState(false)
     const [like, setLike] = useState(isLiked)
-    const { content, createdAt, owner, _id, image, likes, isLiked } = postInfo
     const { avatar, username } = owner
     const navigate = useNavigate()
 

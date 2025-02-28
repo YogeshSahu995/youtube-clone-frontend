@@ -27,6 +27,7 @@ export function GetChannelVideos(
                 setLoading(true);
                 setError("");
                 const response = await getChannelVideos({ page, limit: "10", query: userId, sortBy, sortType, signal });
+                if(!response) return 
                 if (response?.data?.data) {
                     const data = response.data.data;
                     setAllVideos((prev) => [...prev, ...data.docs].filter((video) => video.isPublished));

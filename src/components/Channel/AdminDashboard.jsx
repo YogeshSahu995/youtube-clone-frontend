@@ -17,6 +17,7 @@ export function ChannelDetails() {
                 setLoading(true)
                 setError("")
                 const response = await getChannelInfo({ userId, signal })
+                if(!response) return 
                 if (response.data.data) {
                     setUserInfo(response.data.data)
                 }

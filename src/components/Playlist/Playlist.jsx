@@ -17,6 +17,7 @@ export function Playlist({ playlistInfo }) {
                 if (videos.length > 0) {
                     setVideoCount(`${videos.length} videos`)
                     const response = await getVideoById({ videoId: videos[0], signal });
+                    if(!response) return 
                     if (response?.data?.data?.thumbnail) {
                         setImage(response.data.data.thumbnail);
                     }

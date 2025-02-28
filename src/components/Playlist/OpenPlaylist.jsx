@@ -26,6 +26,7 @@ export function OpenPlaylist({ playlistId }) {
                 setLoading(true)
                 setError("")
                 const response = await getPlaylistById({ playlistId, signal })
+                if(!response) return 
                 if (response?.data?.data) {
                     setData(response.data.data)
                     setVideos(response.data.data.videos)
@@ -61,6 +62,7 @@ export function OpenPlaylist({ playlistId }) {
     async function handleDelete() {
         try {
             const response = await deletePlaylist({ playlistId })
+            if(!response) return 
             if (response?.data?.data) {
                 toast.success('successfully delete a playlist')
                 setIsHidden(true)

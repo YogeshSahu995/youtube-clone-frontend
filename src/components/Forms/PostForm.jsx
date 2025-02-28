@@ -32,6 +32,7 @@ export function PostForm({ post }) {
             formData.append("content", data?.content)
             try {
                 const response = await updateATweet({ tweetId: post._id, formData })
+                if(!response) return 
                 if (response?.data?.data) {
                     navigate(`/channel/${username}/posts`);
                     toast.success(`Successfully update a post id:${post._id}`)
@@ -51,8 +52,7 @@ export function PostForm({ post }) {
 
             try {
                 const response = await createATweet(formData);
-                console.log(response)
-                console.log(errorHandler(response))
+                if(!response) return 
                 if (response?.data?.data) {
                     toast.success(`Successfully upload a post`)
                     navigate(`/channel/${username}/posts`);

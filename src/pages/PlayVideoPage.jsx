@@ -17,6 +17,7 @@ export function PlayVideoPage() {
             ; (async () => {
                 try {
                     const response = await getVideoById({ videoId, signal })
+                    if(!response) return 
                     if (response?.data?.data) {
                         setVideoInfo(response.data.data)
                     }

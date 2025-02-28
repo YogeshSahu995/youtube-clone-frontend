@@ -11,6 +11,7 @@ export function ChangeComment({ commentId, changeForm, setChangeForm }) {
         try {
             if (data.content.trim()) {
                 const response = await updateComment({ commentId, data })
+                if(!response) return 
                 if (response?.data?.data) {
                     toast.success("Successfully change comment")
                     setChangeForm(true)

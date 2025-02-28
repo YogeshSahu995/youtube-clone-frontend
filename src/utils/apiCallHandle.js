@@ -13,9 +13,7 @@ export const apiCall = async (endpoint, method = 'GET', data = null, headers, si
             signal
         })
     } catch (error) {
-        if (axios.isCancel(error)) {
-            return
-        }
+        if (axios.isCancel(error)) return
         if (error.response) {
             return error.response ? error.response.data : error
         }

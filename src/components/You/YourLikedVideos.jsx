@@ -15,6 +15,7 @@ export function YourLikedVideos() {
             ; (async () => {
                 try {
                     const response = await getLikedVideos(signal)
+                    if(!response) return 
                     if (response?.data?.data) {
                         setAllLikedVideos(response.data.data)
                     }

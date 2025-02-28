@@ -32,6 +32,7 @@ export function Home() {
             setError("")
             try {
                 const response = await getVideosByTitle({ page, limit: "5", query, signal })
+                if(!response) return 
                 if (response?.data?.data) {
                     const filteredVideos = response.data.data.docs?.filter((video) => video.isPublished)
                     setData(response.data.data)

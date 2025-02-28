@@ -18,6 +18,7 @@ export function YourHistory() {
             ; (async () => {
                 try {
                     const response = await getUserHistory({ signal })
+                    if(!response) return 
                     if (response?.data?.data) {
                         setAllHistory(response.data.data)
                     }
@@ -33,6 +34,7 @@ export function YourHistory() {
     const handleClearHistory = async () => {
         try {
             const response = await clearAllHistory()
+            if(!response) return 
             if (response?.data?.data) {
                 setAllHistory([])
                 setFetch(prev => !prev)

@@ -48,6 +48,7 @@ export function OpenVideo({ video, userId, watcherId }) {
             try {
                 await addVideoInHistory({ videoId })
                 const response = await handleVideoViews({ videoId: videoId, userId: watcherId })
+                if(!response) return 
                 if (response?.data?.data) {
                     setTimeout(() => {
                         setViewCount(prev => prev + 1)

@@ -7,6 +7,7 @@ import toast from "react-hot-toast"
 import { errorHandler } from "../../utils"
 
 export function SubscriptionButton({ channelId, isSubscribed }) {
+    const [loading, setLoading] = useState(false)
     const [Subscribed, setSubscribed] = useState(isSubscribed)
     const userData = useSelector(state => state.data)
     const navigate = useNavigate()
@@ -16,8 +17,10 @@ export function SubscriptionButton({ channelId, isSubscribed }) {
     }, [isSubscribed]);
 
     async function handleToggle() {
+        setLoading(true)
         try {
             const response = await toggleSubscription({ anotherChannelId: channelId })
+            if(!response) return 
             if (response?.data?.data) {
                 setSubscribed(response.data.data.isSubscribed)
             }
@@ -27,10 +30,13 @@ export function SubscriptionButton({ channelId, isSubscribed }) {
         } catch (error) {
             toast.error(error.message)
         }
+        finally{
+            setLoading(false)
+        }
     }
 
     return (
-        channelId == userData._id ? (
+        channelId == userData?._id ? (
             <Button
                 className="px-4"
                 value="Customize"
@@ -42,7 +48,9 @@ export function SubscriptionButton({ channelId, isSubscribed }) {
                 bgColor={`${Subscribed ? "bg-[#ffffff3c]" : "bg-cyan-700"}`}
                 textColor="text-white"
                 className="px-4"
-                value={Subscribed ? "Subscribed" : "Subscribe"}
+                cursor={loading? "cursor-wait": "cursor-pointer"}
+                disabled = {loading}
+                value={loading? "wait...": Subscribed ? "Subscribed" : "Subscribe"}
                 onClick={() => {
                     handleToggle()
                 }}

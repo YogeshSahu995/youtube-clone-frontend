@@ -2,6 +2,7 @@ export function LikeToggle({ setLike, setLikeCount, Like, likeCount, _id, fn }) 
 
     const toggleLike = async () => {
         const response = await fn(_id)
+        if(!response) return 
         if (response?.data?.data) {
             setLike(true)
             setLikeCount(prev => prev + 1)

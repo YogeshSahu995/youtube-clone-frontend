@@ -19,6 +19,7 @@ export function ChannelList({ channelInfo }) {
             ; (async () => {
                 try {
                     const response = await getUserChannelProfile({ username, signal })
+                    if(!response) return 
                     if (response?.data?.data) {
                         const data = response.data.data
                         setUserData(data)

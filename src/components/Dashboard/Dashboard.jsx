@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { VideoLi } from "./VideoLi";
 import { EmptyPageResponse } from "../Channel";
 import toast from "react-hot-toast";
-import { Loading2 } from "../LayoutComponents";
+import { Loading } from "../LayoutComponents";
 
 export function Dashboard() {
     const userData = useSelector((state) => state.data)
@@ -22,14 +22,15 @@ export function Dashboard() {
 
     useEffect(() => {
         const controller = new AbortController()
-        const signal = controller.signal;
+        const signal = controller.signal
         ; (async () => {
             try {
                 setLoading(true);
                 setError("");
                 const response = await getChannelVideos({ page, query: userData._id, limit: "10", sortBy, sortType, signal });
-                const data = response.data.data;
-                if (data) {
+                if(!response) return 
+                if (response?.data?.data) {
+                    const data = response.data.data
                     setAllVideos((prev) => [...prev, ...data.docs]);
                     setData(data);
                 }
@@ -58,8 +59,7 @@ export function Dashboard() {
         setAllVideos([])
     }, [sortBy, sortType])
 
-    if(loading) return <Loading2 />
-
+    if(loading) return <Loading />
 
     return (
         <div>

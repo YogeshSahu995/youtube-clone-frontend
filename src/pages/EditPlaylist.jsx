@@ -20,6 +20,7 @@ export function EditPlaylist() {
                 setLoading(true)
                 setError("")
                 const response = await getPlaylistById({ playlistId, signal })
+                if(!response) return 
                 if (response?.data?.data) {
                     setData(response.data.data)
                 }

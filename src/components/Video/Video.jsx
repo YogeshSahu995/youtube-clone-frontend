@@ -39,11 +39,12 @@ export function Video({
 
     const userData = useSelector(state => state.data)
     const { username, avatar, fullname } = owner
-    const isCurrentUser = userData._id == owner._id
+    const isCurrentUser = userData?._id == owner?._id
 
     async function handleDelete() {
         try {
             const response = await deleteVideo({ videoId: _id })
+            if(!response) return 
             if (response?.data?.data) {
                 setIsHidden(true)
                 toast.success(`Successfully delete video ${_id}`)
@@ -73,7 +74,7 @@ export function Video({
                 title="Permanently delete"
             />
             <div className={`${gridLayout} ${adjustWidth} rounded-lg hover:bg-[#0000005d]`}>
-                <Link to={isPublished && `/video/${_id}/${userData._id}`} className={`${isPlaying && "cursor-wait"} ${!isPublished ? "cursor-not-allowed" : "cursor-pointer"} `}>
+                <Link to={isPublished && `/video/${_id}/${userData?._id}`} className={`${isPlaying && "cursor-wait"} ${!isPublished ? "cursor-not-allowed" : "cursor-pointer"} `}>
                     <div
                         className={` ${thumbnailSize} relative bg-cover bg-no-repeat bg-center bg-black rounded-lg`}
                         style={{ backgroundImage: `url(${thumbnail})` }}

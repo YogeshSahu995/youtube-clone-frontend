@@ -19,6 +19,7 @@ export function EditPostPage () {
                 setLoading(true)
                 setError("")
                 const response = await getTweetById({tweetId : postId, signal})
+                if(!response) return 
                 if(response?.data?.data){
                     setPost(response.data.data)
                 }

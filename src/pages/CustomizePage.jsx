@@ -16,6 +16,7 @@ export function CustomizePage() {
                 setLoading(true)
                 setError("")
                 const response = await getcurrentUser(signal)
+                if(!response) return 
                 if (response?.data?.data) {
                     setUserData(response.data.data)
                 }

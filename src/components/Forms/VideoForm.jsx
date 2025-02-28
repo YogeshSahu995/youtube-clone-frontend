@@ -38,6 +38,7 @@ export function VideoForm({ videoInfo }) {
 
             try {
                 const response = await updateVideo({ videoId: videoInfo._id, formData });
+                if(!response) return 
                 if (response?.data?.data) {
                     toast.success(`Sucessfully video is Updated id:${videoInfo._id}`)
                     navigate(`/video/${videoInfo._id}/${userData._id}`);
@@ -58,11 +59,12 @@ export function VideoForm({ videoInfo }) {
 
             try {
                 const response = await publishVideo(formData);
-                if (response.data) {
+                if(!response) return 
+                if (response?.data?.data) {
                     toast.success(`Sucessfully video is uploaded`)
                     navigate(`/channel/${userData.username}`);
                 } else {
-                    response && toast.error(errorHandler(response))
+                    toast.error(errorHandler(response))
                 }
             } catch (error) {
                 toast.error(error.message)

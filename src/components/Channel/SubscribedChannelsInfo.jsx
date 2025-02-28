@@ -18,14 +18,15 @@ export function SubscribedChannelInfo({ isCurrentUser, userId }) {
                 setLoading(true)
                 setError("")
                 const response = await getSubscribedChannels({ channelId: userId, signal })
+                if(!response) return 
                 if (response?.data?.data) {
                     setSubscribedChannel(response.data.data)
                 }
-                else {
+                else { 
                     toast.error(errorHandler(response));
                 }
             } catch (error) {
-                setError("An unexpected error occurred.");
+                console.log(error.message)
             } finally {
                 setLoading(false)
             }
@@ -36,10 +37,6 @@ export function SubscribedChannelInfo({ isCurrentUser, userId }) {
 
     if (loading) {
         return (<Loading2 />)
-    }
-
-    if (error) {
-        return error
     }
 
     if (subscribedChannels.length === 0) {

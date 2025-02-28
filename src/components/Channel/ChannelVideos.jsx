@@ -31,10 +31,6 @@ export function ChannelVideos() {
         userId
     })
 
-    if (error) {
-        return <Error message={error} />;
-    }
-
     if (allVideos.length === 0) {
         return (
             <div className="w-fit mx-auto">

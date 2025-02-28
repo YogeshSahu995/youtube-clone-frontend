@@ -24,6 +24,7 @@ export function AddVideoInPlaylist({
                 setLoading(true)
                 setError("")
                 let response = await getUserPlaylists({ userId: userData._id, signal })
+                if(!response) return 
                 if (response?.data?.data) {
                     setAllPlaylist(response.data.data)
                 }

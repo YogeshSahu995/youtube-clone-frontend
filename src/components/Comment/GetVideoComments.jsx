@@ -34,6 +34,7 @@ export function GetVideoComment({
                 setLoading(true);
                 setError("");
                 const response = await getVideoComments({ videoId, page, limit: "5", signal });
+                if(!response) return 
                 if (response?.data?.data) {
                     const data = response.data.data;
                     setAllComments((prev) => [...prev, ...data.docs]);
@@ -63,6 +64,7 @@ export function GetVideoComment({
     const SubmitComment = async () => {
         try {
             const response = await addComment({ videoId, data: { "content": comment } })
+            if(!response) return 
             if (response?.data?.data) {
                 setComment("")
                 setAllComments([])
@@ -79,6 +81,7 @@ export function GetVideoComment({
     async function handleDelete() {
         try {
             const response = await deleteComment({ commentId: commentId })
+            if(!response) return 
             if (response?.data?.data) {
                 setAllComments([])
                 setNoOfComment(prev => prev - 1)
@@ -89,7 +92,7 @@ export function GetVideoComment({
                 toast.error(errorHandler(response))
             }
         } catch (error) {
-            console.error(error.message)
+            toast.error(error.message)
         }
     }
 

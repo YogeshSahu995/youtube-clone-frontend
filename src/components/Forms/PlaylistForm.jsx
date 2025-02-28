@@ -28,6 +28,7 @@ export function PlaylistForm({ playlist, playlistId }) {
         if (playlist) {
             try {
                 const response = await updatePlaylist({ playlistId, data });
+                if(!response) return 
                 if (response?.data?.data) {
                     navigate(`/channel/${username}/playlists`)
                     toast.success("Successfully update a playlist")
@@ -44,7 +45,7 @@ export function PlaylistForm({ playlist, playlistId }) {
         else {
             try {
                 const response = await createPlaylist({ data })
-
+                if(!response) return 
                 if (response?.data?.data) {
                     navigate(`/channel/${username}/playlists`)
                     toast.success("Successfully created a playlist")

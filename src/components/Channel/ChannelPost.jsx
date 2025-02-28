@@ -21,6 +21,7 @@ export function ChannelPost() {
                 setLoading(true)
                 setError("")
                 const response = await getUserTweets(userId, signal)
+                if(!response) return 
                 if (response?.data?.data) {
                     setAllPosts(response.data.data)
                 }

@@ -37,6 +37,7 @@ export function Channel({ username, Navbar }) {
                 if (username) {
                     try {
                         const response = await getUserChannelProfile({ username, signal })
+                        if(!response) return 
                         if (response?.data?.data) {
                             setProfile(response.data.data)
                         }
@@ -56,11 +57,11 @@ export function Channel({ username, Navbar }) {
         }
     }, [username])
 
+    if(loading) return <Loading />
+
     if (Object.keys(profile).length > 0) {
         return (
             <>
-                {loading && (<Loading />)}
-                {error && (<div>{error}</div>)}
                 {profile && (
                     <div>
                         <ChannelHeader profile={profile} isCurrentUser={isCurrentUser} />

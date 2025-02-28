@@ -8,7 +8,7 @@ const getSubscribedChannels = ({ channelId, signal }) => {
     return apiCall(`subscriptions/u/${channelId}`, 'GET', {}, {}, signal)
 }
 
-const toggleSubscription = ({ anotherChannelId }) => {
+const toggleSubscription = ({ anotherChannelId, signal }) => {
     return apiCall(`subscriptions/c/${anotherChannelId}`, 'POST')
 }
 

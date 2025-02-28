@@ -22,6 +22,7 @@ export function Login() {
         setError("")
         try {
             const response = await loginUser(data)
+            if(!response) return 
             if (response?.data?.data) {
                 const userData = await getcurrentUser(signal)
                 if (userData) {

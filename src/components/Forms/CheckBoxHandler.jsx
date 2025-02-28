@@ -12,6 +12,7 @@ export function CheckBoxHandler({ playlistId, videoId, name }) {
             async () => {
                 try {
                     const response = await checkAlreadyVideoExist({ playlistId, videoId })
+                    if(!response) return 
                     if (response?.data?.data) {
                         setCheckbox(response.data.data)
                     }

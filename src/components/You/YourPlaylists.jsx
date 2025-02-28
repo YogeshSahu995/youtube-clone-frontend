@@ -19,6 +19,7 @@ export function YourPlaylists({userId}) {
                 setLoading(true)
                 setError("")
                 const response = await getUserPlaylists({ userId, signal })
+                if(!response) return 
                 if (response?.data?.data) {
                     setAllPlaylist(response.data.data)
                 }

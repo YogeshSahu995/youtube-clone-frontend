@@ -214,6 +214,7 @@ export function Register({ userData }) {
                         value={loading? "Loading...": userData ? "Save Changes" : "Sign up"}
                         type="submit"
                         className="mr-2 mt-4"
+                        cursor={loading? "cursor-wait": "cursor-pointer"}
                         disabled = {loading}
                     />
                     {!userData && (

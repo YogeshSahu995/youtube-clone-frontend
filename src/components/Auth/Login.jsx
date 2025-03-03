@@ -81,6 +81,7 @@ export function Login() {
                     type="submit"
                     bgColor={loading ? "bg-cyan-900" : "bg-cyan-700"}
                     className="mr-2 mt-2"
+                    cursor={loading? "cursor-wait": "cursor-pointer"}
                     disabled={loading}
                 />
             </form>

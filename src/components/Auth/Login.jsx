@@ -9,9 +9,8 @@ import { errorHandler } from "../../utils/errorHandler"
 import toast from "react-hot-toast"
 
 export function Login() {
-    const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
-    const { register, handleSubmit } = useForm()
+    const { register, handleSubmit, formState: { errors } } = useForm()
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -19,10 +18,9 @@ export function Login() {
         const controller = new AbortController()
         const signal = controller.signal
         setLoading(true)
-        setError("")
         try {
             const response = await loginUser(data)
-            if(!response) return 
+            if (!response) return
             if (response?.data?.data) {
                 const userData = await getcurrentUser(signal)
                 if (userData) {
@@ -48,39 +46,42 @@ export function Login() {
     return (
         <FormStyle heading="Sign In">
 
-            {error && <Error message={error} />}
-            
             <form onSubmit={handleSubmit(dataSubmit)}>
+                {errors.email && (
+                    <Error message={errors.email.message} />
+                )}
                 <Input
                     label="Email"
                     type="email"
-                    placeholder="enter your email.."
+                    placeholder="enter your email"
                     outline="outline-none"
                     {...register("email", {
-                        required: true,
+                        required: "email is required",
                         pattern: {
                             value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
                             message: "Invailed Email Address"
                         }
                     })}
                 />
-
+                {errors.password && (
+                    <Error message={errors.password.message} />
+                )}
                 <Input
                     type="password"
-                    label="Password..."
+                    label="Password"
                     outline="outline-none"
-                    placeholder="Enter Password"
+                    placeholder="enter password"
                     {...register("password", {
-                        required: true,
-
+                        required: "password is required",
                     })}
                 />
 
                 <Button
-                    value={loading ? "Sign In..." : "Sign In"}
+                    value={loading ? "Loading..." : "Sign In"}
                     type="submit"
                     bgColor={loading ? "bg-cyan-900" : "bg-cyan-700"}
                     className="mr-2 mt-2"
+                    disabled={loading}
                 />
             </form>
             <p className="font-semibold text-blue-100 mt-2">

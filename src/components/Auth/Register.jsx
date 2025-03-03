@@ -41,7 +41,7 @@ export function Register({ userData }) {
 
             try {
                 const response = await registerUser(formData)
-                if(!response) return 
+                if (!response) return
                 if (response?.data?.data) {
                     const { email, password, username, fullname } = data
                     const userData = await loginUser({ email, password })
@@ -108,10 +108,6 @@ export function Register({ userData }) {
     return (
         <>
             <FormStyle heading={userData ? "Customise" : "Sign up"}>
-                {error && <Error message={error} />}
-                {errors.avatar && (
-                    <Error message={errors.avatar.message} />
-                )}
                 {userData && (
                     <Link
                         className="text-[#ffffff81] hover:text-white absolute right-4 top-8"
@@ -121,7 +117,7 @@ export function Register({ userData }) {
                     </Link>
                 )}
                 <form onSubmit={handleSubmit(dataSubmit)}>
-                    <div className={`${userData ? "inline" : "grid"} sm:grid-cols-2`}>
+                    <div className={`${userData ? "inline" : "grid grid-cols-1 sm:grid-cols-2"}`}>
                         <div>
                             {errors.email && (
                                 <Error message={errors.email.message} />
@@ -162,7 +158,7 @@ export function Register({ userData }) {
                                 placeholder="Enter fullname.."
                                 outline="outline-white outline-1"
                                 {...register("fullname", {
-                                    required: (userData ? false : true)
+                                    required: (userData ? false : "fullname is required")
                                 })}
                             />
                             {!userData && (
@@ -188,6 +184,9 @@ export function Register({ userData }) {
 
                         </div>
                         <div>
+                            {errors.avatar && (
+                                <Error message={errors.avatar.message} />
+                            )}
                             <Input
                                 type="file"
                                 label="Upload Avatar"
@@ -212,9 +211,10 @@ export function Register({ userData }) {
                     </div>
 
                     <Button
-                        value={userData ? "Save Changes" : "Sign up"}
+                        value={loading? "Loading...": userData ? "Save Changes" : "Sign up"}
                         type="submit"
                         className="mr-2 mt-4"
+                        disabled = {loading}
                     />
                     {!userData && (
                         <p className="font-semibold text-blue-100 mt-2">

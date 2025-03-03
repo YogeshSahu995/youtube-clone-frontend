@@ -1,13 +1,11 @@
 import { useForm } from "react-hook-form";
-import { Button, Error as ErrorTag, FormStyle, Input } from "../LayoutComponents";
-import { useState } from "react";
+import { Button, Error, FormStyle, Input } from "../LayoutComponents";
 import { changePassword } from "../../services/userService";
 import { useNavigate } from "react-router-dom";
 import { errorHandler } from "../../utils";
 import toast from "react-hot-toast";
 
 export function ChangePasswordForm() {
-    const [Error, setError] = useState("")
     const { register, handleSubmit } = useForm()
     const navigate = useNavigate()
 
@@ -37,7 +35,6 @@ export function ChangePasswordForm() {
     return (
         <FormStyle heading="Change Password">
             <form onSubmit={handleSubmit(submitData)}>
-                {Error && <ErrorTag message={Error} />}
                 <Input
                     label="Current Password"
                     placeholder="Current Password"

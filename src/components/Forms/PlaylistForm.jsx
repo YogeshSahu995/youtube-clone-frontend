@@ -8,7 +8,6 @@ import toast from "react-hot-toast"
 import { errorHandler } from "../../utils"
 
 export function PlaylistForm({ playlist, playlistId }) {
-    const [error, setError] = useState("")
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
     const userData = useSelector((state) => state.data)
@@ -22,7 +21,6 @@ export function PlaylistForm({ playlist, playlistId }) {
     })
 
     const dataSubmit = async (data) => {
-        setError("")
         setLoading(true)
 
         if (playlist) {

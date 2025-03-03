@@ -145,6 +145,7 @@ export function Video({
                                 setAddVideoForm={setAddVideoForm}
                                 setIsHidden={setIsHidden}
                                 isCurrentUser={isCurrentUser}
+                                videoId = {_id}
                             />
                         )
                     }

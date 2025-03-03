@@ -1,22 +1,21 @@
-import { Input, FormStyle, Button, Error, Loading, ToggleButton } from "../LayoutComponents";
+import { Input, FormStyle, Button, Error, Loading } from "../LayoutComponents";
 import { errorHandler } from "../../utils";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { publishVideo, updateVideo } from "../../services/videoService";
 import { HandelPreview } from "../Auth";
 import toast from "react-hot-toast";
 
 export function VideoForm({ videoInfo }) {
-    const [publishStatus, setPublishStatus] = useState(videoInfo?.isPublished || true);
-    const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const [image, setImage] = useState(videoInfo?.thumbnail);
+    const publishStatus = videoInfo?.isPublished || true
     const userData = useSelector(state => state.data);
     const navigate = useNavigate();
 
-    const { register, handleSubmit, formState: { errors }, control } = useForm({
+    const { register, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {
             thumbnail: videoInfo?.thumbnail || "",
             title: videoInfo?.title || "",
@@ -26,7 +25,6 @@ export function VideoForm({ videoInfo }) {
     });
 
     const dataSubmit = async (data) => {
-        setError("");
         setLoading(true);
         const formData = new FormData();
 
@@ -38,7 +36,7 @@ export function VideoForm({ videoInfo }) {
 
             try {
                 const response = await updateVideo({ videoId: videoInfo._id, formData });
-                if(!response) return 
+                if (!response) return
                 if (response?.data?.data) {
                     toast.success(`Sucessfully video is Updated id:${videoInfo._id}`)
                     navigate(`/video/${videoInfo._id}/${userData._id}`);
@@ -59,7 +57,7 @@ export function VideoForm({ videoInfo }) {
 
             try {
                 const response = await publishVideo(formData);
-                if(!response) return 
+                if (!response) return
                 if (response?.data?.data) {
                     toast.success(`Sucessfully video is uploaded`)
                     navigate(`/channel/${userData.username}`);
@@ -83,7 +81,6 @@ export function VideoForm({ videoInfo }) {
             <h1 className="text-2xl font-semibold text-[#10e3ff] border-b-2 w-fit mx-auto border-[#10e3ff]">
                 {videoInfo ? "Update Video" : "Create Content"}
             </h1>
-            {error && <Error message={error} />}
 
             <form onSubmit={handleSubmit(dataSubmit)}>
                 {errors.title && <Error message={errors.title.message} />}
@@ -100,18 +97,6 @@ export function VideoForm({ videoInfo }) {
                     type="text"
                     placeholder="Tell viewers about your video"
                     {...register("description", { required: "Description is required" })}
-                />
-
-                <Controller
-                    name="isPublished"
-                    control={control}
-                    defaultValue={publishStatus}
-                    render={({ field: { value, onChange } }) => (
-                        <ToggleButton
-                            setPublishStatus={onChange}
-                            publishStatus={value}
-                        />
-                    )}
                 />
 
                 {errors.videoFile && <Error message={errors.videoFile.message} />}

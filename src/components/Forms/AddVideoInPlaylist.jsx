@@ -3,7 +3,6 @@ import { Loading2, Popup } from "../index"
 import { getUserPlaylists } from "../../services/playlistService"
 import { useSelector } from "react-redux"
 import { CheckBoxHandler } from "./index"
-import { errorHandler } from "../../utils"
 import toast from "react-hot-toast"
 
 export function AddVideoInPlaylist({
@@ -13,7 +12,6 @@ export function AddVideoInPlaylist({
 }) {
     const [allPlaylist, setAllPlaylist] = useState([])
     const [loading, setLoading] = useState(false)
-    const [error, setError] = useState("")
     const userData = useSelector(state => state.data)
 
     useEffect(() => {
@@ -22,7 +20,6 @@ export function AddVideoInPlaylist({
         ; (async () => {
             try {
                 setLoading(true)
-                setError("")
                 let response = await getUserPlaylists({ userId: userData._id, signal })
                 if(!response) return 
                 if (response?.data?.data) {

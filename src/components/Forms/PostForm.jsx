@@ -8,7 +8,6 @@ import toast, { Toaster } from "react-hot-toast";
 import { errorHandler } from "../../utils";
 
 export function PostForm({ post }) {
-    const [error, setError] = useState("");
     const [loading, setLoading] = useState(false)
     const [postImage, setPostImage] = useState(post?.image)
     const navigate = useNavigate();
@@ -23,7 +22,6 @@ export function PostForm({ post }) {
     })
 
     const dataSubmit = async (data) => {
-        setError("")
         setLoading(true)
         const formData = new FormData();
 
@@ -73,7 +71,6 @@ export function PostForm({ post }) {
     return (
         <>
             <FormStyle heading={post ? "Update Post" : "Create Post"}>
-                {error && <Error message={error} />}
 
                 <form onSubmit={handleSubmit(dataSubmit)}>
 

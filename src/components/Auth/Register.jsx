@@ -128,7 +128,7 @@ export function Register({ userData }) {
                                 placeholder="Enter Email.."
                                 outline="outline-white outline-1"
                                 {...register("email", {
-                                    required: (userData ? false : true),
+                                    required: (userData ? false : "email is required"),
                                     pattern: {
                                         value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
                                         message: "Invailed Email Address"

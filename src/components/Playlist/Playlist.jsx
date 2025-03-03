@@ -44,7 +44,7 @@ export function Playlist({ playlistInfo }) {
                     <img
                         src={`${image}`}
                         className=" absolute h-full w-full object-cover object-center rounded-lg z-20"
-                        alt=""
+                        alt="playlist image"
                     />
                     {videoCount && (
                         <div className="absolute bottom-2 right-2 px-2 bg-[#00000081] text-white rounded-lg text-sm z-30">

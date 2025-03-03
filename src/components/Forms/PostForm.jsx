@@ -82,7 +82,7 @@ export function PostForm({ post }) {
                         onInput={(e) => HandelPreview(e, setPostImage)}
                         {...register("image", { required: "Image is required" })}
                     />
-                    {postImage && <img src={postImage} className="h-[250px] w-[300px] mx-auto object-cover object-center" />}
+                    {postImage && <img src={postImage} alt="posted image" className="h-[250px] w-[300px] mx-auto object-cover object-center" />}
 
                     {errors.content && <Error message={errors.content.message} />}
                     <RTE

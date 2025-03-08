@@ -1,8 +1,7 @@
 import { getUserPlaylists } from "../../services/playlistService"
 import { useState, useEffect } from "react"
 import { useOutletContext } from "react-router-dom"
-import { errorHandler } from "../../utils"
-import { Error, Loading2 } from "../LayoutComponents"
+import { Loading2 } from "../LayoutComponents"
 import { Playlist } from "../Playlist"
 import { EmptyPageResponse } from "./EmptyPageResponse";
 import toast from "react-hot-toast"
@@ -10,7 +9,6 @@ import toast from "react-hot-toast"
 export function ChannelPlaylists() {
     const [allPlaylist, setAllPlaylist] = useState([])
     const [loading, setLoading] = useState(false)
-    const [error, setError] = useState("")
     const { userId, isCurrentUser } = useOutletContext()
 
     useEffect(() => {
@@ -19,14 +17,10 @@ export function ChannelPlaylists() {
         ; (async () => {
             try {
                 setLoading(true)
-                setError("")
                 const response = await getUserPlaylists({ userId, signal })
                 if(!response) return 
                 if (response?.data?.data) {
                     setAllPlaylist(response.data.data)
-                }
-                else {
-                    toast.error(errorHandler(response));
                 }
             } catch (error) {
                 toast.error(error.message);
@@ -65,7 +59,6 @@ export function ChannelPlaylists() {
 
     return (
         <div>
-            {error && <Error message={error} />}
             <ul className="flex flex-wrap justify-around gap-4">
                 {allPlaylist?.map((playlist) => (
                     <li key={playlist._id}>

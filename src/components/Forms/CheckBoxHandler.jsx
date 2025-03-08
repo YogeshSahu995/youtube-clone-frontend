@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { addVideoInPlaylist, removeVideoFromPlaylist, checkAlreadyVideoExist } from "../../services/playlistService";
 import { Input } from "../LayoutComponents";
 import toast from "react-hot-toast";
-import { errorHandler } from "../../utils";
 
 export function CheckBoxHandler({ playlistId, videoId, name }) {
     const [checkbox, setCheckbox] = useState(false)
@@ -17,7 +16,7 @@ export function CheckBoxHandler({ playlistId, videoId, name }) {
                         setCheckbox(response.data.data)
                     }
                 } catch (error) {
-                    console.log(error.message)
+                    console.error(error.message)
                 }
             }
         )()
@@ -39,7 +38,7 @@ export function CheckBoxHandler({ playlistId, videoId, name }) {
                 }
             }
         } catch (error) {
-            console.error(error.message)
+            toast.error(error.message)
         }
     }
 

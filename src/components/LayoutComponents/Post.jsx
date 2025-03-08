@@ -8,7 +8,6 @@ import { DeleteForm } from "../Forms"
 import { LikeToggle } from "../Video"
 import { toggleTweetLike } from "../../services/likeService"
 import toast from "react-hot-toast"
-import { errorHandler } from "../../utils"
 
 export function Post({ postInfo, isCurrentUser }) {
     const { content, createdAt, owner, _id, image, likes, isLiked } = postInfo
@@ -36,9 +35,6 @@ export function Post({ postInfo, isCurrentUser }) {
                 navigate(`/channel/${username}/posts`)
                 toast.success("Successfully delete a post")
                 setIsDeleted(true)
-            }
-            else {
-                toast.error(errorHandler(response))
             }
         } catch (error) {
             toast.error(error)

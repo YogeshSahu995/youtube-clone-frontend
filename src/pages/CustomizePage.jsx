@@ -5,7 +5,6 @@ import toast from "react-hot-toast";
 
 export function CustomizePage() {
     const [loading, setLoading] = useState(false)
-    const [error, setError] = useState("")
     const [userData, setUserData] = useState({})
 
     useEffect(() => {
@@ -14,14 +13,10 @@ export function CustomizePage() {
         ; (async () => {
             try {
                 setLoading(true)
-                setError("")
                 const response = await getcurrentUser(signal)
                 if(!response) return 
                 if (response?.data?.data) {
                     setUserData(response.data.data)
-                }
-                else {
-                    toast.error(errorHandler(response));
                 }
             } catch (error) {
                 toast.error("An unexpected error occurred.");

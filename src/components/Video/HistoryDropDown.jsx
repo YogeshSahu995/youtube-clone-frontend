@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom"
 import { removeVideoFromHistory } from "../../services/userService"
 import { DropDown } from "../LayoutComponents"
 import toast from "react-hot-toast"
-import { errorHandler } from "../../utils"
 
 export function HistoryDropDown({ setAddVideoForm, isCurrentUser, videoId, setFetch }) {
     const navigate = useNavigate()
@@ -16,7 +15,6 @@ export function HistoryDropDown({ setAddVideoForm, isCurrentUser, videoId, setFe
             }
             else {
                 navigate("/")
-                toast.error(errorHandler(response))
             }
         } catch (error) {
             toast.error(error.message)

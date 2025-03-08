@@ -2,7 +2,6 @@ import { useForm } from "react-hook-form";
 import { Button, Input, Popup } from "../LayoutComponents";
 import { updateComment } from "../../services/commentService";
 import toast from "react-hot-toast";
-import { errorHandler } from "../../utils";
 
 export function ChangeComment({ commentId, changeForm, setChangeForm }) {
     const { register, handleSubmit } = useForm()
@@ -15,9 +14,6 @@ export function ChangeComment({ commentId, changeForm, setChangeForm }) {
                 if (response?.data?.data) {
                     toast.success("Successfully change comment")
                     setChangeForm(true)
-                }
-                else {
-                    toast.error(errorHandler(response))
                 }
             }
         } catch (error) {

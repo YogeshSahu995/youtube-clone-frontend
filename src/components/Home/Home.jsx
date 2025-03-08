@@ -14,7 +14,6 @@ export function Home() {
     const [end, setEnd] = useState(false)
     const [data, setData] = useState({})
     const [page, setPage] = useState(1)
-    const [error, setError] = useState("")
     const [channelLoader, setChannelLoader] = useState(false)
     const [videoLoader, setVideoLoader] = useState(false)
     const { searchInput, mainRef } = useOutletContext()
@@ -29,7 +28,6 @@ export function Home() {
         const signal = controller.signal;
         ; (async () => {
             setVideoLoader(true)
-            setError("")
             try {
                 const response = await getVideosByTitle({ page, limit: "5", query, signal })
                 if(!response) return 
@@ -44,7 +42,7 @@ export function Home() {
                     }
                 }
             } catch (error) {
-                console.error(error.message)
+                console.log(error.response.data)
             }
             finally {
                 setVideoLoader(false)
@@ -59,7 +57,6 @@ export function Home() {
         const signal = controller.signal;
         ; (async () => {
             setChannelLoader(true)
-            setError("")
             setAllUsers([])
             try {
                 if (query) {

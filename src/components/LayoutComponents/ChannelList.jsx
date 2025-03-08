@@ -2,13 +2,11 @@ import { useNavigate } from "react-router-dom"
 import { Avatar, Loading2, SubscriptionButton } from "../index"
 import { useEffect, useState } from "react"
 import { getUserChannelProfile } from "../../services/userService"
-import { errorHandler } from "../../utils/index"
 import toast from "react-hot-toast"
 
 export function ChannelList({ channelInfo }) {
     const [userData, setUserData] = useState({})
     const [loading, setLoading] = useState(false)
-    const [error, setError] = useState("")
     const { username } = channelInfo
     const navigate = useNavigate()
 
@@ -23,9 +21,6 @@ export function ChannelList({ channelInfo }) {
                     if (response?.data?.data) {
                         const data = response.data.data
                         setUserData(data)
-                    }
-                    else {
-                        toast.error(errorHandler(response))
                     }
                 } catch (error) {
                     toast.error(error.message)

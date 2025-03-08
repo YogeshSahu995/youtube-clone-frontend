@@ -4,7 +4,6 @@ import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import toast from "react-hot-toast"
-import { errorHandler } from "../../utils"
 
 export function SubscriptionButton({ channelId, isSubscribed }) {
     const [loading, setLoading] = useState(false)
@@ -23,9 +22,6 @@ export function SubscriptionButton({ channelId, isSubscribed }) {
             if(!response) return 
             if (response?.data?.data) {
                 setSubscribed(response.data.data.isSubscribed)
-            }
-            else {
-                toast.error(errorHandler(response));
             }
         } catch (error) {
             toast.error(error.message)

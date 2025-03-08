@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { clearAllHistory, getUserHistory } from "../../services/userService"
 import { Button, Loading2 } from "../LayoutComponents"
-import { errorHandler } from "../../utils"
 import { Video } from "../Video"
 import { Link } from "react-router-dom"
 import toast from "react-hot-toast"

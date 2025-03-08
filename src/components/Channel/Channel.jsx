@@ -2,7 +2,6 @@ import { useSelector } from "react-redux"
 import { Protectedpage } from "../LayoutComponents/Protectedpage"
 import { getUserChannelProfile } from "../../services/userService"
 import { useEffect, useState } from "react"
-import { errorHandler } from "../../utils"
 import { Outlet, useOutletContext } from "react-router-dom"
 import { ChannelHeader } from "./ChannelHeader"
 import { Loading } from "../LayoutComponents"
@@ -10,7 +9,6 @@ import toast from "react-hot-toast"
 
 export function Channel({ username, Navbar }) {
     const [profile, setProfile] = useState({})
-    const [error, setError] = useState("")
     const [loading, setLoading] = useState(false)
     const [searchQuery, setSearchQuery] = useState("")
     const [isCurrentUser, setIsCurrentUser] = useState(false)
@@ -32,7 +30,6 @@ export function Channel({ username, Navbar }) {
         }
 
         setLoading(true)
-        setError("")
             ; (async () => {
                 if (username) {
                     try {
@@ -40,9 +37,6 @@ export function Channel({ username, Navbar }) {
                         if(!response) return 
                         if (response?.data?.data) {
                             setProfile(response.data.data)
-                        }
-                        else {
-                            toast.error(errorHandler(response));
                         }
                     } catch (error) {
                         toast.error(error.message)

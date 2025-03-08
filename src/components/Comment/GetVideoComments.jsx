@@ -1,6 +1,6 @@
 import { getVideoComments, addComment } from "../../services/commentService"
 import { useState, useEffect, useRef } from "react";
-import { errorHandler, paginationHandler } from "../../utils";
+import { paginationHandler } from "../../utils";
 import { Comment } from "./Comment";
 import { Button, Input } from "../LayoutComponents";
 import { DeleteForm } from ".."
@@ -16,7 +16,6 @@ export function GetVideoComment({
     const [end, setEnd] = useState(false)
     const [allComments, setAllComments] = useState([])
     const [data, setData] = useState({})
-    const [error, setError] = useState("")
     const [page, setPage] = useState(1)
     const [comment, setComment] = useState("")
     const [noOfComment, setNoOfComment] = useState(commentCount)
@@ -32,16 +31,12 @@ export function GetVideoComment({
         ; (async () => {
             try {
                 setLoading(true);
-                setError("");
                 const response = await getVideoComments({ videoId, page, limit: "5", signal });
                 if(!response) return 
                 if (response?.data?.data) {
                     const data = response.data.data;
                     setAllComments((prev) => [...prev, ...data.docs]);
                     setData(data);
-                }
-                else {
-                    toast.error(errorHandler(response));
                 }
             } catch (error) {
                 toast.error(error.message);
@@ -70,9 +65,6 @@ export function GetVideoComment({
                 setAllComments([])
                 setNoOfComment(prev => prev += 1)
             }
-            else {
-                toast.error(errorHandler(response))
-            }
         } catch (error) {
             toast.error("Error submitting comment:", error.message)
         }
@@ -87,9 +79,6 @@ export function GetVideoComment({
                 setNoOfComment(prev => prev - 1)
                 setIsHidden(true)
                 toast.success("Successfully delete comment")
-            }
-            else {
-                toast.error(errorHandler(response))
             }
         } catch (error) {
             toast.error(error.message)
@@ -137,7 +126,6 @@ export function GetVideoComment({
                             <h1>No Any Comment</h1>
                         </div>
                     ) : (
-
                         <ul>
                             {allComments?.map((comment) => {
                                 return (

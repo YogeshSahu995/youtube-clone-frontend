@@ -1,8 +1,7 @@
 import { useForm } from "react-hook-form";
-import { Button, Error, FormStyle, Input } from "../LayoutComponents";
+import { Button, FormStyle, Input } from "../LayoutComponents";
 import { changePassword } from "../../services/userService";
 import { useNavigate } from "react-router-dom";
-import { errorHandler } from "../../utils";
 import toast from "react-hot-toast";
 
 export function ChangePasswordForm() {
@@ -11,7 +10,6 @@ export function ChangePasswordForm() {
 
     const submitData = async (data) => {
         try {
-            setError("")
             const { newPassword, confirmPassword } = data
 
             if (confirmPassword !== newPassword) {
@@ -23,9 +21,6 @@ export function ChangePasswordForm() {
             if (response?.data?.data) {
                 toast.success("Successfully changed password")
                 navigate("/")
-            }
-            else {
-                toast.error(errorHandler(response))
             }
         }
         catch (error) {

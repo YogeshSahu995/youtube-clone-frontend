@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { login, logout } from './store/authSlice';
 import { useNavigate } from 'react-router-dom';
 import { Loading } from './components';
+import {setupInterceptors} from './utils/apiInterceptor'
 
 function App() {
   const [loading, setLoading] = useState(false)
@@ -13,6 +14,8 @@ function App() {
   const navigate = useNavigate()
 
   useEffect(() => {
+    setupInterceptors(navigate);
+
     const handleOffline = () => setOffline(true);
     const handleOnline = () => {
       setOffline(false);
@@ -26,30 +29,38 @@ function App() {
       window.removeEventListener("offline", handleOffline);
       window.removeEventListener("online", handleOnline);
     };
-  }, []);
+  }, [navigate]);
 
   useEffect(() => {
     if (!offline) {
+      console.log("🚀 Fetching current user...");
       setLoading(true);
       getcurrentUser()
         .then((res) => {
+          
           if (res?.data?.data) {
+            console.log("✅ User fetched:", res?.data?.data);
             const { username, fullname, email, _id, coverImage, avatar, createdAt, updateAt } = res.data.data;
             dispatch(login({ username, fullname, email, _id, coverImage, avatar, createdAt, updateAt }));
-            navigate("/");
+            navigate('/')
           } else {
+            console.log("⚠️ No user data found. Logging out.");
             dispatch(logout());
-            navigate("/login");
+            navigate('/login')
           }
         })
-        .catch(() => navigate("/login"))
-        .finally(() => setLoading(false));
+        .catch((error) => {
+          console.error("❌ Error fetching user:", error);
+          console.error('Error:', error)
+        })
+        .finally(() => {
+          setLoading(false)
+          console.log("✅ Finished loading.");
+        });
     }
-  }, [navigate, offline]);
+  }, [dispatch, offline]);
 
-  if (loading) {
-    return <Loading />
-  }
+  if (loading) return <Loading />
 
   if (offline) {
     return (
@@ -63,7 +74,7 @@ function App() {
   return (
     !loading ? (
       <div>
-        <Outlet /> {/* Render nested routes */}
+        <Outlet />
       </div>
     ) : (<Loading />)
   );

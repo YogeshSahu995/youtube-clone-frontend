@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { createPlaylist, updatePlaylist } from "../../services/playlistService"
 import toast from "react-hot-toast"
-import { errorHandler } from "../../utils"
 
 export function PlaylistForm({ playlist, playlistId }) {
     const [loading, setLoading] = useState(false)
@@ -30,8 +29,6 @@ export function PlaylistForm({ playlist, playlistId }) {
                 if (response?.data?.data) {
                     navigate(`/channel/${username}/playlists`)
                     toast.success("Successfully update a playlist")
-                } else {
-                    toast.error(errorHandler(response))
                 }
             } catch (error) {
                 toast.error(error.message)
@@ -47,8 +44,6 @@ export function PlaylistForm({ playlist, playlistId }) {
                 if (response?.data?.data) {
                     navigate(`/channel/${username}/playlists`)
                     toast.success("Successfully created a playlist")
-                } else {
-                    toast.error(errorHandler(response))
                 }
             } catch (error) {
                 toast.error(error.message)

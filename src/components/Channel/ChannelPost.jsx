@@ -4,13 +4,10 @@ import { Loading2, Post } from "../LayoutComponents";
 import { EmptyPageResponse } from "./EmptyPageResponse";
 import { useOutletContext } from "react-router-dom";
 import toast from "react-hot-toast";
-import { errorHandler } from "../../utils";
 
 export function ChannelPost() {
     const [loading, setLoading] = useState(false)
-    const [error, setError] = useState("")
     const [allPosts, setAllPosts] = useState([])
-    const [end, setEnd] = useState(false)
     const { userId, isCurrentUser } = useOutletContext()
 
     useEffect(() => {
@@ -19,14 +16,10 @@ export function ChannelPost() {
         ; (async () => {
             try {
                 setLoading(true)
-                setError("")
                 const response = await getUserTweets(userId, signal)
                 if(!response) return 
                 if (response?.data?.data) {
                     setAllPosts(response.data.data)
-                }
-                else {
-                    toast.error(errorHandler(response));
                 }
             } catch (error) {
                 toast.error(error.message);
@@ -75,7 +68,7 @@ export function ChannelPost() {
                     </li>
                 ))}
             </ul>
-            {end && <p className="text-white text-center italic underline-offset-1">No More Posts</p>}
+            <p className="text-white text-center italic underline-offset-1">No More Posts</p>
         </div>
     )
 }

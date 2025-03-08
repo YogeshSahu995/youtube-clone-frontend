@@ -1,11 +1,10 @@
 import { Input, FormStyle, Button, Error, Loading, RTE, HandelPreview } from "../index";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { createATweet, updateATweet } from "../../services/tweetService";
-import toast, { Toaster } from "react-hot-toast";
-import { errorHandler } from "../../utils";
+import toast from "react-hot-toast";
 
 export function PostForm({ post }) {
     const [loading, setLoading] = useState(false)
@@ -34,8 +33,6 @@ export function PostForm({ post }) {
                 if (response?.data?.data) {
                     navigate(`/channel/${username}/posts`);
                     toast.success(`Successfully update a post id:${post._id}`)
-                } else {
-                    toast.error(errorHandler(response))
                 }
             } catch (error) {
                 toast.error(error.message)
@@ -54,8 +51,6 @@ export function PostForm({ post }) {
                 if (response?.data?.data) {
                     toast.success(`Successfully upload a post`)
                     navigate(`/channel/${username}/posts`);
-                } else {
-                    toast.error(errorHandler(response));
                 }
             } catch (error) {
                 toast.error(error.message)

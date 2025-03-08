@@ -6,7 +6,6 @@ import { paginationHandler } from "../../utils";
 import { Video } from "../Video";
 import { Loading2, Error } from "../LayoutComponents";
 import { EmptyPageResponse } from "./EmptyPageResponse";
-import { errorHandler } from "../../utils";
 import toast from "react-hot-toast";
 
 export function ChannelSearchVideos() {
@@ -17,7 +16,6 @@ export function ChannelSearchVideos() {
     const [allVideos, setAllVideos] = useState([])
     const [data, setData] = useState({})
     const [end, setEnd] = useState(false)
-    const [error, setError] = useState("")
     const { searchQuery, mainRef, userId } = useOutletContext()
     const query = useDebounce({ value: searchQuery, delay: 500 }) // custom Hook 
 
@@ -27,16 +25,12 @@ export function ChannelSearchVideos() {
         setAllVideos([])
             ; (async () => {
                 setLoading(true)
-                setError("")
                 try {
                     const response = await getAllVideos({ page, limit: "5", query, sortBy, sortType, userId, signal })
                     if(!response) return 
                     if (response?.data?.data) {
                         const data = response.data.data;
                         setAllVideos((prev) => [...prev, ...data.docs].filter((video) => video.isPublished));
-                    }
-                    else {
-                        toast.error(errorHandler(response));
                     }
                 } catch (error) {
                     toast.error(error.message)

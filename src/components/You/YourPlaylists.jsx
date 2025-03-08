@@ -8,7 +8,6 @@ import toast from "react-hot-toast"
 export function YourPlaylists({userId}) {
     const [allPlaylist, setAllPlaylist] = useState([])
     const [loading, setLoading] = useState(false)
-    const [error, setError] = useState("")
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -17,7 +16,6 @@ export function YourPlaylists({userId}) {
         ; (async () => {
             try {
                 setLoading(true)
-                setError("")
                 const response = await getUserPlaylists({ userId, signal })
                 if(!response) return 
                 if (response?.data?.data) {

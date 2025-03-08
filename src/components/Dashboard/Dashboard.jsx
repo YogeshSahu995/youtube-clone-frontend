@@ -14,7 +14,6 @@ export function Dashboard() {
     const [data, setData] = useState({});
     const [allVideos, setAllVideos] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState("");
     const [end, setEnd] = useState(false);
     const [page, setPage] = useState(1);
     const [sortBy, setSortBy] = useState("views");
@@ -26,7 +25,6 @@ export function Dashboard() {
         ; (async () => {
             try {
                 setLoading(true);
-                setError("");
                 const response = await getChannelVideos({ page, query: userData._id, limit: "10", sortBy, sortType, signal });
                 if(!response) return 
                 if (response?.data?.data) {

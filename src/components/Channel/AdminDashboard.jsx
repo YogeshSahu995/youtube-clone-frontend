@@ -2,9 +2,9 @@ import { Link, useOutletContext } from "react-router-dom";
 import { getChannelInfo } from "../../services/dashboardService";
 import { useState, useEffect } from "react";
 import { Loading } from "../LayoutComponents";
+import toast from "react-hot-toast";
 
 export function ChannelDetails() {
-    const [error, setError] = useState("")
     const [loading, setLoading] = useState(false)
     const [userInfo, setUserInfo] = useState({})
     const { userId, userData } = useOutletContext()
@@ -15,17 +15,13 @@ export function ChannelDetails() {
         ; (async () => {
             try {
                 setLoading(true)
-                setError("")
                 const response = await getChannelInfo({ userId, signal })
                 if(!response) return 
                 if (response.data.data) {
                     setUserInfo(response.data.data)
                 }
-                else {
-                    setError(errorHandler(response));
-                }
             } catch (error) {
-                setError("An unexpected error occurred.");
+                toast.error(error.message);
             } finally {
                 setLoading(false)
             }

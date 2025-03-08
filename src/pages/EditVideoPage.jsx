@@ -6,7 +6,6 @@ import toast from "react-hot-toast";
 
 export function EditVideoPage() {
     const [loading, setLoading] = useState(false)
-    const [error, setError] = useState("")
     const [videoInfo, setVideoInfo] = useState({})
     const { videoId } = useParams()
 
@@ -16,14 +15,10 @@ export function EditVideoPage() {
         ; (async () => {
             try {
                 setLoading(true)
-                setError("")
                 const response = await getVideoById({ videoId, signal })
                 if(!response) return 
                 if (response?.data?.data) {
                     setVideoInfo(response.data.data)
-                }
-                else {
-                    toast.error(errorHandler(response));
                 }
             } catch (error) {
                 toast.error(error.message)

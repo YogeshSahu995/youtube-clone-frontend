@@ -8,7 +8,6 @@ import { GetVideoComment } from "../Comment/GetVideoComments"
 import { addVideoInHistory, handleVideoViews } from "../../services/videoService"
 import { LikeToggle } from "./LikeToggle"
 import toast from "react-hot-toast"
-import { errorHandler } from "../../utils"
 
 export function OpenVideo({ video, userId, watcherId }) {
     const { _id, videoFile, thumbnail, title, description, views, likes, comments, owner, isLiked, createdAt } = video
@@ -16,7 +15,6 @@ export function OpenVideo({ video, userId, watcherId }) {
     const [data, setData] = useState({});
     const [allVideos, setAllVideos] = useState([]);
     const [end, setEnd] = useState(false);
-    const [error, setError] = useState("");
     const [page, setPage] = useState(1);
     const [sortBy, setSortBy] = useState("createdAt");
     const [sortType, setSortType] = useState("des");
@@ -34,7 +32,6 @@ export function OpenVideo({ video, userId, watcherId }) {
         setEnd,
         mainRef,
         setLoading,
-        setError,
         setPage,
         sortBy,
         sortType,
@@ -53,9 +50,6 @@ export function OpenVideo({ video, userId, watcherId }) {
                     setTimeout(() => {
                         setViewCount(prev => prev + 1)
                     }, 4000)
-                }
-                else {
-                    toast.error(errorHandler(response))
                 }
             } catch (error) {
                 toast.error(error.message)

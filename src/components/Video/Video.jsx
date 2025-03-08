@@ -8,7 +8,6 @@ import { useState } from "react"
 import { VideoDropDown } from "./index"
 import { HistoryDropDown } from "./HistoryDropDown"
 import toast from "react-hot-toast"
-import { errorHandler } from "../../utils"
 
 export function Video({
     history = false,
@@ -49,9 +48,6 @@ export function Video({
                 setIsHidden(true)
                 toast.success(`Successfully delete video ${_id}`)
                 navigate(`/channel/${username}/videos`)
-            }
-            else {
-                toast.error(errorHandler(response))
             }
         } catch (error) {
             toast.error(error.message)

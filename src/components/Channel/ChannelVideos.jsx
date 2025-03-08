@@ -9,7 +9,6 @@ export function ChannelVideos() {
     const [data, setData] = useState({});
     const [allVideos, setAllVideos] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState("");
     const [end, setEnd] = useState(false);
     const [page, setPage] = useState(1);
     const [sortBy, setSortBy] = useState("createdAt");
@@ -22,7 +21,6 @@ export function ChannelVideos() {
         setEnd,
         mainRef,
         setLoading,
-        setError,
         setPage,
         sortBy,
         sortType,

@@ -3,7 +3,6 @@ import { Loading2, OpenVideo } from "../components"
 import { useEffect, useState } from "react"
 import { getVideoById } from "../services/videoService"
 import toast from "react-hot-toast"
-import { errorHandler } from "../utils"
 
 export function PlayVideoPage() {
     const { videoId, userId } = useParams()
@@ -20,9 +19,6 @@ export function PlayVideoPage() {
                     if(!response) return 
                     if (response?.data?.data) {
                         setVideoInfo(response.data.data)
-                    }
-                    else {
-                        toast.error(errorHandler(response))
                     }
                 } catch (error) {
                     toast.error(error.message)

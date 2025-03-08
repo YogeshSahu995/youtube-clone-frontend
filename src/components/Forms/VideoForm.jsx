@@ -1,5 +1,4 @@
 import { Input, FormStyle, Button, Error, Loading } from "../LayoutComponents";
-import { errorHandler } from "../../utils";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -40,8 +39,6 @@ export function VideoForm({ videoInfo }) {
                 if (response?.data?.data) {
                     toast.success(`Sucessfully video is Updated id:${videoInfo._id}`)
                     navigate(`/video/${videoInfo._id}/${userData._id}`);
-                } else {
-                    response && toast.error(errorHandler(response))
                 }
             } catch (error) {
                 toast(error.message);
@@ -61,8 +58,6 @@ export function VideoForm({ videoInfo }) {
                 if (response?.data?.data) {
                     toast.success(`Sucessfully video is uploaded`)
                     navigate(`/channel/${userData.username}`);
-                } else {
-                    toast.error(errorHandler(response))
                 }
             } catch (error) {
                 toast.error(error.message)

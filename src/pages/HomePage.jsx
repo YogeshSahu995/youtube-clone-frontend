@@ -3,6 +3,7 @@ import { Home } from "../components";
 import { useDispatch } from "react-redux";
 import { login } from "../store/authSlice";
 import { getcurrentUser } from "../services/userService";
+import toast from "react-hot-toast";
 
 export function HomePage() {
     const dispatch = useDispatch()
@@ -25,6 +26,10 @@ export function HomePage() {
                     dispatch(login({ username, fullname, email, _id, coverImage, avatar, createdAt, updateAt }))
                 }
             })
+            .catch((error) => {
+                console.log(error)
+            })
+
         return () => controller.abort()
     }, [])
     return (

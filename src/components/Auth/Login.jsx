@@ -5,7 +5,6 @@ import { login } from "../../store/authSlice"
 import { loginUser, getcurrentUser } from "../../services/userService"
 import { Link, useNavigate } from "react-router-dom"
 import { useForm } from "react-hook-form"
-import { errorHandler } from "../../utils/errorHandler"
 import toast from "react-hot-toast"
 
 export function Login() {
@@ -29,9 +28,6 @@ export function Login() {
                     navigate('/')
                     toast.success("Successfully login")
                 }
-            }
-            else {
-                toast.error(errorHandler(response))
             }
         } catch (error) {
             toast.error(error.message)

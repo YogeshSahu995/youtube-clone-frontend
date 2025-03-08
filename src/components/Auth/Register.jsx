@@ -7,13 +7,11 @@ import { login } from "../../store/authSlice"
 import toast from "react-hot-toast"
 import { registerUser, loginUser, updateAccountdetails, updateAvatar, updateCoverImage } from "../../services/userService"
 import { Link } from "react-router-dom"
-import { errorHandler } from "../../utils/errorHandler"
 
 export function Register({ userData }) {
     const [loading, setLoading] = useState(false)
     const [tempCoverImage, setTempCoverImage] = useState("")
     const [temAvatar, setTempAvatar] = useState("")
-    const [error, setError] = useState('')
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -29,7 +27,6 @@ export function Register({ userData }) {
 
     const dataSubmit = async (data) => {
         if (!userData) {
-            setError("")
             setLoading(true)
             const formData = new FormData();
             if (data.avatar?.[0]) formData.append("avatar", data.avatar[0]);
@@ -51,19 +48,14 @@ export function Register({ userData }) {
                         toast.success("successfully register details")
                     }
                 }
-                else {
-                    const errMsg = errorHandler(response)
-                    setError(errMsg)
-                }
             } catch (error) {
-                console.log(error)
+                toast.error(error.message)
             }
             finally {
                 setLoading(false)
             }
         }
         else {
-            setError("")
             setLoading(true)
             try {
                 if (data.fullname && data.email) {
@@ -87,7 +79,7 @@ export function Register({ userData }) {
                     }
                 }
             } catch (error) {
-                console.error(error.message)
+                toast.error(error.message)
             } finally {
                 setLoading(false)
                 navigate(`/channel/${userData.username}`)

@@ -5,7 +5,6 @@ import { useEffect, useState } from "react"
 import { Outlet, useOutletContext } from "react-router-dom"
 import { ChannelHeader } from "./ChannelHeader"
 import { Loading } from "../LayoutComponents"
-import toast from "react-hot-toast"
 
 export function Channel({ username, Navbar }) {
     const [profile, setProfile] = useState({})
@@ -39,7 +38,7 @@ export function Channel({ username, Navbar }) {
                             setProfile(response.data.data)
                         }
                     } catch (error) {
-                        toast.error(error.message)
+                        console.log(error.message)
                     } finally {
                         setLoading(false)
                     }

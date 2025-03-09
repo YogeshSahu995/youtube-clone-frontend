@@ -36,7 +36,7 @@ import { CustomizePage } from './pages/CustomizePage.jsx';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />, // Main app logic (e.g., user authentication)
+    element: <App />,
     children: [
       {
         path: '/',

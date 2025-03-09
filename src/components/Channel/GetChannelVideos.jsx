@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { getChannelVideos } from "../../services/videoService";
 import { paginationHandler } from "../../utils";
-import toast from "react-hot-toast";
 
 export function GetChannelVideos(
     {
@@ -25,14 +24,13 @@ export function GetChannelVideos(
             try {
                 setLoading(true);
                 const response = await getChannelVideos({ page, limit: "10", query: userId, sortBy, sortType, signal });
-                if(!response) return 
                 if (response?.data?.data) {
                     const data = response.data.data;
                     setAllVideos((prev) => [...prev, ...data.docs].filter((video) => video.isPublished));
                     setData(data);
                 }
             } catch (error) {
-                toast.error(error.message);
+                console.log(error.message);
             } finally {
                 setLoading(false);
             }

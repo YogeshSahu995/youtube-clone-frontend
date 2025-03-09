@@ -3,7 +3,6 @@ import { clearAllHistory, getUserHistory } from "../../services/userService"
 import { Button, Loading2 } from "../LayoutComponents"
 import { Video } from "../Video"
 import { Link } from "react-router-dom"
-import toast from "react-hot-toast"
 
 export function YourHistory() {
     const [allHistory, setAllHistory] = useState([])
@@ -17,12 +16,11 @@ export function YourHistory() {
             ; (async () => {
                 try {
                     const response = await getUserHistory({ signal })
-                    if(!response) return 
                     if (response?.data?.data) {
                         setAllHistory(response.data.data)
                     }
                 } catch (error) {
-                    toast.error(error.message)
+                    console.log(error.message)
                 } finally {
                     setLoading(false)
                 }
@@ -33,13 +31,12 @@ export function YourHistory() {
     const handleClearHistory = async () => {
         try {
             const response = await clearAllHistory()
-            if(!response) return 
             if (response?.data?.data) {
                 setAllHistory([])
                 setFetch(prev => !prev)
             }
         } catch (error) {
-            toast.error(error.message)
+            console.log(error.message)
         }
     }
 

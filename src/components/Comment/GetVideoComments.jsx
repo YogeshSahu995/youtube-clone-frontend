@@ -32,14 +32,13 @@ export function GetVideoComment({
             try {
                 setLoading(true);
                 const response = await getVideoComments({ videoId, page, limit: "5", signal });
-                if(!response) return 
                 if (response?.data?.data) {
                     const data = response.data.data;
                     setAllComments((prev) => [...prev, ...data.docs]);
                     setData(data);
                 }
             } catch (error) {
-                toast.error(error.message);
+                console.log(error.message);
             } finally {
                 setLoading(false);
             }
@@ -66,14 +65,13 @@ export function GetVideoComment({
                 setNoOfComment(prev => prev += 1)
             }
         } catch (error) {
-            toast.error("Error submitting comment:", error.message)
+            console.log("Error submitting comment:", error.message)
         }
     }
 
     async function handleDelete() {
         try {
             const response = await deleteComment({ commentId: commentId })
-            if(!response) return 
             if (response?.data?.data) {
                 setAllComments([])
                 setNoOfComment(prev => prev - 1)
@@ -81,7 +79,7 @@ export function GetVideoComment({
                 toast.success("Successfully delete comment")
             }
         } catch (error) {
-            toast.error(error.message)
+            console.log(error.message)
         }
     }
 

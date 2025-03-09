@@ -33,29 +33,24 @@ function App() {
 
   useEffect(() => {
     if (!offline) {
-      console.log("🚀 Fetching current user...");
       setLoading(true);
       getcurrentUser()
         .then((res) => {
           
           if (res?.data?.data) {
-            console.log("✅ User fetched:", res?.data?.data);
             const { username, fullname, email, _id, coverImage, avatar, createdAt, updateAt } = res.data.data;
             dispatch(login({ username, fullname, email, _id, coverImage, avatar, createdAt, updateAt }));
             navigate('/')
           } else {
-            console.log("⚠️ No user data found. Logging out.");
             dispatch(logout());
             navigate('/login')
           }
         })
         .catch((error) => {
-          console.error("❌ Error fetching user:", error);
-          console.error('Error:', error)
+          console.log('Error:', error.message)
         })
         .finally(() => {
           setLoading(false)
-          console.log("✅ Finished loading.");
         });
     }
   }, [dispatch, offline]);

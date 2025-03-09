@@ -19,7 +19,6 @@ export function Login() {
         setLoading(true)
         try {
             const response = await loginUser(data)
-            if (!response) return
             if (response?.data?.data) {
                 const userData = await getcurrentUser(signal)
                 if (userData) {
@@ -30,7 +29,7 @@ export function Login() {
                 }
             }
         } catch (error) {
-            toast.error(error.message)
+            console.error(error.response.data.message)
         }
         finally {
             setLoading(false)

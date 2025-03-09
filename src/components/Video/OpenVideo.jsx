@@ -59,7 +59,7 @@ export function OpenVideo({ video, userId, watcherId }) {
 
     if (Object.keys(video).length > 0) {
         const { avatar, fullname, isSubscribed, subscribersCount, _id, username } = owner
-        const isCurrentUser = _id == userData._id
+        const isCurrentUser = _id == userData?._id
 
         return (
             <div className="p-1 relative">

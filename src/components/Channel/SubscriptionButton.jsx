@@ -3,7 +3,6 @@ import { toggleSubscription } from "../../services/subscriptionService"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import toast from "react-hot-toast"
 
 export function SubscriptionButton({ channelId, isSubscribed }) {
     const [loading, setLoading] = useState(false)
@@ -19,12 +18,11 @@ export function SubscriptionButton({ channelId, isSubscribed }) {
         setLoading(true)
         try {
             const response = await toggleSubscription({ anotherChannelId: channelId })
-            if(!response) return 
             if (response?.data?.data) {
                 setSubscribed(response.data.data.isSubscribed)
             }
         } catch (error) {
-            toast.error(error.message)
+            console.log(error.message)
         }
         finally{
             setLoading(false)

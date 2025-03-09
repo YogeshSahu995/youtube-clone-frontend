@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Video } from "../Video";
-import { Button, Loading2, Error } from "../LayoutComponents";
+import { Button, Loading2 } from "../LayoutComponents";
 import { useOutletContext } from "react-router-dom";
 import { EmptyPageResponse } from "./EmptyPageResponse";
 import { GetChannelVideos } from "./GetChannelVideos";

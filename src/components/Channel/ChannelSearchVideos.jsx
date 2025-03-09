@@ -6,7 +6,6 @@ import { paginationHandler } from "../../utils";
 import { Video } from "../Video";
 import { Loading2, Error } from "../LayoutComponents";
 import { EmptyPageResponse } from "./EmptyPageResponse";
-import toast from "react-hot-toast";
 
 export function ChannelSearchVideos() {
     const [page, setPage] = useState(1);
@@ -27,13 +26,12 @@ export function ChannelSearchVideos() {
                 setLoading(true)
                 try {
                     const response = await getAllVideos({ page, limit: "5", query, sortBy, sortType, userId, signal })
-                    if(!response) return 
                     if (response?.data?.data) {
                         const data = response.data.data;
                         setAllVideos((prev) => [...prev, ...data.docs].filter((video) => video.isPublished));
                     }
                 } catch (error) {
-                    toast.error(error.message)
+                    console.log(error.message)
                 } finally {
                     setLoading(false);
                 }

@@ -4,7 +4,6 @@ import { useOutletContext } from "react-router-dom"
 import { Loading2 } from "../LayoutComponents"
 import { Playlist } from "../Playlist"
 import { EmptyPageResponse } from "./EmptyPageResponse";
-import toast from "react-hot-toast"
 
 export function ChannelPlaylists() {
     const [allPlaylist, setAllPlaylist] = useState([])
@@ -18,12 +17,11 @@ export function ChannelPlaylists() {
             try {
                 setLoading(true)
                 const response = await getUserPlaylists({ userId, signal })
-                if(!response) return 
                 if (response?.data?.data) {
                     setAllPlaylist(response.data.data)
                 }
             } catch (error) {
-                toast.error(error.message);
+                console.log(error.message);
             } finally {
                 setLoading(false)
             }

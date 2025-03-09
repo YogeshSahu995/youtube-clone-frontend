@@ -23,13 +23,12 @@ export function OpenPlaylist({ playlistId }) {
             try {
                 setLoading(true)
                 const response = await getPlaylistById({ playlistId, signal })
-                if(!response) return 
                 if (response?.data?.data) {
                     setData(response.data.data)
                     setVideos(response.data.data.videos)
                 }
             } catch (error) {
-                toast.error(error.message);
+                console.log(error.message);
             } finally {
                 setLoading(false)
             }
@@ -56,14 +55,13 @@ export function OpenPlaylist({ playlistId }) {
     async function handleDelete() {
         try {
             const response = await deletePlaylist({ playlistId })
-            if(!response) return 
             if (response?.data?.data) {
                 toast.success('successfully delete a playlist')
                 setIsHidden(true)
                 navigate(`/channel/${data.owner.username}/playlists`)
             }
         } catch (error) {
-            toast.error(error.message)
+            console.log(error.message)
         }
     }
 

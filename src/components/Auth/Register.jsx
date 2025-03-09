@@ -38,7 +38,6 @@ export function Register({ userData }) {
 
             try {
                 const response = await registerUser(formData)
-                if (!response) return
                 if (response?.data?.data) {
                     const { email, password, username, fullname } = data
                     const userData = await loginUser({ email, password })
@@ -49,7 +48,7 @@ export function Register({ userData }) {
                     }
                 }
             } catch (error) {
-                toast.error(error.message)
+                console.error(error.response.data.message)
             }
             finally {
                 setLoading(false)

@@ -3,7 +3,6 @@ import { getUserTweets } from "../../services/tweetService";
 import { Loading2, Post } from "../LayoutComponents";
 import { EmptyPageResponse } from "./EmptyPageResponse";
 import { useOutletContext } from "react-router-dom";
-import toast from "react-hot-toast";
 
 export function ChannelPost() {
     const [loading, setLoading] = useState(false)
@@ -17,12 +16,11 @@ export function ChannelPost() {
             try {
                 setLoading(true)
                 const response = await getUserTweets(userId, signal)
-                if(!response) return 
                 if (response?.data?.data) {
                     setAllPosts(response.data.data)
                 }
             } catch (error) {
-                toast.error(error.message);
+                console.log(error.message);
             } finally {
                 setLoading(false)
             }

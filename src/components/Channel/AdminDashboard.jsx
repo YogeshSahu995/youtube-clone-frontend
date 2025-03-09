@@ -16,12 +16,11 @@ export function ChannelDetails() {
             try {
                 setLoading(true)
                 const response = await getChannelInfo({ userId, signal })
-                if(!response) return 
-                if (response.data.data) {
+                if (response?.data?.data) {
                     setUserInfo(response.data.data)
                 }
             } catch (error) {
-                toast.error(error.message);
+                console.log(error.message);
             } finally {
                 setLoading(false)
             }

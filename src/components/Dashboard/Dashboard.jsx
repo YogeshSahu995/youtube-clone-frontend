@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import { getChannelVideos } from "../../services/videoService";
-import { errorHandler, paginationHandler } from "../../utils";
+import { paginationHandler } from "../../utils";
 import { useOutletContext, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { VideoLi } from "./VideoLi";
 import { EmptyPageResponse } from "../Channel";
-import toast from "react-hot-toast";
 import { Loading } from "../LayoutComponents";
 
 export function Dashboard() {
@@ -26,17 +25,13 @@ export function Dashboard() {
             try {
                 setLoading(true);
                 const response = await getChannelVideos({ page, query: userData._id, limit: "10", sortBy, sortType, signal });
-                if(!response) return 
                 if (response?.data?.data) {
                     const data = response.data.data
                     setAllVideos((prev) => [...prev, ...data.docs]);
                     setData(data);
                 }
-                else {
-                    toast.error(errorHandler(response));
-                }
             } catch (error) {
-                toast.error(error.message);
+                console.log(error.message);
             } finally {
                 setLoading(false);
             }

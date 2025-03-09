@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Loading, VideoForm } from "../components";
 import { getVideoById } from "../services/videoService";
 import { useParams } from "react-router-dom";
-import toast from "react-hot-toast";
 
 export function EditVideoPage() {
     const [loading, setLoading] = useState(false)
@@ -16,12 +15,11 @@ export function EditVideoPage() {
             try {
                 setLoading(true)
                 const response = await getVideoById({ videoId, signal })
-                if(!response) return 
                 if (response?.data?.data) {
                     setVideoInfo(response.data.data)
                 }
             } catch (error) {
-                toast.error(error.message)
+                console.log(error.message)
             } finally {
                 setLoading(false)
             }

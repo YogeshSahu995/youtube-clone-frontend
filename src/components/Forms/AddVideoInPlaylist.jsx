@@ -3,7 +3,6 @@ import { Loading2, Popup } from "../index"
 import { getUserPlaylists } from "../../services/playlistService"
 import { useSelector } from "react-redux"
 import { CheckBoxHandler } from "./index"
-import toast from "react-hot-toast"
 
 export function AddVideoInPlaylist({
     videoId,
@@ -21,12 +20,11 @@ export function AddVideoInPlaylist({
             try {
                 setLoading(true)
                 let response = await getUserPlaylists({ userId: userData._id, signal })
-                if(!response) return 
                 if (response?.data?.data) {
                     setAllPlaylist(response.data.data)
                 }
             } catch (error) {
-                toast.error(error.message);
+                console.log(error.message);
             } finally {
                 setLoading(false)
             }

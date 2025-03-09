@@ -2,7 +2,6 @@ import { useParams } from "react-router-dom";
 import { Loading, PlaylistForm } from "../components";
 import { useEffect, useState } from "react";
 import { getPlaylistById } from "../services/playlistService";
-import toast from "react-hot-toast";
 
 export function EditPlaylist() {
     const [loading, setLoading] = useState(false)
@@ -17,12 +16,11 @@ export function EditPlaylist() {
             try {
                 setLoading(true)
                 const response = await getPlaylistById({ playlistId, signal })
-                if(!response) return 
                 if (response?.data?.data) {
                     setData(response.data.data)
                 }
             } catch (error) {
-                toast.error(error.message)
+                console.log(error.message)
             } finally {
                 setLoading(false)
             }

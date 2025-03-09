@@ -26,7 +26,7 @@ export function HomePage() {
                 }
             })
             .catch((error) => {
-                console.log(error)
+                console.log(error.message)
             })
 
         return () => controller.abort()

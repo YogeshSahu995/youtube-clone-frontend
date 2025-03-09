@@ -3,7 +3,6 @@ import { getUserPlaylists } from "../../services/playlistService"
 import { Button, Loading2 } from "../LayoutComponents"
 import { useNavigate } from "react-router-dom"
 import { Playlist } from "../Playlist"
-import toast from "react-hot-toast"
 
 export function YourPlaylists({userId}) {
     const [allPlaylist, setAllPlaylist] = useState([])
@@ -17,12 +16,11 @@ export function YourPlaylists({userId}) {
             try {
                 setLoading(true)
                 const response = await getUserPlaylists({ userId, signal })
-                if(!response) return 
                 if (response?.data?.data) {
                     setAllPlaylist(response.data.data)
                 }
             } catch (error) {
-                toast.error(error.message)
+                console.log(error.message)
             } finally {
                 setLoading(false)
             }

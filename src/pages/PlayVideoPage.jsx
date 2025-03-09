@@ -2,7 +2,6 @@ import { useParams } from "react-router-dom"
 import { Loading2, OpenVideo } from "../components"
 import { useEffect, useState } from "react"
 import { getVideoById } from "../services/videoService"
-import toast from "react-hot-toast"
 
 export function PlayVideoPage() {
     const { videoId, userId } = useParams()
@@ -16,12 +15,11 @@ export function PlayVideoPage() {
             ; (async () => {
                 try {
                     const response = await getVideoById({ videoId, signal })
-                    if(!response) return 
                     if (response?.data?.data) {
                         setVideoInfo(response.data.data)
                     }
                 } catch (error) {
-                    toast.error(error.message)
+                    console.log(error.message)
                 }
                 finally {
                     setLoading(false)

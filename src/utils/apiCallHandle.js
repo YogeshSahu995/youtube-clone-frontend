@@ -16,12 +16,12 @@ export const apiCall = async (endpoint, method = 'GET', data = null, headers, si
     } catch (error) {
         if (axios.isCancel(error)) return;
 
-        // ✅ Handle 401 Unauthorized Properly
+        // Handle 401 Unauthorized 
         if (error?.response?.status === 401) return
 
-        // ✅ Handle Other API Errors
+        // Handle Other API Errors
         if (error?.response) {
-            toast.error(error.response.data?.message || "Something went wrong!");
+            toast.error(error.response?.data?.message || "Something went wrong!");
         } else if (error.request) {
             toast.error("No response from server!");
         } else {

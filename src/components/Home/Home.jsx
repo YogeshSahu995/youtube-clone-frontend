@@ -30,9 +30,8 @@ export function Home() {
             setVideoLoader(true)
             try {
                 const response = await getVideosByTitle({ page, limit: "5", query, signal })
-                if(!response) return 
                 if (response?.data?.data) {
-                    const filteredVideos = response.data.data.docs?.filter((video) => video.isPublished)
+                    const filteredVideos = response.data.data?.docs?.filter((video) => video.isPublished)
                     setData(response.data.data)
                     if (page == 1) {
                         setAllVideos(filteredVideos)
@@ -42,7 +41,7 @@ export function Home() {
                     }
                 }
             } catch (error) {
-                console.log(error.response.data)
+                console.log(error.message)
             }
             finally {
                 setVideoLoader(false)

@@ -17,14 +17,13 @@ export function ChangePasswordForm() {
             }
 
             const response = await changePassword(data)
-            if(!response) return 
             if (response?.data?.data) {
                 toast.success("Successfully changed password")
                 navigate("/")
             }
         }
         catch (error) {
-            toast.error(error.message)
+            console.log(error.message)
         }
     }
     return (

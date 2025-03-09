@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Loading, PostForm } from "../components";
 import { useParams } from "react-router-dom";
 import { getTweetById } from "../services/tweetService";
-import toast from "react-hot-toast";
 
 export function EditPostPage () {
     const [loading, setLoading] = useState(false)
@@ -16,12 +15,11 @@ export function EditPostPage () {
             try {
                 setLoading(true)
                 const response = await getTweetById({tweetId : postId, signal})
-                if(!response) return 
                 if(response?.data?.data){
                     setPost(response.data.data)
                 }
             } catch (error) {
-                toast.error(error.message)
+                console.log(error.message)
             } finally{
                 setLoading(false)
             }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { toggleCommentLike } from "../../services/likeService"
 import { Avatar, TimeAgo, DropDown } from "../LayoutComponents"
 import { LikeToggle } from "../Video/LikeToggle"

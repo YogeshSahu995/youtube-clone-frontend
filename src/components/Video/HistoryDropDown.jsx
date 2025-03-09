@@ -9,7 +9,6 @@ export function HistoryDropDown({ setAddVideoForm, isCurrentUser, videoId, setFe
     const handleRemoveVideo = async () => {
         try {
             const response = await removeVideoFromHistory(videoId)
-            if(!response) return 
             if (response?.data?.data) {
                 setFetch(prev => !prev)
             }
@@ -17,7 +16,7 @@ export function HistoryDropDown({ setAddVideoForm, isCurrentUser, videoId, setFe
                 navigate("/")
             }
         } catch (error) {
-            toast.error(error.message)
+            console.log(error.message)
         }
     }
 

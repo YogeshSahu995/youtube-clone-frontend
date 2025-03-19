@@ -14,27 +14,24 @@ export function Login() {
     const navigate = useNavigate()
 
     const dataSubmit = async (data) => {
-        const controller = new AbortController()
-        const signal = controller.signal
         setLoading(true)
         try {
-            const response = await loginUser(data)
+            const response = await loginUser({data})
             if (response?.data?.data) {
-                const userData = await getcurrentUser(signal)
+                const userData = await getcurrentUser()
                 if (userData) {
                     const { username, fullname, email, _id } = userData.data.data
                     dispatch(login({ username, fullname, email, _id }))
                     navigate('/')
-                    toast.success("Successfully login")
+                    toast.success("Login successfully")
                 }
             }
         } catch (error) {
-            console.error(error.response.data.message)
+            console.log(error)
         }
         finally {
             setLoading(false)
         }
-        return () => controller.abort()
     }
 
 

@@ -7,12 +7,10 @@ export function CustomizePage() {
     const [userData, setUserData] = useState({})
 
     useEffect(() => {
-        const controller = new AbortController()
-        const signal = controller.signal;
         ; (async () => {
             try {
                 setLoading(true)
-                const response = await getcurrentUser(signal)
+                const response = await getcurrentUser()
                 if (response?.data?.data) {
                     setUserData(response.data.data)
                 }
@@ -23,7 +21,6 @@ export function CustomizePage() {
             }
         })()
 
-        return () => controller.abort()
     }, [])
 
     if (loading) return <Loading />

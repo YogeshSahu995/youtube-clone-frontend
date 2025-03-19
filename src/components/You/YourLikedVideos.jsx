@@ -13,7 +13,7 @@ export function YourLikedVideos() {
         setLoading(true)
             ; (async () => {
                 try {
-                    const response = await getLikedVideos(signal)
+                    const response = await getLikedVideos({signal})
                     if (response?.data?.data) {
                         setAllLikedVideos(response.data.data)
                     }

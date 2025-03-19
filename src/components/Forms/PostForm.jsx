@@ -1,17 +1,21 @@
 import { Input, FormStyle, Button, Error, Loading, RTE, HandelPreview } from "../index";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { createATweet, updateATweet } from "../../services/tweetService";
 import toast from "react-hot-toast";
+import { onUploadProgress } from "../../utils";
 
 export function PostForm({ post }) {
     const [loading, setLoading] = useState(false)
+    const [progress ,setProgress] = useState(0)
     const [postImage, setPostImage] = useState(post?.image)
     const navigate = useNavigate();
     const userData = useSelector(state => state.data);
     const { username } = userData
+    
+    useEffect(() => {console.log(progress)}, [progress] )
 
     const { register, handleSubmit, control, getValues, formState: { errors } } = useForm({
         defaultValues: {
@@ -28,7 +32,7 @@ export function PostForm({ post }) {
             if (data.image?.[0]) formData.append("image", data?.image?.[0])
             formData.append("content", data?.content)
             try {
-                const response = await updateATweet({ tweetId: post._id, formData })
+                const response = await updateATweet({ tweetId: post._id, formData, onUploadProgress: onUploadProgress(setProgress) })
                 if (response?.data?.data) {
                     navigate(`/channel/${username}/posts`);
                     toast.success(`Successfully update a post id:${post._id}`)
@@ -45,7 +49,7 @@ export function PostForm({ post }) {
             formData.append("content", data.content)
 
             try {
-                const response = await createATweet(formData);
+                const response = await createATweet({data: formData, onUploadProgress: onUploadProgress(setProgress)});
                 if (response?.data?.data) {
                     toast.success(`Successfully upload a post`)
                     navigate(`/channel/${username}/posts`);

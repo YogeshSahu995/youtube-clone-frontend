@@ -7,9 +7,7 @@ import { getcurrentUser } from "../services/userService";
 export function HomePage() {
     const dispatch = useDispatch()
     useEffect(() => {
-        const controller = new AbortController()
-        const signal = controller.signal;
-        getcurrentUser(signal)
+        getcurrentUser()
             .then((res) => {
                 if (res?.data?.data) {
                     const {
@@ -28,8 +26,6 @@ export function HomePage() {
             .catch((error) => {
                 console.log(error.message)
             })
-
-        return () => controller.abort()
     }, [])
     return (
         <div>

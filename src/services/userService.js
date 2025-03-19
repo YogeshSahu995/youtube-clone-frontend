@@ -1,60 +1,118 @@
 import { apiCall } from "../utils/apiCallHandle.js";
 import { jsonFormatte, multipartFormatte } from "../constants.js";
 
-const registerUser = (formData) => {
-    return apiCall('users/register', 'POST', formData, multipartFormatte)
+const registerUser = ({formData}) => {
+    return apiCall({
+        endpoint: 'users/register', 
+        method: 'POST', 
+        data: formData, 
+        headers: multipartFormatte
+    })
 }
 
-const loginUser = (data) => {
-    return apiCall('users/login', 'POST', data, jsonFormatte)
+const loginUser = ({data}) => {
+    console.log(data)
+    return apiCall({
+        endpoint: 'users/login', 
+        method: 'POST', 
+        data, 
+        headers: jsonFormatte
+    })
 }
 
 const logout = () => {
-    return apiCall('users/logout', 'POST')
+    return apiCall({
+        endpoint: 'users/logout', 
+        method: 'POST'
+    })
 }
 
-const changePassword = (data) => {
-    return apiCall('users/change-password', 'POST', data, jsonFormatte)
+const changePassword = ({data}) => {
+    return apiCall({
+        endpoint: 'users/change-password', 
+        method: 'POST', 
+        data, 
+        headers: jsonFormatte
+    })
 }
 
 const refreshToken = () => {
-    return apiCall('users/refresh-token', 'POST')
+    return apiCall({
+        endpoint: 'users/refresh-token', 
+        method: 'POST'
+    })
 }
 
-const getcurrentUser = (signal) => {
-    return apiCall('users/current-user', 'GET', {}, {}, signal)
+const getcurrentUser = () => {
+    return apiCall({
+        endpoint: 'users/current-user', 
+        method: 'GET', 
+    })
 }
 
-const updateAccountdetails = (data) => {
-    return apiCall('users/update-account', 'PATCH', data, jsonFormatte)
+const updateAccountdetails = ({data}) => {
+    return apiCall({
+        endpoint: 'users/update-account', 
+        method: 'PATCH', 
+        data,
+        headers: jsonFormatte
+    })
 }
 
-const updateAvatar = (data) => {
-    return apiCall('users/update-avatar', 'PATCH', data, multipartFormatte)
+const updateAvatar = ({data}) => {
+    return apiCall({
+        endpoint: 'users/update-avatar', 
+        method: 'PATCH', 
+        data, 
+        headers: multipartFormatte
+    })
 }
 
-const updateCoverImage = (data) => {
-    return apiCall('users/update-cover-image', 'PATCH', data, multipartFormatte)
+const updateCoverImage = ({data}) => {
+    return apiCall({
+        endpoint: 'users/update-cover-image', 
+        method: 'PATCH', 
+        data, 
+        headers: multipartFormatte
+    })
 }
 
 const getUserChannelProfile = ({ username, signal }) => {
-    return apiCall(`users/channel/${username}`, 'GET', {}, {}, signal)
+    return apiCall({
+        endpoint: `users/channel/${username}`, 
+        method: 'GET', 
+        signal
+    })
 }
 
 const getUserHistory = ({ signal }) => {
-    return apiCall('users/watch-history', 'GET', {}, {}, signal)
+    return apiCall({
+        endpoint: 'users/watch-history', 
+        method: 'GET', 
+        signal
+    })
 }
 
-const removeVideoFromHistory = (videoId) => {
-    return apiCall(`users/watch-history/remove/${videoId}`, "POST")
+const removeVideoFromHistory = ({videoId}) => {
+    return apiCall({
+        endpoint: `users/watch-history/remove/${videoId}`, 
+        method: "POST"
+    })
 }
 
 const clearAllHistory = () => {
-    return apiCall(`users/watch-history/clear-all`, "POST")
+    return apiCall({
+        endpoint: `users/watch-history/clear-all`, 
+        method: "POST"
+    })
 }
 
 const getUserChannelByName = ({ username, signal }) => {
-    return apiCall(`users/get/users/${username}`, "get", {}, {}, signal)
+    return apiCall({
+        endpoint: `users/get/users/${username}`, 
+        method: "get",
+        signal
+    })
 }
 
 

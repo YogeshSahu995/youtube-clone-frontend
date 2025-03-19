@@ -16,7 +16,7 @@ export function ChangePasswordForm() {
                 toast.error("Please make sure your password match with confirm password")
             }
 
-            const response = await changePassword(data)
+            const response = await changePassword({data})
             if (response?.data?.data) {
                 toast.success("Successfully changed password")
                 navigate("/")

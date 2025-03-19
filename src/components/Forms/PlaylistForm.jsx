@@ -1,16 +1,20 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Input, Button, FormStyle, Loading, Error } from "../index"
 import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { createPlaylist, updatePlaylist } from "../../services/playlistService"
 import toast from "react-hot-toast"
+import { onUploadProgress } from "../../utils"
 
 export function PlaylistForm({ playlist, playlistId }) {
     const [loading, setLoading] = useState(false)
+    const [progress, setProgress] = useState(0)
     const navigate = useNavigate()
     const userData = useSelector((state) => state.data)
     const { username } = userData
+
+    useEffect(() => {console.log(progress)}, [progress])
 
     const { handleSubmit, register, formState: { errors } } = useForm({
         defaultValues: {
@@ -24,7 +28,7 @@ export function PlaylistForm({ playlist, playlistId }) {
 
         if (playlist) {
             try {
-                const response = await updatePlaylist({ playlistId, data });
+                const response = await updatePlaylist({ playlistId, data, onUploadProgress: onUploadProgress(setProgress) });
                 if (response?.data?.data) {
                     navigate(`/channel/${username}/playlists`)
                     toast.success("Successfully update a playlist")
@@ -38,7 +42,7 @@ export function PlaylistForm({ playlist, playlistId }) {
         }
         else {
             try {
-                const response = await createPlaylist({ data })
+                const response = await createPlaylist({ data, onUploadProgress : onUploadProgress(setProgress) })
                 if(!response) return 
                 if (response?.data?.data) {
                     navigate(`/channel/${username}/playlists`)

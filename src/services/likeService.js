@@ -1,19 +1,32 @@
 import { apiCall } from "../utils/apiCallHandle.js";
 
-const toggleVideoLike = (videoId) => {
-    return apiCall(`likes/toggle/v/${videoId}`, 'POST')
+const toggleVideoLike = ({_id}) => {
+    return apiCall({
+        endpoint: `likes/toggle/v/${_id}`, 
+        method: 'POST'
+    })
 }
 
-const toggleCommentLike = (commentId) => {
-    return apiCall(`likes/toggle/c/${commentId}`, 'POST')
+const toggleCommentLike = ({_id}) => {
+    return apiCall({
+        endpoint: `likes/toggle/c/${_id}`, 
+        method: 'POST'
+    })
 }
 
-const toggleTweetLike = (tweetId) => {
-    return apiCall(`likes/toggle/t/${tweetId}`, 'POST')
+const toggleTweetLike = ({_id}) => {
+    return apiCall({
+        endpoint: `likes/toggle/t/${_id}`, 
+        method: 'POST'
+    })
 }
 
-const getLikedVideos = (signal) => {
-    return apiCall('likes/videos', 'GET', {}, {}, signal)
+const getLikedVideos = ({signal}) => {
+    return apiCall({
+        endpoint: 'likes/videos', 
+        method: 'GET',
+        signal
+    })
 }
 
 export {

@@ -1,14 +1,16 @@
 import { Input, FormStyle, Button, Error, Loading } from "../LayoutComponents";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { publishVideo, updateVideo } from "../../services/videoService";
 import { HandelPreview } from "../Auth";
 import toast from "react-hot-toast";
+import { onUploadProgress } from "../../utils";
 
 export function VideoForm({ videoInfo }) {
     const [loading, setLoading] = useState(false);
+    const [progress ,setProgress] = useState(0);
     const [image, setImage] = useState(videoInfo?.thumbnail);
     const publishStatus = videoInfo?.isPublished || true
     const userData = useSelector(state => state.data);
@@ -23,6 +25,8 @@ export function VideoForm({ videoInfo }) {
         },
     });
 
+    useEffect(() => console.log(progress), [progress])
+
     const dataSubmit = async (data) => {
         setLoading(true);
         const formData = new FormData();
@@ -34,7 +38,7 @@ export function VideoForm({ videoInfo }) {
             formData.append("isPublished", publishStatus);
 
             try {
-                const response = await updateVideo({ videoId: videoInfo._id, formData });
+                const response = await updateVideo({ videoId: videoInfo._id, formData, onUploadProgress: onUploadProgress(setProgress)});
                 if (response?.data?.data) {
                     toast.success(`Sucessfully video is Updated id:${videoInfo._id}`)
                     navigate(`/video/${videoInfo._id}/${userData._id}`);
@@ -52,7 +56,7 @@ export function VideoForm({ videoInfo }) {
             formData.append("isPublished", publishStatus);
 
             try {
-                const response = await publishVideo(formData);
+                const response = await publishVideo({formData, onUploadProgress: onUploadProgress(setProgress)});
                 if (response?.data?.data) {
                     toast.success(`Sucessfully video is uploaded`)
                     navigate(`/channel/${userData.username}`);

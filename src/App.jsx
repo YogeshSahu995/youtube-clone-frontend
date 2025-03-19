@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { login, logout } from './store/authSlice';
 import { useNavigate } from 'react-router-dom';
 import { Loading } from './components';
-import {setupInterceptors} from './utils/apiInterceptor'
+import { setupInterceptors } from './utils/apiInterceptor'
 
 function App() {
   const [loading, setLoading] = useState(false)
@@ -36,7 +36,6 @@ function App() {
       setLoading(true);
       getcurrentUser()
         .then((res) => {
-          
           if (res?.data?.data) {
             const { username, fullname, email, _id, coverImage, avatar, createdAt, updateAt } = res.data.data;
             dispatch(login({ username, fullname, email, _id, coverImage, avatar, createdAt, updateAt }));

@@ -37,10 +37,10 @@ export function Register({ userData }) {
             formData.append("password", data.password);
 
             try {
-                const response = await registerUser(formData)
+                const response = await registerUser({formData})
                 if (response?.data?.data) {
                     const { email, password, username, fullname } = data
-                    const userData = await loginUser({ email, password })
+                    const userData = await loginUser({data: { email, password }})
                     if (userData) {
                         dispatch(login({ email, password, username, fullname }))
                         navigate("/")
@@ -57,24 +57,22 @@ export function Register({ userData }) {
         else {
             setLoading(true)
             try {
-                if (data.fullname && data.email) {
-                    await updateAccountdetails({
-                        fullname: data.fullname,
-                        email: data.email,
-                    })
+                const {fullname, email} = data
+                if (fullname && email) {
+                    await updateAccountdetails({ data:{ fullname, email} })
                 }
                 if (data?.avatar?.[0]) {
                     const formData = new FormData()
                     formData.append("avatar", data.avatar[0]);
                     if ([...formData]?.[0][1].name) {
-                        await updateAvatar(formData)
+                        await updateAvatar({data: formData})
                     }
                 }
                 if (data?.coverImage?.[0]) {
                     const formData = new FormData()
                     formData.append('coverImage', data.coverImage[0])
                     if ([...formData]?.[0][1].name) {
-                        await updateCoverImage(formData)
+                        await updateCoverImage({data: formData})
                     }
                 }
             } catch (error) {

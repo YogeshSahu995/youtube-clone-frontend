@@ -8,7 +8,7 @@ export function HistoryDropDown({ setAddVideoForm, isCurrentUser, videoId, setFe
 
     const handleRemoveVideo = async () => {
         try {
-            const response = await removeVideoFromHistory(videoId)
+            const response = await removeVideoFromHistory({videoId})
             if (response?.data?.data) {
                 setFetch(prev => !prev)
             }

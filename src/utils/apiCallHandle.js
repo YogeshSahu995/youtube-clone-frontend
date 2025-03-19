@@ -3,7 +3,7 @@ import { api } from "./apiInterceptor";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-export const apiCall = async (endpoint, method = 'GET', data = null, headers, signal) => {
+export const apiCall = async ({endpoint, method = 'GET', data = null, headers = {}, signal = null, onUploadProgress}) => {
     try {
         return await api({
             url: `${baseURL}/${endpoint}`,
@@ -11,7 +11,8 @@ export const apiCall = async (endpoint, method = 'GET', data = null, headers, si
             data,
             headers,
             withCredentials: true,
-            signal
+            signal,
+            onUploadProgress,
         });
     } catch (error) {
         if (axios.isCancel(error)) return;
@@ -25,7 +26,7 @@ export const apiCall = async (endpoint, method = 'GET', data = null, headers, si
         } else if (error.request) {
             toast.error("No response from server!");
         } else {
-            toast.error("Request setup error!");
+            console.log(error)
         }
 
         return Promise.reject(error); // ✅ Ensure error is propagated

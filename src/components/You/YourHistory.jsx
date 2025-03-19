@@ -60,6 +60,7 @@ export function YourHistory() {
                 (<div className="overflow-y-hidden mt-8 pb-2 scrollbar-thin scrollbar-thumb-[#444] scrollbar-track-transparent ">
                     <ul className="flex gap-4">
                         {allHistory?.map((history) => {
+                            console.log(history._id)
                             return (
                                 <li key={history._id}>
                                     <Video

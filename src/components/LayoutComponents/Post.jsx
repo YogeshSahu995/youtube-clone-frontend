@@ -29,7 +29,7 @@ export function Post({ postInfo, isCurrentUser }) {
 
     async function handleDelete() {
         try {
-            const response = await deleteATweet(_id)
+            const response = await deleteATweet({tweetId: _id})
             if (response?.data?.data) {
                 setIsHidden(true)
                 navigate(`/channel/${username}/posts`)

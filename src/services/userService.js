@@ -11,7 +11,6 @@ const registerUser = ({formData}) => {
 }
 
 const loginUser = ({data}) => {
-    console.log(data)
     return apiCall({
         endpoint: 'users/login', 
         method: 'POST', 

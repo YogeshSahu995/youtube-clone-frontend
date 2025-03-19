@@ -29,6 +29,6 @@ export const apiCall = async ({endpoint, method = 'GET', data = null, headers = 
             console.log(error)
         }
 
-        return Promise.reject(error); // ✅ Ensure error is propagated
+        return Promise.reject(error);
     }
 };

@@ -12,10 +12,10 @@ const setupInterceptors = (navigate) => {
     async (error) => {
       const originalRequest = error.config;
 
-      // **Agar 401 error aaye aur request refresh-token wali na ho**
+      // Agar 401 error aaye aur request refresh-token wali na ho
       if (error.response?.status === 401 && !originalRequest._retry) {
+
         if (originalRequest.url.includes("/users/refresh-token")) {
-          navigate("/login");
           return Promise.reject(error);
         }
 
@@ -27,7 +27,7 @@ const setupInterceptors = (navigate) => {
           return api(originalRequest);
         } catch (refreshError) {
 
-          // **Agar refresh token bhi fail ho gaya to user ko login pe bhejo**
+          // Agar refresh token bhi fail ho gaya to user ko login pe bhejo
           navigate("/login");
           return Promise.reject(refreshError);
         }

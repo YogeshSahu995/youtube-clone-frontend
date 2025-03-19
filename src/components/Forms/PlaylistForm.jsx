@@ -14,8 +14,6 @@ export function PlaylistForm({ playlist, playlistId }) {
     const userData = useSelector((state) => state.data)
     const { username } = userData
 
-    useEffect(() => {console.log(progress)}, [progress])
-
     const { handleSubmit, register, formState: { errors } } = useForm({
         defaultValues: {
             name: playlist?.name || "",

@@ -25,7 +25,6 @@ export function VideoForm({ videoInfo }) {
         },
     });
 
-    useEffect(() => console.log(progress), [progress])
 
     const dataSubmit = async (data) => {
         setLoading(true);

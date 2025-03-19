@@ -15,8 +15,6 @@ export function PostForm({ post }) {
     const userData = useSelector(state => state.data);
     const { username } = userData
     
-    useEffect(() => {console.log(progress)}, [progress] )
-
     const { register, handleSubmit, control, getValues, formState: { errors } } = useForm({
         defaultValues: {
             image: post?.image || "",

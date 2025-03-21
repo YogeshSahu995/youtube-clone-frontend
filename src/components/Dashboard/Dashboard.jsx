@@ -102,7 +102,7 @@ export function Dashboard() {
                             path="/add-video"
                             buttonValue="upload Video"
                             buttonicon={<i className="ri-video-add-fill text-2xl"></i>}
-                            mainicon={<img src={'/images/NoContent.svg'} alt="no content" />}
+                            mainicon={<img src={'/images/NoContent.svg'} alt="no content" loading="lazy" />}
                         />
                     </div>
                 )}

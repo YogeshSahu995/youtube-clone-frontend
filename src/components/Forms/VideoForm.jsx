@@ -119,7 +119,12 @@ export function VideoForm({ videoInfo }) {
                         validate: (value) => value?.[0] || "File is required",
                     })}
                 />
-                {image && <img src={image} alt="thumbnail image" className="h-[250px] w-full object-cover object-center" />}
+                {image && <img 
+                    src={image} 
+                    alt="thumbnail image" 
+                    loading="lazy"
+                    className="h-[250px] w-full object-cover object-center" 
+                />}
 
                 <Button
                     type="submit"

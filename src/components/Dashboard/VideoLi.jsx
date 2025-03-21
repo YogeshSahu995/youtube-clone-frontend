@@ -27,7 +27,12 @@ export function VideoLi({ video }) {
                         {!publishStatus && <div className="bg-[#0000009f] h-full w-full rounded-lg absolute flex justify-center items-center">
                             <h1>Private</h1>
                         </div>}
-                        <img src={thumbnail} alt="thumbnail" className="h-[120px] w-[280px] object-cover object-center rounded-lg" />
+                        <img 
+                            src={thumbnail} 
+                            alt="thumbnail" 
+                            loading="lazy"
+                            className="h-[120px] w-[280px] object-cover object-center rounded-lg" 
+                        />
                     </div>
                     <div>
                         <h1>{title}</h1>

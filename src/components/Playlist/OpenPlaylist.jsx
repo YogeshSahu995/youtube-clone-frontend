@@ -101,7 +101,12 @@ export function OpenPlaylist({ playlistId }) {
                                     </>
                                 ) : (
                                     <>
-                                        <img src={avatar} alt="avatar" className=" h-[50px] w-[50px]  object-cover object-center  rounded-full mr-4" />
+                                        <img 
+                                            src={avatar} 
+                                            alt="avatar" 
+                                            className=" h-[50px] w-[50px]  object-cover object-center  rounded-full mr-4" 
+                                            loading="lazy"
+                                        />
                                         <div>
                                             <h3>{username}</h3>
                                             <h3>{email}</h3>

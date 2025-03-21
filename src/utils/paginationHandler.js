@@ -11,6 +11,7 @@ export function paginationHandler({ container, data, setPage, setEnd }) {
     }
 
     if (container) {
+        // here i set event on mainRef.current
         container.addEventListener("scroll", handleScroll);
     }
 

@@ -8,6 +8,7 @@ export function Avatar({
             <img
                 src={avatar}
                 alt={`avatar`}
+                loading="lazy"
                 className={`${className} ${heightWidth} rounded-full object-cover object-center bg-white bg-opacity-10`}
             />
         )

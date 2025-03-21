@@ -43,6 +43,7 @@ export function Playlist({ playlistInfo }) {
                     <img
                         src={`${image}`}
                         className=" absolute h-full w-full object-cover object-center rounded-lg z-20"
+                        loading="lazy"
                         alt="playlist image"
                     />
                     {videoCount && (

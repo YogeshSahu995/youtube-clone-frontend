@@ -19,9 +19,9 @@ export default function Layout() {
                         <Sidebar />
                     </div>
                 )}
-                <main className="overflow-x-hidden"> {/* its imp overflow-hidden */}
+                <main className="overflow-x-hidden">
                     <ScrollDiv ref={mainRef}>
-                        <Outlet context={{ mainRef, searchInput }} /> {/* pass ref to the outlet */}
+                        <Outlet context={{ mainRef, searchInput }} />
                     </ScrollDiv>
                 </main>
             </div>

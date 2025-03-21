@@ -77,10 +77,10 @@ export function Home() {
 
 
     useEffect(() => {
-        const container = mainRef.current;
-        const handleScroll = paginationHandler({ container, data, setPage, setEnd })
+        const handleScroll = paginationHandler({ container: mainRef.current, data, setPage, setEnd })
         return () => {
-            if (container) container.removeEventListener("scroll", handleScroll);
+            //by cleanup remove prev event
+            if (container) container.removeEventListener("scroll", handleScroll); 
         };
     }, [data, mainRef]);
 
@@ -91,7 +91,12 @@ export function Home() {
                     <h2 className="">Welcome to the <span className="text-cyan-500">Home Page</span> </h2>
                     <p className="text-lg font-normal">Search for a channel and videos using the search bar above to get started.</p>
                     <div className=" rounded-3xl w-fit h-fit mx-auto">
-                        <img src="/images/plsSearch.png" alt="Search illustration" className="w-[400px] mx-auto mt-[10px]" />
+                        <img 
+                            src="/images/plsSearch.png" 
+                            loading="lazy"
+                            alt="Search illustration" 
+                            className="w-[400px] mx-auto mt-[10px]" 
+                        />
                     </div>
                 </div>
             </div>

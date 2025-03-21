@@ -46,6 +46,7 @@ export function ChannelPlaylists() {
                     mainicon={
                         <img
                             src={'/images/NoContent.png'}
+                            loading="lazy"
                             alt="No content"
                             className="h-fit w-[60vw] sm:w-[40vw] md:w-[30vw] lg:w-[20vw] object-cover object-center mx-auto"
                         />

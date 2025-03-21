@@ -9,6 +9,7 @@ export function Logo(
         <img
             src="/images/logo4.png"
             alt="Logo"
+            loading="lazy"
             className={`${height} ${width} object-cover object-center`}
         />
     )

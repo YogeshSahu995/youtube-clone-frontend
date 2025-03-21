@@ -77,7 +77,8 @@ export function Home() {
 
 
     useEffect(() => {
-        const handleScroll = paginationHandler({ container: mainRef.current, data, setPage, setEnd })
+        const container = mainRef.current;
+        const handleScroll = paginationHandler({ container, data, setPage, setEnd })
         return () => {
             //by cleanup remove prev event
             if (container) container.removeEventListener("scroll", handleScroll); 

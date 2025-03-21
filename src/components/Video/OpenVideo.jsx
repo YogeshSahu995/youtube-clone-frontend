@@ -90,7 +90,7 @@ export function OpenVideo({ video, userId, watcherId }) {
                                 <TimeAgo timeStamp={createdAt} />
                             </div>
                             <div className="flex gap-4 justify-between items-center mt-2 border-b pb-2">
-                                <Link to={`/channel/${username}`} className="flex gap-4">
+                                <Link to={`/${username}`} className="flex gap-4">
                                     <Avatar avatar={avatar} heightWidth="h-[60px] w-[60px]" />
                                     <div>
                                         <h3 className="text-xl font-medium">{fullname}</h3>

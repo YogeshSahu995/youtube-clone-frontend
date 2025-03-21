@@ -1,8 +1,22 @@
-# React + Vite
+#  YouTube Clone 🎥
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack YouTube Clone built using **MERN Stack**. 
 
-Currently, two official plugins are available:
+Users can **upload videos or images, like, comment, and search** for content.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features  
+✅ User Authentication (JWT + HTTP-Only Cookies)  
+✅ Video Upload & Streaming  
+✅ Like, Comment, & Subscribe System  
+✅ Search & Pagination  
+✅ Responsive UI  
+
+## 🛠 Tech Stack  
+- **Frontend:** React, Tailwind CSS  
+- **Backend:** Node.js, Express.js  
+- **Database:** MongoDB  
+- **Authentication:** JWT & HTTP-Only Cookies
+
+## 🌐 Live Demo  
+🔗 [YouTube Clone] (https://zippytube.netlify.app/)  
+

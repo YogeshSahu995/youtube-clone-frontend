@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
-import { Loading2, Popup } from "../index"
+import { Button, Loading2, Popup } from "../index"
 import { getUserPlaylists } from "../../services/playlistService"
 import { useSelector } from "react-redux"
 import { CheckBoxHandler } from "./index"
+import { useNavigate } from "react-router-dom"
 
 export function AddVideoInPlaylist({
     videoId,
@@ -12,6 +13,7 @@ export function AddVideoInPlaylist({
     const [allPlaylist, setAllPlaylist] = useState([])
     const [loading, setLoading] = useState(false)
     const userData = useSelector(state => state.data)
+    const navigate = useNavigate()
 
     useEffect(() => {
         const controller = new AbortController()
@@ -51,11 +53,18 @@ export function AddVideoInPlaylist({
                         onClick={() => setAddVideoForm(true)}>
                     </i>
                 </div>
-                {allPlaylist?.map((playlist) => (
-                    <div className="mb-2" key={playlist._id}>
-                        <CheckBoxHandler videoId={videoId} playlistId={playlist._id} name={playlist.name} />
-                    </div>
-                ))}
+                {allPlaylist.length ? (
+                    allPlaylist?.map((playlist) => (
+                        <div className="mb-2" key={playlist._id}>
+                            <CheckBoxHandler videoId={videoId} playlistId={playlist._id} name={playlist.name} />
+                        </div>
+                    ))
+                ) : (
+                    <Button
+                        value="Create a Playlist" 
+                        onClick = {() => navigate('/create-playlist')}
+                    />
+                )}
             </div>
         </Popup>
     )

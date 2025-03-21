@@ -132,7 +132,6 @@ export function Video({
                         history ? (
                             <HistoryDropDown
                                 setAddVideoForm={setAddVideoForm}
-                                isCurrentUser={isCurrentUser}
                                 videoId={_id}
                                 setFetch={setFetch}
                             />
